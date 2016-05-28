@@ -1,0 +1,34 @@
+apply plugin: 'java'
+
+group = 'Notronix'
+sourceCompatibility = 1.8
+version = System.getenv("BUILD_NUMBER") ?: 'SNAPSHOT-' + getDate()
+
+def getDate() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMddHHmmss')
+    return formattedDate
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.google.code.gson:gson:2.3.1'
+    compile 'org.apache.httpcomponents:httpclient:4.4'
+
+    testCompile 'junit:junit:4.11'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.13'
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'JaLAPI',
+                'Implementation-Version': version,
+                'Implementation-Vendor': 'Notronix'
+    }
+}
