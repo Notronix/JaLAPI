@@ -49,7 +49,7 @@ public class APITester
         GenericPagedResult genericPagedResult = lwapi.getStockItems(client, sessionToken, 50);
 
         List<StockItem> stockItems = genericPagedResult == null ? null : genericPagedResult.getData();
-        List<InventoryItem> inventoryItems = lwapi.getInventoryItems(client, sessionToken, createView(), 50).getItems();
+        List<InventoryItem> inventoryItems = lwapi.getInventoryItems(client, sessionToken, createInventoryView(), 50).getItems();
 
         StockItemInv stockItemInv = lwapi.getInventoryItem(client, sessionToken, "d6c4db80-dda1-4230-9b8b-000e322b51d9");
         List<StockItemLevel> stockItemLevels = lwapi.getLevels(client, sessionToken, "d6c4db80-dda1-4230-9b8b-000e322b51d9");
@@ -60,7 +60,7 @@ public class APITester
         client = null;
     }
 
-    private static InventoryView createView()
+    private static InventoryView createInventoryView()
     {
         InventoryView view = new InventoryView();
         view.setFilters(Collections.emptyList());
