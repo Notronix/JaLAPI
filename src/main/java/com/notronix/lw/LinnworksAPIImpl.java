@@ -5,6 +5,10 @@ import com.notronix.lw.methods.inventory.GetInventoryItemsMethod;
 import com.notronix.lw.methods.Method;
 import com.notronix.lw.methods.auth.AuthorizeByApplicationMethod;
 import com.notronix.lw.methods.inventory.*;
+import com.notronix.lw.methods.orders.GetOrderViewsMethod;
+import com.notronix.lw.methods.orders.GetOrdersByIdMethod;
+import com.notronix.lw.methods.processedorders.SearchProcessedOrdersPagedMethod;
+import com.notronix.lw.methods.returnsrefunds.GetSearchTypesMethod;
 import com.notronix.lw.methods.stock.GetStockItemsMethod;
 import com.notronix.lw.methods.stock.GetStockLevelMethod;
 import com.notronix.lw.model.*;
@@ -90,7 +94,7 @@ public class LinnworksAPIImpl implements LinnworksAPI
     }
 
     @Override
-    public GenericPagedResult getStockItems(LinnworksAPIClient client, SessionToken token, Integer pageSize)
+    public GenericPagedResult<StockItem> getStockItems(LinnworksAPIClient client, SessionToken token, Integer pageSize)
             throws LinnworksAPIException
     {
         return client.executeMethod(prepareMethod(GetStockItemsMethod.class, token).withPageSize(pageSize));
@@ -110,7 +114,57 @@ public class LinnworksAPIImpl implements LinnworksAPI
         return client.executeMethod(prepareMethod(GetInventoryItemImagesMethod.class, token).withItemId(itemId));
     }
 
-    private static <T extends Method> T prepareMethod(Class<T> clazz, SessionToken token) throws LinnworksAPIException
+    @Override
+    public List<UserOrderView> getOrderViews(LinnworksAPIClient client, SessionToken token)
+            throws LinnworksAPIException
+    {
+        return client.executeMethod(prepareMethod(GetOrderViewsMethod.class, token));
+    }
+
+    @Override
+    public List<SearchField> getSearchFields(LinnworksAPIClient client, SessionToken token)
+            throws LinnworksAPIException
+    {
+        return client.executeMethod(prepareMethod(GetSearchTypesMethod.class, token));
+    }
+
+    @Override
+    public GenericPagedResult<ProcessedOrderWeb> searchProcessedOrdersPaged(LinnworksAPIClient client, SessionToken token, String from,
+                                                         String to, SearchDateType dateType, SearchField searchField,
+                                                         boolean exactMatch, String searchTerm, int pageNum, int pageSize)
+            throws LinnworksAPIException
+    {
+        SearchProcessedOrdersPagedMethod method = prepareMethod(SearchProcessedOrdersPagedMethod.class, token);
+        method.from(from).to(to).withDateType(dateType).withSearchField(searchField);
+
+        if (exactMatch)
+        {
+            method.withExactMatch();
+        }
+        else
+        {
+            try
+            {
+                method.withPartialMatch();
+            }
+            catch (IllegalArgumentException|IllegalAccessException e)
+            {
+                throw new LinnworksAPIException("Error setting partial match.", e);
+            }
+        }
+
+        return client.executeMethod(method.withSearchTerm(searchTerm).withPageNum(pageNum).withPageSize(pageSize));
+    }
+
+    @Override
+    public List<OrderDetails> getOrdersById(LinnworksAPIClient client, SessionToken token, List<String> orderIds)
+            throws LinnworksAPIException
+    {
+        return client.executeMethod(prepareMethod(GetOrdersByIdMethod.class, token).withOrderIds(orderIds));
+    }
+
+    private static <T extends Method> T prepareMethod(Class<T> clazz, SessionToken token)
+            throws LinnworksAPIException
     {
         try
         {

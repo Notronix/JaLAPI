@@ -2,13 +2,13 @@ package com.notronix.lw.model;
 
 import java.util.List;
 
-public class GenericPagedResult
+public class GenericPagedResult<T>
 {
     private Integer PageNumber;
     private Integer EntriesPerPage;
     private Integer TotalEntries;
     private Integer TotalPages;
-    private List<StockItem> Data;
+    private List<T> Data;
 
     public Integer getPageNumber()
     {
@@ -50,12 +50,12 @@ public class GenericPagedResult
         TotalPages = totalPages;
     }
 
-    public List<StockItem> getData()
+    public List<T> getData()
     {
         return Data;
     }
 
-    public void setData(List<StockItem> data)
+    public void setData(List<T> data)
     {
         Data = data;
     }

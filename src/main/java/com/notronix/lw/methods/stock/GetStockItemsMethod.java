@@ -1,10 +1,14 @@
 package com.notronix.lw.methods.stock;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.notronix.lw.LinnworksAPIException;
 import com.notronix.lw.model.GenericPagedResult;
+import com.notronix.lw.model.StockItem;
 
-public class GetStockItemsMethod extends StockMethod<GenericPagedResult>
+import java.lang.reflect.Type;
+
+public class GetStockItemsMethod extends StockMethod<GenericPagedResult<StockItem>>
 {
     private String keyWord;
     private String locationId;
@@ -31,10 +35,10 @@ public class GetStockItemsMethod extends StockMethod<GenericPagedResult>
     }
 
     @Override
-    public GenericPagedResult getResponse()
+    public GenericPagedResult<StockItem> getResponse()
             throws LinnworksAPIException
     {
-        return new Gson().fromJson(getJsonResult(), GenericPagedResult.class);
+        return new Gson().fromJson(getJsonResult(), new TypeToken<GenericPagedResult<StockItem>>(){}.getType());
     }
 
     public String getKeyWord()

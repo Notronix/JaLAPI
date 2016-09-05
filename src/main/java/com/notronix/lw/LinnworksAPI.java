@@ -40,9 +40,23 @@ public interface LinnworksAPI
     List<StockItemImage> getImages(LinnworksAPIClient client, SessionToken token, String itemId)
             throws LinnworksAPIException;
 
-    GenericPagedResult getStockItems(LinnworksAPIClient client, SessionToken token, Integer pageSize)
+    GenericPagedResult<StockItem> getStockItems(LinnworksAPIClient client, SessionToken token, Integer pageSize)
             throws LinnworksAPIException;
 
     List<StockItemLevel> getLevels(LinnworksAPIClient client, SessionToken token, String itemId)
+            throws LinnworksAPIException;
+
+    List<UserOrderView> getOrderViews(LinnworksAPIClient client, SessionToken token)
+            throws LinnworksAPIException;
+
+    List<SearchField> getSearchFields(LinnworksAPIClient client, SessionToken token)
+            throws LinnworksAPIException;
+
+    GenericPagedResult<ProcessedOrderWeb> searchProcessedOrdersPaged(LinnworksAPIClient client, SessionToken token, String from,
+                                                  String to, SearchDateType dateType, SearchField searchField,
+                                                  boolean exactMatch, String searchTerm, int pageNum, int pageSize)
+            throws LinnworksAPIException;
+
+    List<OrderDetails> getOrdersById(LinnworksAPIClient client, SessionToken token, List<String> orderIds)
             throws LinnworksAPIException;
 }
