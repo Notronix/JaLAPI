@@ -13,6 +13,7 @@ import com.notronix.lw.methods.stock.GetStockItemsMethod;
 import com.notronix.lw.methods.stock.GetStockLevelMethod;
 import com.notronix.lw.model.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class LinnworksAPIImpl implements LinnworksAPI
@@ -129,8 +130,8 @@ public class LinnworksAPIImpl implements LinnworksAPI
     }
 
     @Override
-    public GenericPagedResult<ProcessedOrderWeb> searchProcessedOrdersPaged(LinnworksAPIClient client, SessionToken token, String from,
-                                                         String to, SearchDateType dateType, SearchField searchField,
+    public GenericPagedResult<ProcessedOrderWeb> searchProcessedOrdersPaged(LinnworksAPIClient client, SessionToken token, LocalDateTime from,
+                                                         LocalDateTime to, SearchDateType dateType, SearchField searchField,
                                                          boolean exactMatch, String searchTerm, int pageNum, int pageSize)
             throws LinnworksAPIException
     {

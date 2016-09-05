@@ -8,12 +8,12 @@ import com.notronix.lw.model.ProcessedOrderWeb;
 import com.notronix.lw.model.SearchDateType;
 import com.notronix.lw.model.SearchField;
 
-import java.lang.reflect.Type;
+import java.time.LocalDateTime;
 
 public class SearchProcessedOrdersPagedMethod extends ProcessedOrdersMethod<GenericPagedResult<ProcessedOrderWeb>>
 {
-    private String from;
-    private String to;
+    private LocalDateTime from;
+    private LocalDateTime to;
     private SearchDateType dateType;
     private SearchField searchField;
     private Boolean exactMatch;
@@ -43,33 +43,33 @@ public class SearchProcessedOrdersPagedMethod extends ProcessedOrdersMethod<Gene
         return new Gson().fromJson(getJsonResult(), new TypeToken<GenericPagedResult<ProcessedOrderWeb>>(){}.getType());
     }
 
-    public String getFrom()
+    public LocalDateTime getFrom()
     {
         return from;
     }
 
-    public void setFrom(String from)
+    public void setFrom(LocalDateTime from)
     {
         this.from = from;
     }
 
-    public SearchProcessedOrdersPagedMethod from(String fromDate)
+    public SearchProcessedOrdersPagedMethod from(LocalDateTime fromDate)
     {
         this.from = fromDate;
         return this;
     }
 
-    public String getTo()
+    public LocalDateTime getTo()
     {
         return to;
     }
 
-    public void setTo(String to)
+    public void setTo(LocalDateTime to)
     {
         this.to = to;
     }
 
-    public SearchProcessedOrdersPagedMethod to(String toDate)
+    public SearchProcessedOrdersPagedMethod to(LocalDateTime toDate)
     {
         this.to = toDate;
         return this;
