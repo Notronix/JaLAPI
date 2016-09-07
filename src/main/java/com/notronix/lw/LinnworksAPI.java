@@ -60,4 +60,13 @@ public interface LinnworksAPI
 
     List<OrderDetails> getOrdersById(LinnworksAPIClient client, SessionToken token, List<String> orderIds)
             throws LinnworksAPIException;
+
+    String createPurchaseOrder(LinnworksAPIClient client, SessionToken token, CreatePurchaseOrderParameters parameters)
+            throws LinnworksAPIException;
+
+    List<Supplier> getSuppliers(LinnworksAPIClient client, SessionToken token)
+            throws LinnworksAPIException;
+
+    String  deletePurchaseOrder(LinnworksAPIClient client, SessionToken token, String purchaseOrderId)
+            throws LinnworksAPIException;
 }

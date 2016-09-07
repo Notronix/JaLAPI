@@ -3,6 +3,8 @@ package com.notronix.lw.client;
 import com.notronix.lw.LinnworksAPIException;
 import com.notronix.lw.methods.Method;
 import org.apache.http.HttpHost;
+import org.apache.http.HttpStatus;
+import org.apache.http.StatusLine;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -42,7 +44,20 @@ public class LinnworksAPIClientImpl implements LinnworksAPIClient
         try (CloseableHttpClient client = HttpClientBuilder.create().setDefaultRequestConfig(request.getConfig()).build();
              CloseableHttpResponse response = client.execute(request))
         {
-            method.setJsonResult(EntityUtils.toString(response.getEntity()));
+            StatusLine status = response.getStatusLine();
+            String responsePayload = response.getEntity() == null ? null : EntityUtils.toString(response.getEntity());
+
+            if (status.getStatusCode() == HttpStatus.SC_OK)
+            {
+                method.setJsonResult(responsePayload);
+            }
+            else
+            {
+                throw new Exception("API call failed" +
+                        ". Code: " + status.getStatusCode() +
+                        ", Reason: " + status.getReasonPhrase() +
+                        ", Details: " + responsePayload);
+            }
         }
         catch (Exception e)
         {
@@ -98,8 +113,10 @@ public class LinnworksAPIClientImpl implements LinnworksAPIClient
             request.addHeader("Authorization", sessionToken);
         }
 
-        request.addHeader("Accept", "*/*");
-        request.addHeader("Content-Type", "application/x-www-form-urlencoded");
+        request.addHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+        request.addHeader("Accept-Encoding", "gzip, deflate");
+        request.addHeader("Accept-Language", "en");
+        request.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
         request.setConfig(requestConfig);
 
         return request;

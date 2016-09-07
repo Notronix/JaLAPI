@@ -8,6 +8,8 @@ import com.notronix.lw.methods.inventory.*;
 import com.notronix.lw.methods.orders.GetOrderViewsMethod;
 import com.notronix.lw.methods.orders.GetOrdersByIdMethod;
 import com.notronix.lw.methods.processedorders.SearchProcessedOrdersPagedMethod;
+import com.notronix.lw.methods.purchaseorder.CreatePurchaseOrderInitialMethod;
+import com.notronix.lw.methods.purchaseorder.DeletePurchaseOrderMethod;
 import com.notronix.lw.methods.returnsrefunds.GetSearchTypesMethod;
 import com.notronix.lw.methods.stock.GetStockItemsMethod;
 import com.notronix.lw.methods.stock.GetStockLevelMethod;
@@ -162,6 +164,24 @@ public class LinnworksAPIImpl implements LinnworksAPI
             throws LinnworksAPIException
     {
         return client.executeMethod(prepareMethod(GetOrdersByIdMethod.class, token).withOrderIds(orderIds));
+    }
+
+    @Override
+    public String createPurchaseOrder(LinnworksAPIClient client, SessionToken token, CreatePurchaseOrderParameters parameters) throws LinnworksAPIException
+    {
+        return client.executeMethod(prepareMethod(CreatePurchaseOrderInitialMethod.class, token).withParameters(parameters));
+    }
+
+    @Override
+    public List<Supplier> getSuppliers(LinnworksAPIClient client, SessionToken token) throws LinnworksAPIException
+    {
+        return client.executeMethod(prepareMethod(GetSuppliersMethod.class, token));
+    }
+
+    @Override
+    public String deletePurchaseOrder(LinnworksAPIClient client, SessionToken token, String purchaseOrderId) throws LinnworksAPIException
+    {
+        return client.executeMethod(prepareMethod(DeletePurchaseOrderMethod.class, token).withPurchaseOrderId(purchaseOrderId));
     }
 
     private static <T extends Method> T prepareMethod(Class<T> clazz, SessionToken token)

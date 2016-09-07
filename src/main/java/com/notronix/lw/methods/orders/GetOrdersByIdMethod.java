@@ -20,22 +20,24 @@ public class GetOrdersByIdMethod extends OrdersMethod<List<OrderDetails>>
     @Override
     public String getPayload()
     {
-        String ids = "";
+        String payload = "";
 
         if (orderIds != null)
         {
             for (String orderId : orderIds)
             {
-                if (ids.trim().length() > 0)
+                if (payload.trim().length() > 0)
                 {
-                    ids += ",";
+                    payload += ",";
                 }
 
-                ids += "\"" + orderId + "\"";
+                payload += "\"" + orderId + "\"";
             }
         }
 
-        return "pkOrderIds=[" + ids + "]";
+        payload = "pkOrderIds=[" + payload + "]";
+
+        return payload;
     }
 
     @Override
