@@ -36,7 +36,7 @@ public class APITester
     }
 
     private static SessionToken authenticateApplication(LinnworksAPI api, LinnworksAPIClient client, String appId, String appSecret, String authToken)
-        throws LinnworksAPIException
+            throws LinnworksAPIException
     {
         SessionToken sessionToken = api.authenticateApplication(client, appId, appSecret, authToken);
         if (sessionToken == null)

@@ -1,7 +1,5 @@
 package com.notronix.lw.model;
 
-import com.notronix.lw.model.InventoryItem;
-
 import java.util.List;
 
 public class GetInventoryItemsResponse
@@ -10,6 +8,7 @@ public class GetInventoryItemsResponse
     private int TotalItems;
     private int StartIndex;
     private int batchSize;
+    private String Token;
 
     public List<InventoryItem> getItems()
     {
@@ -49,5 +48,30 @@ public class GetInventoryItemsResponse
     public void setBatchSize(int batchSize)
     {
         this.batchSize = batchSize;
+    }
+
+    public String getToken()
+    {
+        return Token;
+    }
+
+    public void setToken(String token)
+    {
+        Token = token;
+    }
+
+    public int getTotalPages()
+    {
+        if (TotalItems == 0)
+        {
+            return 0;
+        }
+
+        if (batchSize < 1)
+        {
+            return 0;
+        }
+
+        return (TotalItems + batchSize - 1) / batchSize;
     }
 }

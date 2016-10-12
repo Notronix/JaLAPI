@@ -69,10 +69,10 @@ public class LinnworksAPIImpl implements LinnworksAPI
     }
 
     @Override
-    public GetInventoryItemsResponse getInventoryItems(LinnworksAPIClient client, SessionToken token, InventoryView view, Integer pageSize)
+    public GetInventoryItemsResponse getInventoryItems(LinnworksAPIClient client, SessionToken token, InventoryView view, Integer pageSize, Integer page)
             throws LinnworksAPIException
     {
-        return client.executeMethod(prepareMethod(GetInventoryItemsMethod.class, token).withView(view).withPageSize(pageSize));
+        return client.executeMethod(prepareMethod(GetInventoryItemsMethod.class, token).withView(view).withPageSize(pageSize).withPage(page));
     }
 
     @Override

@@ -20,7 +20,10 @@ public class GetInventoryItemsMethod extends InventoryMethod<GetInventoryItemsRe
     public GetInventoryItemsResponse getResponse()
             throws LinnworksAPIException
     {
-        return new Gson().fromJson(getJsonResult(), GetInventoryItemsResponse.class);
+        GetInventoryItemsResponse response = new Gson().fromJson(getJsonResult(), GetInventoryItemsResponse.class);
+        response.setBatchSize(pageSize);
+
+        return response;
     }
 
     @Override
@@ -75,6 +78,20 @@ public class GetInventoryItemsMethod extends InventoryMethod<GetInventoryItemsRe
     public void setStartIndex(Integer startIndex)
     {
         this.startIndex = startIndex;
+    }
+
+    public GetInventoryItemsMethod withPage(Integer page)
+    {
+        if (page < 1)
+        {
+            this.startIndex = 1;
+        }
+        else
+        {
+            this.startIndex = page;
+        }
+
+        return this;
     }
 
     public Integer getPageSize()
