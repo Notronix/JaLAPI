@@ -80,15 +80,15 @@ public class GetInventoryItemsMethod extends InventoryMethod<GetInventoryItemsRe
         this.startIndex = startIndex;
     }
 
-    public GetInventoryItemsMethod withPage(Integer page)
+    public GetInventoryItemsMethod withStartIndex(Integer startIndex)
     {
-        if (page < 1)
+        if (startIndex < 1)
         {
             this.startIndex = 1;
         }
         else
         {
-            this.startIndex = page;
+            this.startIndex = startIndex;
         }
 
         return this;
