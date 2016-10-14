@@ -31,7 +31,7 @@ task wrapper(type: Wrapper) {
 
 jar {
     manifest {
-        attributes 'Implementation-Title': 'JaLAPI',
+        attributes 'Implementation-Title': rootProject.name,
                 'Implementation-Version': version,
                 'Implementation-Vendor': 'Notronix'
     }
@@ -68,15 +68,15 @@ uploadArchives {
             }
 
             pom.project {
-                name 'JaLAPI'
+                name rootProject.name
                 packaging 'jar'
-                description 'A Java implementation of the Linnworks API'
-                url 'https://github.com/Notronix/JaLAPI/'
+                description rootProject.description
+                url rootProject.url
 
                 scm {
-                    url 'scm:git@github.com:Notronix/JaLAPI.git'
-                    connection 'scm:git@github.com:Notronix/JaLAPI.git'
-                    developerConnection 'scm:git@github.com:Notronix/JaLAPI.git'
+                    url 'scm:git@github.com:Notronix/' + rootProject.name + '.git'
+                    connection 'scm:git@github.com:Notronix/' + rootProject.name + '.git'
+                    developerConnection 'scm:git@github.com:Notronix/' + rootProject.name + '.git'
                 }
 
                 licenses {
