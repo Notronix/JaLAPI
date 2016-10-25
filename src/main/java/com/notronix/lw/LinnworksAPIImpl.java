@@ -184,6 +184,13 @@ public class LinnworksAPIImpl implements LinnworksAPI
         return client.executeMethod(prepareMethod(DeletePurchaseOrderMethod.class, token).withPurchaseOrderId(purchaseOrderId));
     }
 
+    @Override
+    public List<StockItemSupplierStat> getStockSupplierStat(LinnworksAPIClient client, SessionToken token, String inventoryItemId)
+            throws LinnworksAPIException
+    {
+        return client.executeMethod(prepareMethod(GetStockSupplierStatMethod.class, token).withInventoryItemId(inventoryItemId));
+    }
+
     private static <T extends Method> T prepareMethod(Class<T> clazz, SessionToken token)
             throws LinnworksAPIException
     {

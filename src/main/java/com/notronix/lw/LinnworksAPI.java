@@ -69,4 +69,7 @@ public interface LinnworksAPI
 
     String  deletePurchaseOrder(LinnworksAPIClient client, SessionToken token, String purchaseOrderId)
             throws LinnworksAPIException;
+
+    List<StockItemSupplierStat> getStockSupplierStat(LinnworksAPIClient client, SessionToken token, String inventoryItemId)
+            throws LinnworksAPIException;
 }
