@@ -9,7 +9,7 @@ import com.notronix.lw.model.SessionToken;
 
 public class APITester
 {
-    private static void makeAPICalls(LinnworksAPI api, LinnworksAPIClient client, SessionToken token)
+    private static void makeAPICalls(LinnworksAPI api, LinnworksAPIClient client, SessionToken token) throws LinnworksAPIException
     {
         //MAKE API METHOD CALLS HERE
     }
