@@ -70,6 +70,12 @@ public class GetInventoryItemsMethod extends InventoryMethod<GetInventoryItemsRe
         this.stockLocationIds = stockLocationIds;
     }
 
+    public GetInventoryItemsMethod withStockLocationIds(List<String> stockLocationIds)
+    {
+        this.stockLocationIds = stockLocationIds;
+        return this;
+    }
+
     public Integer getStartIndex()
     {
         return startIndex;

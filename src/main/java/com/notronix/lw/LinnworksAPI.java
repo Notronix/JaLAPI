@@ -26,7 +26,7 @@ public interface LinnworksAPI
     List<Column> getColumns(LinnworksAPIClient client, SessionToken token)
             throws LinnworksAPIException;
 
-    GetInventoryItemsResponse getInventoryItems(LinnworksAPIClient client, SessionToken token, InventoryView view, Integer pageSize, Integer startIndex, Boolean preloadChilds)
+    GetInventoryItemsResponse getInventoryItems(LinnworksAPIClient client, SessionToken token, InventoryView view, List<String> locations, Integer pageSize, Integer startIndex, Boolean preloadChilds)
             throws LinnworksAPIException;
 
     StockItemInv getInventoryItem(LinnworksAPIClient client, SessionToken token, String itemId)
@@ -68,6 +68,9 @@ public interface LinnworksAPI
             throws LinnworksAPIException;
 
     String  deletePurchaseOrder(LinnworksAPIClient client, SessionToken token, String purchaseOrderId)
+            throws LinnworksAPIException;
+
+    List<StockItemSupplierStat> getStockSupplierStat(LinnworksAPIClient client, SessionToken token, String inventoryItemId)
             throws LinnworksAPIException;
 
     List<StockItemChannelSKU> getChannelSKUs(LinnworksAPIClient client, SessionToken token, String itemId)

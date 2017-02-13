@@ -69,10 +69,15 @@ public class LinnworksAPIImpl implements LinnworksAPI
     }
 
     @Override
-    public GetInventoryItemsResponse getInventoryItems(LinnworksAPIClient client, SessionToken token, InventoryView view, Integer pageSize, Integer startIndex, Boolean preloadChilds)
+    public GetInventoryItemsResponse getInventoryItems(LinnworksAPIClient client, SessionToken token, InventoryView view, List<String> locations, Integer pageSize, Integer startIndex, Boolean preloadChilds)
             throws LinnworksAPIException
     {
-        return client.executeMethod(prepareMethod(GetInventoryItemsMethod.class, token).withView(view).withPageSize(pageSize).withStartIndex(startIndex).withPreloadChilds(preloadChilds));
+        return client.executeMethod(prepareMethod(GetInventoryItemsMethod.class, token)
+                                            .withView(view)
+                                            .withStockLocationIds(locations)
+                                            .withPageSize(pageSize)
+                                            .withStartIndex(startIndex)
+                                            .withPreloadChilds(preloadChilds));
     }
 
     @Override
@@ -140,8 +145,8 @@ public class LinnworksAPIImpl implements LinnworksAPI
 
     @Override
     public GenericPagedResult<ProcessedOrderWeb> searchProcessedOrdersPaged(LinnworksAPIClient client, SessionToken token, LocalDateTime from,
-                                                         LocalDateTime to, SearchDateType dateType, SearchField searchField,
-                                                         boolean exactMatch, String searchTerm, int pageNum, int pageSize)
+                                                                            LocalDateTime to, SearchDateType dateType, SearchField searchField,
+                                                                            boolean exactMatch, String searchTerm, int pageNum, int pageSize)
             throws LinnworksAPIException
     {
         SearchProcessedOrdersPagedMethod method = prepareMethod(SearchProcessedOrdersPagedMethod.class, token);
@@ -157,7 +162,7 @@ public class LinnworksAPIImpl implements LinnworksAPI
             {
                 method.withPartialMatch();
             }
-            catch (IllegalArgumentException|IllegalAccessException e)
+            catch (IllegalArgumentException | IllegalAccessException e)
             {
                 throw new LinnworksAPIException("Error setting partial match.", e);
             }
@@ -189,6 +194,13 @@ public class LinnworksAPIImpl implements LinnworksAPI
     public String deletePurchaseOrder(LinnworksAPIClient client, SessionToken token, String purchaseOrderId) throws LinnworksAPIException
     {
         return client.executeMethod(prepareMethod(DeletePurchaseOrderMethod.class, token).withPurchaseOrderId(purchaseOrderId));
+    }
+
+    @Override
+    public List<StockItemSupplierStat> getStockSupplierStat(LinnworksAPIClient client, SessionToken token, String inventoryItemId)
+            throws LinnworksAPIException
+    {
+        return client.executeMethod(prepareMethod(GetStockSupplierStatMethod.class, token).withInventoryItemId(inventoryItemId));
     }
 
     private static <T extends Method> T prepareMethod(Class<T> clazz, SessionToken token)
