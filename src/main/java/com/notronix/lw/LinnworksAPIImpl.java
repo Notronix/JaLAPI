@@ -111,6 +111,13 @@ public class LinnworksAPIImpl implements LinnworksAPI
     }
 
     @Override
+    public List<StockItemChannelSKU> getChannelSKUs(LinnworksAPIClient client, SessionToken token, String itemId)
+            throws LinnworksAPIException
+    {
+        return client.executeMethod(prepareMethod(GetInventoryItemChannelSKUsMethod.class, token).withItemId(itemId));
+    }
+
+    @Override
     public List<StockItemImage> getImages(LinnworksAPIClient client, SessionToken token, String itemId)
             throws LinnworksAPIException
     {
