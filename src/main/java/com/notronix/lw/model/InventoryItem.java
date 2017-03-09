@@ -23,6 +23,9 @@ public class InventoryItem
     private String BinRack;
     private Map<String, InventoryItemChannel> Channels;
 
+    private String CreatedDate;
+    private String ModifiedDate;
+
     public String getId()
     {
         return Id;
@@ -191,6 +194,26 @@ public class InventoryItem
     public void setChannels(Map<String, InventoryItemChannel> channels)
     {
         Channels = channels;
+    }
+
+    public String getCreatedDate()
+    {
+        return CreatedDate;
+    }
+
+    public void setCreatedDate(String createdDate)
+    {
+        CreatedDate = createdDate;
+    }
+
+    public String getModifiedDate()
+    {
+        return ModifiedDate;
+    }
+
+    public void setModifiedDate(String modifiedDate)
+    {
+        ModifiedDate = modifiedDate;
     }
 
     @Override
