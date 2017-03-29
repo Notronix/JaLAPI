@@ -6,8 +6,7 @@ import com.notronix.lw.model.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface LinnworksAPI
-{
+public interface LinnworksAPI {
     SessionToken authenticateApplication(LinnworksAPIClient client, String appId, String appSecret, String authToken)
             throws LinnworksAPIException;
 
@@ -67,12 +66,15 @@ public interface LinnworksAPI
     List<Supplier> getSuppliers(LinnworksAPIClient client, SessionToken token)
             throws LinnworksAPIException;
 
-    String  deletePurchaseOrder(LinnworksAPIClient client, SessionToken token, String purchaseOrderId)
+    String deletePurchaseOrder(LinnworksAPIClient client, SessionToken token, String purchaseOrderId)
             throws LinnworksAPIException;
 
     List<StockItemSupplierStat> getStockSupplierStat(LinnworksAPIClient client, SessionToken token, String inventoryItemId)
             throws LinnworksAPIException;
 
     List<StockItemChannelSKU> getChannelSKUs(LinnworksAPIClient client, SessionToken token, String itemId)
+            throws LinnworksAPIException;
+
+    List<CurrencyConversionRate> getCurrencyConversionRates(LinnworksAPIClient client, SessionToken token, boolean getCurrenciesFromOrders, String currency)
             throws LinnworksAPIException;
 }
