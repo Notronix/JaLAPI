@@ -57,6 +57,9 @@ public interface LinnworksAPI {
                                                                      boolean exactMatch, String searchTerm, int pageNum, int pageSize)
             throws LinnworksAPIException;
 
+    GenericPagedResult<OpenOrder> getOpenOrders(LinnworksAPIClient client, SessionToken token, int pageNum, int pageSize)
+            throws LinnworksAPIException;
+
     List<OrderDetails> getOrdersById(LinnworksAPIClient client, SessionToken token, List<String> orderIds)
             throws LinnworksAPIException;
 

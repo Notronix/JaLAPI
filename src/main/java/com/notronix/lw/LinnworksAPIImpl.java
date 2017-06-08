@@ -5,6 +5,7 @@ import com.notronix.lw.methods.inventory.GetInventoryItemsMethod;
 import com.notronix.lw.methods.Method;
 import com.notronix.lw.methods.auth.AuthorizeByApplicationMethod;
 import com.notronix.lw.methods.inventory.*;
+import com.notronix.lw.methods.orders.GetOpenOrdersMethod;
 import com.notronix.lw.methods.orders.GetOrderViewsMethod;
 import com.notronix.lw.methods.orders.GetOrdersByIdMethod;
 import com.notronix.lw.methods.processedorders.SearchProcessedOrdersPagedMethod;
@@ -155,6 +156,15 @@ public class LinnworksAPIImpl implements LinnworksAPI {
         }
 
         return client.executeMethod(method.withSearchTerm(searchTerm).withPageNum(pageNum).withPageSize(pageSize));
+    }
+
+    @Override
+    public GenericPagedResult<OpenOrder> getOpenOrders(LinnworksAPIClient client, SessionToken token, int pageNum, int pageSize)
+            throws LinnworksAPIException {
+        GetOpenOrdersMethod method = prepareMethod(GetOpenOrdersMethod.class, token);
+        method.withPageNum(pageNum).withPageSize(pageSize);
+
+        return client.executeMethod(method);
     }
 
     @Override
