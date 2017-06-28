@@ -31,6 +31,15 @@ public interface LinnworksAPI {
     StockItemInv getInventoryItem(LinnworksAPIClient client, SessionToken token, String itemId)
             throws LinnworksAPIException;
 
+    List<StockItemComposition> getCompositions(LinnworksAPIClient client, SessionToken token, String itemId, boolean fullDetails)
+            throws LinnworksAPIException;
+
+    List<StockItemEbayCompatibility> getEbayCompatibility(LinnworksAPIClient client, SessionToken token, String itemId)
+            throws LinnworksAPIException;
+
+    List<StockItemPrice> getPrices(LinnworksAPIClient client, SessionToken token, String itemId)
+            throws LinnworksAPIException;
+
     List<StockItemExtendedProperty> getExtendedProperties(LinnworksAPIClient client, SessionToken token, String itemId)
             throws LinnworksAPIException;
 

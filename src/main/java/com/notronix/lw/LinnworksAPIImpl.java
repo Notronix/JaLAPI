@@ -81,6 +81,24 @@ public class LinnworksAPIImpl implements LinnworksAPI {
     }
 
     @Override
+    public List<StockItemComposition> getCompositions(LinnworksAPIClient client, SessionToken token, String itemId, boolean fullDetail)
+            throws LinnworksAPIException {
+        return client.executeMethod(prepareMethod(GetInventoryItemCompositionsMethod.class, token).withInventoryItemId(itemId).withFullDetail(fullDetail));
+    }
+
+    @Override
+    public List<StockItemEbayCompatibility> getEbayCompatibility(LinnworksAPIClient client, SessionToken token, String itemId)
+            throws LinnworksAPIException {
+        return client.executeMethod(prepareMethod(GetEbayCompatibilityListMethod.class, token).withItemId(itemId));
+    }
+
+    @Override
+    public List<StockItemPrice> getPrices(LinnworksAPIClient client, SessionToken token, String itemId)
+            throws LinnworksAPIException {
+        return client.executeMethod(prepareMethod(GetInventoryItemPricesMethod.class, token).withItemId(itemId));
+    }
+
+    @Override
     public List<StockItemExtendedProperty> getExtendedProperties(LinnworksAPIClient client, SessionToken token, String itemId)
             throws LinnworksAPIException {
         return client.executeMethod(prepareMethod(GetInventoryItemExtendedPropertiesMethod.class, token).withItemId(itemId));
