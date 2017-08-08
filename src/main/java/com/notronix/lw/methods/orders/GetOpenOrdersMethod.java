@@ -6,10 +6,13 @@ import com.notronix.lw.LinnworksAPIException;
 import com.notronix.lw.model.GenericPagedResult;
 import com.notronix.lw.model.OpenOrder;
 
+import static org.apache.http.util.TextUtils.isBlank;
+
 public class GetOpenOrdersMethod extends OrdersMethod<GenericPagedResult<OpenOrder>>
 {
     private Integer pageSize = 200;
     private Integer pageNum = 1;
+    private String fulfillmentCenterId;
 
     @Override
     public String getName() {
@@ -19,7 +22,7 @@ public class GetOpenOrdersMethod extends OrdersMethod<GenericPagedResult<OpenOrd
     @Override
     public String getPayload() {
         return "entriesPerPage=" + pageSize + "&pageNumber=" + pageNum
-                + "&fulfilmentCenter=&sorting=&additionalFilter=";
+                + "&fulfilmentCenter=" + (isBlank(fulfillmentCenterId) ? "" : fulfillmentCenterId) + "&sorting=&additionalFilter=";
     }
 
     @Override
@@ -50,6 +53,19 @@ public class GetOpenOrdersMethod extends OrdersMethod<GenericPagedResult<OpenOrd
 
     public GetOpenOrdersMethod withPageNum(Integer pageNum) {
         this.pageNum = pageNum;
+        return this;
+    }
+
+    public String getFulfillmentCenterId() {
+        return fulfillmentCenterId;
+    }
+
+    public void setFulfillmentCenterId(String fulfillmentCenterId) {
+        this.fulfillmentCenterId = fulfillmentCenterId;
+    }
+
+    public GetOpenOrdersMethod withFulfillmentCenterId(String fulfillmentCenterId) {
+        this.fulfillmentCenterId = fulfillmentCenterId;
         return this;
     }
 }

@@ -177,12 +177,11 @@ public class LinnworksAPIImpl implements LinnworksAPI {
     }
 
     @Override
-    public GenericPagedResult<OpenOrder> getOpenOrders(LinnworksAPIClient client, SessionToken token, int pageNum, int pageSize)
+    public GenericPagedResult<OpenOrder> getOpenOrders(LinnworksAPIClient client, SessionToken token, int pageNum, int pageSize, String locationId)
             throws LinnworksAPIException {
         GetOpenOrdersMethod method = prepareMethod(GetOpenOrdersMethod.class, token);
-        method.withPageNum(pageNum).withPageSize(pageSize);
 
-        return client.executeMethod(method);
+        return client.executeMethod(method.withPageNum(pageNum).withPageSize(pageSize).withFulfillmentCenterId(locationId));
     }
 
     @Override
