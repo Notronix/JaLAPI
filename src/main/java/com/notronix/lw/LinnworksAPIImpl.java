@@ -15,10 +15,12 @@ import com.notronix.lw.methods.returnsrefunds.GetSearchTypesMethod;
 import com.notronix.lw.methods.settings.GetCurrencyConversionRatesMethod;
 import com.notronix.lw.methods.stock.GetStockItemsMethod;
 import com.notronix.lw.methods.stock.GetStockLevelMethod;
+import com.notronix.lw.methods.stock.SetStockLevelMethod;
 import com.notronix.lw.model.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 public class LinnworksAPIImpl implements LinnworksAPI {
     @Override
@@ -120,6 +122,23 @@ public class LinnworksAPIImpl implements LinnworksAPI {
     public List<StockItemLevel> getLevels(LinnworksAPIClient client, SessionToken token, String itemId)
             throws LinnworksAPIException {
         return client.executeMethod(prepareMethod(GetStockLevelMethod.class, token).withItemId(itemId));
+    }
+
+    @Override
+    public List<StockItemLevel> setLevels(LinnworksAPIClient client, SessionToken token, List<StockLevelUpdate> updates) throws LinnworksAPIException {
+        return client.executeMethod(prepareMethod(SetStockLevelMethod.class, token).withUpdates(updates));
+    }
+
+    @Override
+    public Map<String, Object> updateInventoryField(LinnworksAPIClient client, SessionToken token, String itemId, InventoryField field, String value) throws LinnworksAPIException {
+        return client.executeMethod(prepareMethod(UpdateInventoryItemFieldMethod.class, token).withItemId(itemId)
+                .withField(field).withValue(value));
+    }
+
+    @Override
+    public Map<String, Object> updateStockField(LinnworksAPIClient client, SessionToken token, String itemId, InventoryStockField field, String value, String locationId) throws LinnworksAPIException {
+        return client.executeMethod(prepareMethod(UpdateInventoryItemStockFieldMethod.class, token).withItemId(itemId)
+                .withField(field).withValue(value).withLocationId(locationId));
     }
 
     @Override

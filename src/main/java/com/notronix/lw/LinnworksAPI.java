@@ -5,6 +5,7 @@ import com.notronix.lw.model.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 public interface LinnworksAPI {
     SessionToken authenticateApplication(LinnworksAPIClient client, String appId, String appSecret, String authToken)
@@ -53,6 +54,16 @@ public interface LinnworksAPI {
             throws LinnworksAPIException;
 
     List<StockItemLevel> getLevels(LinnworksAPIClient client, SessionToken token, String itemId)
+            throws LinnworksAPIException;
+
+    List<StockItemLevel> setLevels(LinnworksAPIClient client, SessionToken token, List<StockLevelUpdate> updates)
+            throws LinnworksAPIException;
+
+    Map<String, Object> updateInventoryField(LinnworksAPIClient client, SessionToken token, String itemId,
+                                             InventoryField field, String value) throws LinnworksAPIException;
+
+    Map<String, Object> updateStockField(LinnworksAPIClient client, SessionToken token, String itemId,
+                                         InventoryStockField field, String value, String locationId)
             throws LinnworksAPIException;
 
     List<UserOrderView> getOrderViews(LinnworksAPIClient client, SessionToken token)
