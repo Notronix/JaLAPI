@@ -2,8 +2,7 @@ package com.notronix.lw.model;
 
 import java.util.List;
 
-public class OrderItem
-{
+public class OrderItem {
     private String OrderId;
     private String ItemId;
     private String StockItemId;
@@ -40,397 +39,319 @@ public class OrderItem
     private String ChannelTitle;
     private Boolean HasImage;
     private String ImageId;
-    private List<Object> AdditionalInfo;
+    private List<OrderItemOption> AdditionalInfo;
     private Integer StockLevelIndicator;
     private String BinRack;
 
-    public String getOrderId()
-    {
+    public String getOrderId() {
         return OrderId;
     }
 
-    public void setOrderId(String orderId)
-    {
+    public void setOrderId(String orderId) {
         OrderId = orderId;
     }
 
-    public String getItemId()
-    {
+    public String getItemId() {
         return ItemId;
     }
 
-    public void setItemId(String itemId)
-    {
+    public void setItemId(String itemId) {
         ItemId = itemId;
     }
 
-    public String getStockItemId()
-    {
+    public String getStockItemId() {
         return StockItemId;
     }
 
-    public void setStockItemId(String stockItemId)
-    {
+    public void setStockItemId(String stockItemId) {
         StockItemId = stockItemId;
     }
 
-    public String getItemNumber()
-    {
+    public String getItemNumber() {
         return ItemNumber;
     }
 
-    public void setItemNumber(String itemNumber)
-    {
+    public void setItemNumber(String itemNumber) {
         ItemNumber = itemNumber;
     }
 
-    public String getSKU()
-    {
+    public String getSKU() {
         return SKU;
     }
 
-    public void setSKU(String SKU)
-    {
+    public void setSKU(String SKU) {
         this.SKU = SKU;
     }
 
-    public String getItemSource()
-    {
+    public String getItemSource() {
         return ItemSource;
     }
 
-    public void setItemSource(String itemSource)
-    {
+    public void setItemSource(String itemSource) {
         ItemSource = itemSource;
     }
 
-    public String getTitle()
-    {
+    public String getTitle() {
         return Title;
     }
 
-    public void setTitle(String title)
-    {
+    public void setTitle(String title) {
         Title = title;
     }
 
-    public Integer getQuantity()
-    {
+    public Integer getQuantity() {
         return Quantity;
     }
 
-    public void setQuantity(Integer quantity)
-    {
+    public void setQuantity(Integer quantity) {
         Quantity = quantity;
     }
 
-    public String getCategoryName()
-    {
+    public String getCategoryName() {
         return CategoryName;
     }
 
-    public void setCategoryName(String categoryName)
-    {
+    public void setCategoryName(String categoryName) {
         CategoryName = categoryName;
     }
 
-    public Integer getCompositeAvailablity()
-    {
+    public Integer getCompositeAvailablity() {
         return CompositeAvailablity;
     }
 
-    public void setCompositeAvailablity(Integer compositeAvailablity)
-    {
+    public void setCompositeAvailablity(Integer compositeAvailablity) {
         CompositeAvailablity = compositeAvailablity;
     }
 
-    public String getRowId()
-    {
+    public String getRowId() {
         return RowId;
     }
 
-    public void setRowId(String rowId)
-    {
+    public void setRowId(String rowId) {
         RowId = rowId;
     }
 
-    public Boolean getStockLevelsSpecified()
-    {
+    public Boolean getStockLevelsSpecified() {
         return StockLevelsSpecified;
     }
 
-    public void setStockLevelsSpecified(Boolean stockLevelsSpecified)
-    {
+    public void setStockLevelsSpecified(Boolean stockLevelsSpecified) {
         StockLevelsSpecified = stockLevelsSpecified;
     }
 
-    public Integer getOnOrder()
-    {
+    public Integer getOnOrder() {
         return OnOrder;
     }
 
-    public void setOnOrder(Integer onOrder)
-    {
+    public void setOnOrder(Integer onOrder) {
         OnOrder = onOrder;
     }
 
-    public Integer getInOrderBook()
-    {
+    public Integer getInOrderBook() {
         return InOrderBook;
     }
 
-    public void setInOrderBook(Integer inOrderBook)
-    {
+    public void setInOrderBook(Integer inOrderBook) {
         InOrderBook = inOrderBook;
     }
 
-    public Integer getLevel()
-    {
+    public Integer getLevel() {
         return Level;
     }
 
-    public void setLevel(Integer level)
-    {
+    public void setLevel(Integer level) {
         Level = level;
     }
 
-    public Integer getMinimumLevel()
-    {
+    public Integer getMinimumLevel() {
         return MinimumLevel;
     }
 
-    public void setMinimumLevel(Integer minimumLevel)
-    {
+    public void setMinimumLevel(Integer minimumLevel) {
         MinimumLevel = minimumLevel;
     }
 
-    public Integer getAvailableStock()
-    {
+    public Integer getAvailableStock() {
         return AvailableStock;
     }
 
-    public void setAvailableStock(Integer availableStock)
-    {
+    public void setAvailableStock(Integer availableStock) {
         AvailableStock = availableStock;
     }
 
-    public Double getPricePerUnit()
-    {
+    public Double getPricePerUnit() {
         return PricePerUnit;
     }
 
-    public void setPricePerUnit(Double pricePerUnit)
-    {
+    public void setPricePerUnit(Double pricePerUnit) {
         PricePerUnit = pricePerUnit;
     }
 
-    public Double getUnitCost()
-    {
+    public Double getUnitCost() {
         return UnitCost;
     }
 
-    public void setUnitCost(Double unitCost)
-    {
+    public void setUnitCost(Double unitCost) {
         UnitCost = unitCost;
     }
 
-    public Double getDiscount()
-    {
+    public Double getDiscount() {
         return Discount;
     }
 
-    public void setDiscount(Double discount)
-    {
+    public void setDiscount(Double discount) {
         Discount = discount;
     }
 
-    public Double getTax()
-    {
+    public Double getTax() {
         return Tax;
     }
 
-    public void setTax(Double tax)
-    {
+    public void setTax(Double tax) {
         Tax = tax;
     }
 
-    public Double getTaxRate()
-    {
+    public Double getTaxRate() {
         return TaxRate;
     }
 
-    public void setTaxRate(Double taxRate)
-    {
+    public void setTaxRate(Double taxRate) {
         TaxRate = taxRate;
     }
 
-    public Double getCost()
-    {
+    public Double getCost() {
         return Cost;
     }
 
-    public void setCost(Double cost)
-    {
+    public void setCost(Double cost) {
         Cost = cost;
     }
 
-    public Double getCostIncTax()
-    {
+    public Double getCostIncTax() {
         return CostIncTax;
     }
 
-    public void setCostIncTax(Double costIncTax)
-    {
+    public void setCostIncTax(Double costIncTax) {
         CostIncTax = costIncTax;
     }
 
-    public List<OrderItem> getCompositeSubItems()
-    {
+    public List<OrderItem> getCompositeSubItems() {
         return CompositeSubItems;
     }
 
-    public void setCompositeSubItems(List<OrderItem> compositeSubItems)
-    {
+    public void setCompositeSubItems(List<OrderItem> compositeSubItems) {
         CompositeSubItems = compositeSubItems;
     }
 
-    public Boolean getService()
-    {
+    public Boolean getService() {
         return IsService;
     }
 
-    public void setService(Boolean service)
-    {
+    public void setService(Boolean service) {
         IsService = service;
     }
 
-    public Double getSalesTax()
-    {
+    public Double getSalesTax() {
         return SalesTax;
     }
 
-    public void setSalesTax(Double salesTax)
-    {
+    public void setSalesTax(Double salesTax) {
         SalesTax = salesTax;
     }
 
-    public Boolean getTaxCostInclusive()
-    {
+    public Boolean getTaxCostInclusive() {
         return TaxCostInclusive;
     }
 
-    public void setTaxCostInclusive(Boolean taxCostInclusive)
-    {
+    public void setTaxCostInclusive(Boolean taxCostInclusive) {
         TaxCostInclusive = taxCostInclusive;
     }
 
-    public Boolean getPartShipped()
-    {
+    public Boolean getPartShipped() {
         return PartShipped;
     }
 
-    public void setPartShipped(Boolean partShipped)
-    {
+    public void setPartShipped(Boolean partShipped) {
         PartShipped = partShipped;
     }
 
-    public Double getWeight()
-    {
+    public Double getWeight() {
         return Weight;
     }
 
-    public void setWeight(Double weight)
-    {
+    public void setWeight(Double weight) {
         Weight = weight;
     }
 
-    public String getBarcodeNumber()
-    {
+    public String getBarcodeNumber() {
         return BarcodeNumber;
     }
 
-    public void setBarcodeNumber(String barcodeNumber)
-    {
+    public void setBarcodeNumber(String barcodeNumber) {
         BarcodeNumber = barcodeNumber;
     }
 
-    public Integer getMarket()
-    {
+    public Integer getMarket() {
         return Market;
     }
 
-    public void setMarket(Integer market)
-    {
+    public void setMarket(Integer market) {
         Market = market;
     }
 
-    public String getChannelSKU()
-    {
+    public String getChannelSKU() {
         return ChannelSKU;
     }
 
-    public void setChannelSKU(String channelSKU)
-    {
+    public void setChannelSKU(String channelSKU) {
         ChannelSKU = channelSKU;
     }
 
-    public String getChannelTitle()
-    {
+    public String getChannelTitle() {
         return ChannelTitle;
     }
 
-    public void setChannelTitle(String channelTitle)
-    {
+    public void setChannelTitle(String channelTitle) {
         ChannelTitle = channelTitle;
     }
 
-    public Boolean getHasImage()
-    {
+    public Boolean getHasImage() {
         return HasImage;
     }
 
-    public void setHasImage(Boolean hasImage)
-    {
+    public void setHasImage(Boolean hasImage) {
         HasImage = hasImage;
     }
 
-    public String getImageId()
-    {
+    public String getImageId() {
         return ImageId;
     }
 
-    public void setImageId(String imageId)
-    {
+    public void setImageId(String imageId) {
         ImageId = imageId;
     }
 
-    public List<Object> getAdditionalInfo()
-    {
+    public List<OrderItemOption> getAdditionalInfo() {
         return AdditionalInfo;
     }
 
-    public void setAdditionalInfo(List<Object> additionalInfo)
-    {
+    public void setAdditionalInfo(List<OrderItemOption> additionalInfo) {
         AdditionalInfo = additionalInfo;
     }
 
-    public Integer getStockLevelIndicator()
-    {
+    public Integer getStockLevelIndicator() {
         return StockLevelIndicator;
     }
 
-    public void setStockLevelIndicator(Integer stockLevelIndicator)
-    {
+    public void setStockLevelIndicator(Integer stockLevelIndicator) {
         StockLevelIndicator = stockLevelIndicator;
     }
 
-    public String getBinRack()
-    {
+    public String getBinRack() {
         return BinRack;
     }
 
-    public void setBinRack(String binRack)
-    {
+    public void setBinRack(String binRack) {
         BinRack = binRack;
     }
 }
