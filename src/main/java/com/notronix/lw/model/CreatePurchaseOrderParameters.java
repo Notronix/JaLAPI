@@ -1,6 +1,6 @@
 package com.notronix.lw.model;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 public class CreatePurchaseOrderParameters
 {
@@ -9,8 +9,8 @@ public class CreatePurchaseOrderParameters
     private String ExternalInvoiceNumber;
     private String Currency;
     private String SupplierReferenceNumber;
-    private LocalDateTime DateOfPurchase;
-    private LocalDateTime QuotedDeliveryDate;
+    private Instant DateOfPurchase;
+    private Instant QuotedDeliveryDate;
     private Double PostagePaid;
     private Double ShippingTaxRate;
     private Double ConversionRate;
@@ -65,22 +65,22 @@ public class CreatePurchaseOrderParameters
         SupplierReferenceNumber = supplierReferenceNumber;
     }
 
-    public LocalDateTime getDateOfPurchase()
+    public Instant getDateOfPurchase()
     {
         return DateOfPurchase;
     }
 
-    public void setDateOfPurchase(LocalDateTime dateOfPurchase)
+    public void setDateOfPurchase(Instant dateOfPurchase)
     {
         DateOfPurchase = dateOfPurchase;
     }
 
-    public LocalDateTime getQuotedDeliveryDate()
+    public Instant getQuotedDeliveryDate()
     {
         return QuotedDeliveryDate;
     }
 
-    public void setQuotedDeliveryDate(LocalDateTime quotedDeliveryDate)
+    public void setQuotedDeliveryDate(Instant quotedDeliveryDate)
     {
         QuotedDeliveryDate = quotedDeliveryDate;
     }

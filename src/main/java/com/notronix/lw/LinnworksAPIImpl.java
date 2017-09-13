@@ -1,7 +1,6 @@
 package com.notronix.lw;
 
 import com.notronix.lw.client.LinnworksAPIClient;
-import com.notronix.lw.methods.inventory.GetInventoryItemsMethod;
 import com.notronix.lw.methods.Method;
 import com.notronix.lw.methods.auth.AuthorizeByApplicationMethod;
 import com.notronix.lw.methods.inventory.*;
@@ -18,7 +17,7 @@ import com.notronix.lw.methods.stock.GetStockLevelMethod;
 import com.notronix.lw.methods.stock.SetStockLevelMethod;
 import com.notronix.lw.model.*;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
@@ -175,8 +174,8 @@ public class LinnworksAPIImpl implements LinnworksAPI {
     }
 
     @Override
-    public GenericPagedResult<ProcessedOrderWeb> searchProcessedOrdersPaged(LinnworksAPIClient client, SessionToken token, LocalDateTime from,
-                                                                            LocalDateTime to, SearchDateType dateType, SearchField searchField,
+    public GenericPagedResult<ProcessedOrderWeb> searchProcessedOrdersPaged(LinnworksAPIClient client, SessionToken token, Instant from,
+                                                                            Instant to, SearchDateType dateType, SearchField searchField,
                                                                             boolean exactMatch, String searchTerm, int pageNum, int pageSize)
             throws LinnworksAPIException {
         SearchProcessedOrdersPagedMethod method = prepareMethod(SearchProcessedOrdersPagedMethod.class, token);

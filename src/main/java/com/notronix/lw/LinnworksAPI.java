@@ -3,7 +3,7 @@ package com.notronix.lw;
 import com.notronix.lw.client.LinnworksAPIClient;
 import com.notronix.lw.model.*;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
@@ -72,8 +72,8 @@ public interface LinnworksAPI {
     List<SearchField> getSearchFields(LinnworksAPIClient client, SessionToken token)
             throws LinnworksAPIException;
 
-    GenericPagedResult<ProcessedOrderWeb> searchProcessedOrdersPaged(LinnworksAPIClient client, SessionToken token, LocalDateTime from,
-                                                                     LocalDateTime to, SearchDateType dateType, SearchField searchField,
+    GenericPagedResult<ProcessedOrderWeb> searchProcessedOrdersPaged(LinnworksAPIClient client, SessionToken token, Instant from,
+                                                                     Instant to, SearchDateType dateType, SearchField searchField,
                                                                      boolean exactMatch, String searchTerm, int pageNum, int pageSize)
             throws LinnworksAPIException;
 
