@@ -2,149 +2,122 @@ package com.notronix.lw.model;
 
 import java.util.List;
 
-public class InventoryView
-{
+public class InventoryView {
     private String Id;
     private String Name;
-    private String Mode;
+    private Mode Mode;
     private String Source;
     private String SubSource;
     private String CountryCode;
     private String CountryName;
-    private String Listing;
+    private ListingType Listing;
     private Boolean ShowOnlyChanged;
-    private String IncludeProducts;
+    private IncludeArchived IncludeProducts;
     private List<Filter> Filters;
     private List<Column> Columns;
-    private List<Channel> Channels;
+    private List<ViewChannel> Channels;
 
-    public String getId()
-    {
+    public String getId() {
         return Id;
     }
 
-    public void setId(String id)
-    {
+    public void setId(String id) {
         Id = id;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return Name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         Name = name;
     }
 
-    public String getMode()
-    {
+    public Mode getMode() {
         return Mode;
     }
 
-    public void setMode(String mode)
-    {
+    public void setMode(Mode mode) {
         Mode = mode;
     }
 
-    public String getSource()
-    {
+    public String getSource() {
         return Source;
     }
 
-    public void setSource(String source)
-    {
+    public void setSource(String source) {
         Source = source;
     }
 
-    public String getSubSource()
-    {
+    public String getSubSource() {
         return SubSource;
     }
 
-    public void setSubSource(String subSource)
-    {
+    public void setSubSource(String subSource) {
         SubSource = subSource;
     }
 
-    public String getCountryCode()
-    {
+    public String getCountryCode() {
         return CountryCode;
     }
 
-    public void setCountryCode(String countryCode)
-    {
+    public void setCountryCode(String countryCode) {
         CountryCode = countryCode;
     }
 
-    public String getCountryName()
-    {
+    public String getCountryName() {
         return CountryName;
     }
 
-    public void setCountryName(String countryName)
-    {
+    public void setCountryName(String countryName) {
         CountryName = countryName;
     }
 
-    public String getListing()
-    {
+    public ListingType getListing() {
         return Listing;
     }
 
-    public void setListing(String listing)
-    {
+    public void setListing(ListingType listing) {
         Listing = listing;
     }
 
-    public Boolean getShowOnlyChanged()
-    {
+    public Boolean getShowOnlyChanged() {
         return ShowOnlyChanged;
     }
 
-    public void setShowOnlyChanged(Boolean showOnlyChanged)
-    {
+    public void setShowOnlyChanged(Boolean showOnlyChanged) {
         ShowOnlyChanged = showOnlyChanged;
     }
 
-    public String getIncludeProducts()
-    {
+    public IncludeArchived getIncludeProducts() {
         return IncludeProducts;
     }
 
-    public void setIncludeProducts(String includeProducts)
-    {
+    public void setIncludeProducts(IncludeArchived includeProducts) {
         IncludeProducts = includeProducts;
     }
 
-    public List<Filter> getFilters()
-    {
+    public List<Filter> getFilters() {
         return Filters;
     }
 
-    public void setFilters(List<Filter> filters)
-    {
+    public void setFilters(List<Filter> filters) {
         Filters = filters;
     }
 
-    public List<Column> getColumns()
-    {
+    public List<Column> getColumns() {
         return Columns;
     }
 
-    public void setColumns(List<Column> columns)
-    {
+    public void setColumns(List<Column> columns) {
         Columns = columns;
     }
 
-    public List<Channel> getChannels()
-    {
+    public List<ViewChannel> getChannels() {
         return Channels;
     }
 
-    public void setChannels(List<Channel> channels)
-    {
+    public void setChannels(List<ViewChannel> channels) {
         Channels = channels;
     }
 }

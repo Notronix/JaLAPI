@@ -23,10 +23,7 @@ public interface LinnworksAPI {
     List<String> getExtendedPropertyNames(LinnworksAPIClient client, SessionToken token)
             throws LinnworksAPIException;
 
-    List<Column> getColumns(LinnworksAPIClient client, SessionToken token)
-            throws LinnworksAPIException;
-
-    GetInventoryItemsResponse getInventoryItems(LinnworksAPIClient client, SessionToken token, InventoryView view, List<String> locations, Integer pageSize, Integer startIndex, Boolean preloadChilds)
+    GetInventoryItemsResponse getInventoryItems(LinnworksAPIClient client, SessionToken token, InventoryView view, List<StockLocation> locations, Integer pageSize, Integer startIndex, Boolean preloadChilds)
             throws LinnworksAPIException;
 
     StockItemInv getInventoryItem(LinnworksAPIClient client, SessionToken token, String itemId)

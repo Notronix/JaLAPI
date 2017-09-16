@@ -1,21 +1,21 @@
 package com.notronix.lw.model;
 
+import java.util.List;
+
 public class Filter
 {
-    private String FilterName;
+    private FilterName FilterName;
     private String DisplayName;
-    private String FilterNameExact;
-    private String Field;
-    private String Condition;
+    private List<String> FilterNameExact;
+    private FieldType Field;
+    private ConditionType Condition;
     private String Value;
 
-    public String getFilterName()
-    {
+    public FilterName getFilterName() {
         return FilterName;
     }
 
-    public void setFilterName(String filterName)
-    {
+    public void setFilterName(FilterName filterName) {
         FilterName = filterName;
     }
 
@@ -29,32 +29,28 @@ public class Filter
         DisplayName = displayName;
     }
 
-    public String getFilterNameExact()
-    {
+    public List<String> getFilterNameExact() {
         return FilterNameExact;
     }
 
-    public void setFilterNameExact(String filterNameExact)
-    {
+    public void setFilterNameExact(List<String> filterNameExact) {
         FilterNameExact = filterNameExact;
     }
 
-    public String getField()
-    {
+    public FieldType getField() {
         return Field;
     }
 
-    public void setField(String field)
-    {
+    public void setField(FieldType field) {
         Field = field;
     }
 
-    public String getCondition()
+    public ConditionType getCondition()
     {
         return Condition;
     }
 
-    public void setCondition(String condition)
+    public void setCondition(ConditionType condition)
     {
         Condition = condition;
     }

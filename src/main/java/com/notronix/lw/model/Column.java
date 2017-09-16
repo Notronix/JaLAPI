@@ -2,25 +2,25 @@ package com.notronix.lw.model;
 
 public class Column
 {
-    private String ColumnName;
+    private ColumnName ColumnName;
     private String DisplayName;
-    private String Group;
-    private String Field;
-    private String SortDirection;
+    private GroupType Group;
+    private FieldType Field;
+    private SortDirection SortDirection;
     private Double Width;
     private Boolean IsEditable;
 
-    public String getColumnName()
+    public ColumnName getColumnName()
     {
         return ColumnName;
     }
 
-    public void setColumnName(String columnName)
+    public void setColumnName(ColumnName columnName)
     {
         ColumnName = columnName;
     }
 
-    public Column withColumnName(String columnName)
+    public Column withColumnName(ColumnName columnName)
     {
         this.ColumnName = columnName;
         return this;
@@ -42,49 +42,49 @@ public class Column
         return this;
     }
 
-    public String getGroup()
+    public GroupType getGroup()
     {
         return Group;
     }
 
-    public void setGroup(String group)
+    public void setGroup(GroupType group)
     {
         Group = group;
     }
 
-    public Column withGroup(String group)
+    public Column withGroup(GroupType group)
     {
         this.Group = group;
         return this;
     }
 
-    public String getField()
+    public FieldType getField()
     {
         return Field;
     }
 
-    public void setField(String field)
+    public void setField(FieldType field)
     {
         Field = field;
     }
 
-    public Column withField(String field)
+    public Column withField(FieldType field)
     {
         this.Field = field;
         return this;
     }
 
-    public String getSortDirection()
+    public SortDirection getSortDirection()
     {
         return SortDirection;
     }
 
-    public void setSortDirection(String sortDirection)
+    public void setSortDirection(SortDirection sortDirection)
     {
         SortDirection = sortDirection;
     }
 
-    public Column withSortDirection(String sortDirection)
+    public Column withSortDirection(SortDirection sortDirection)
     {
         this.SortDirection = sortDirection;
         return this;

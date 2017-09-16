@@ -4,9 +4,11 @@ import com.google.gson.Gson;
 import com.notronix.lw.LinnworksAPIException;
 import com.notronix.lw.model.GetInventoryItemsResponse;
 import com.notronix.lw.model.InventoryView;
+import com.notronix.lw.model.StockLocation;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GetInventoryItemsMethod extends InventoryMethod<GetInventoryItemsResponse>
 {
@@ -73,6 +75,13 @@ public class GetInventoryItemsMethod extends InventoryMethod<GetInventoryItemsRe
     public GetInventoryItemsMethod withStockLocationIds(List<String> stockLocationIds)
     {
         this.stockLocationIds = stockLocationIds;
+        return this;
+    }
+
+    public GetInventoryItemsMethod withStockLocations(List<StockLocation> stockLocations)
+    {
+        this.stockLocationIds = stockLocations == null ? null :
+                stockLocations.stream().map(StockLocation::getStockLocationId).collect(Collectors.toList());
         return this;
     }
 

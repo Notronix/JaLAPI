@@ -59,17 +59,11 @@ public class LinnworksAPIImpl implements LinnworksAPI {
     }
 
     @Override
-    public List<Column> getColumns(LinnworksAPIClient client, SessionToken token)
-            throws LinnworksAPIException {
-        return client.executeMethod(prepareMethod(GetInventoryColumnTypesMethod.class, token));
-    }
-
-    @Override
-    public GetInventoryItemsResponse getInventoryItems(LinnworksAPIClient client, SessionToken token, InventoryView view, List<String> locations, Integer pageSize, Integer startIndex, Boolean preloadChilds)
+    public GetInventoryItemsResponse getInventoryItems(LinnworksAPIClient client, SessionToken token, InventoryView view, List<StockLocation> locations, Integer pageSize, Integer startIndex, Boolean preloadChilds)
             throws LinnworksAPIException {
         return client.executeMethod(prepareMethod(GetInventoryItemsMethod.class, token)
                 .withView(view)
-                .withStockLocationIds(locations)
+                .withStockLocations(locations)
                 .withPageSize(pageSize)
                 .withStartIndex(startIndex)
                 .withPreloadChilds(preloadChilds));
