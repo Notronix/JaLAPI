@@ -100,6 +100,11 @@ public class LinnworksAPIImpl implements LinnworksAPI {
     }
 
     @Override
+    public List<StockItemExtendedProperty> updateExtendedProperties(LinnworksAPIClient client, SessionToken token, List<StockItemExtendedProperty> extendedProperties) throws LinnworksAPIException {
+        return client.executeMethod(prepareMethod(UpdateInventoryItemExtendedPropertiesMethod.class, token).withExtendedProperties(extendedProperties));
+    }
+
+    @Override
     public List<Country> getCountries(LinnworksAPIClient client, SessionToken token)
             throws LinnworksAPIException {
         return client.executeMethod(prepareMethod(GetCountriesMethod.class, token));
@@ -138,6 +143,13 @@ public class LinnworksAPIImpl implements LinnworksAPI {
     public List<StockItemChannelSKU> getChannelSKUs(LinnworksAPIClient client, SessionToken token, String itemId)
             throws LinnworksAPIException {
         return client.executeMethod(prepareMethod(GetInventoryItemChannelSKUsMethod.class, token).withItemId(itemId));
+    }
+
+    @Override
+    public Object createChannelSKU(LinnworksAPIClient client, SessionToken token, StockItemChannelSKU channelSKU)
+            throws LinnworksAPIException {
+        return client.executeMethod(prepareMethod(CreateInventoryItemChannelSKUsMethod.class, token)
+                .withChannelSKU(channelSKU));
     }
 
     @Override

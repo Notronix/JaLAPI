@@ -1,7 +1,6 @@
 package com.notronix.lw.model;
 
-public class StockItemChannelSKU
-{
+public class StockItemChannelSKU {
     private String StockItemId;
     private String ChannelSKURowId;
     private String ChannelReferenceId;
@@ -13,114 +12,137 @@ public class StockItemChannelSKU
     private Integer MaxListedQuantity;
     private String UpdateStatus;
     private String LastUpdate;
+    private Integer EndWhenStock;
+    private Double StockPercentage;
+    private Boolean IgnoreSync;
+    private Boolean IgnoreSyncMultiLocation;
+    private Boolean IsMultiLocation;
 
-    public String getStockItemId()
-    {
+    public String getStockItemId() {
         return StockItemId;
     }
 
-    public void setStockItemId(String stockItemId)
-    {
+    public void setStockItemId(String stockItemId) {
         StockItemId = stockItemId;
     }
 
-    public String getChannelSKURowId()
-    {
+    public String getChannelSKURowId() {
         return ChannelSKURowId;
     }
 
-    public void setChannelSKURowId(String channelSKURowId)
-    {
+    public void setChannelSKURowId(String channelSKURowId) {
         ChannelSKURowId = channelSKURowId;
     }
 
-    public String getChannelReferenceId()
-    {
+    public String getChannelReferenceId() {
         return ChannelReferenceId;
     }
 
-    public void setChannelReferenceId(String channelReferenceId)
-    {
+    public void setChannelReferenceId(String channelReferenceId) {
         ChannelReferenceId = channelReferenceId;
     }
 
-    public String getSKU()
-    {
+    public String getSKU() {
         return SKU;
     }
 
-    public void setSKU(String SKU)
-    {
+    public void setSKU(String SKU) {
         this.SKU = SKU;
     }
 
-    public String getSource()
-    {
+    public String getSource() {
         return Source;
     }
 
-    public void setSource(String source)
-    {
+    public void setSource(String source) {
         Source = source;
     }
 
-    public String getSubSource()
-    {
+    public String getSubSource() {
         return SubSource;
     }
 
-    public void setSubSource(String subSource)
-    {
+    public void setSubSource(String subSource) {
         SubSource = subSource;
     }
 
-    public Integer getSubmittedQuantity()
-    {
+    public Integer getSubmittedQuantity() {
         return SubmittedQuantity;
     }
 
-    public void setSubmittedQuantity(Integer submittedQuantity)
-    {
+    public void setSubmittedQuantity(Integer submittedQuantity) {
         SubmittedQuantity = submittedQuantity;
     }
 
-    public Integer getListedQuantity()
-    {
+    public Integer getListedQuantity() {
         return ListedQuantity;
     }
 
-    public void setListedQuantity(Integer listedQuantity)
-    {
+    public void setListedQuantity(Integer listedQuantity) {
         ListedQuantity = listedQuantity;
     }
 
-    public Integer getMaxListedQuantity()
-    {
+    public Integer getMaxListedQuantity() {
         return MaxListedQuantity;
     }
 
-    public void setMaxListedQuantity(Integer maxListedQuantity)
-    {
+    public void setMaxListedQuantity(Integer maxListedQuantity) {
         MaxListedQuantity = maxListedQuantity;
     }
 
-    public String getUpdateStatus()
-    {
+    public String getUpdateStatus() {
         return UpdateStatus;
     }
 
-    public void setUpdateStatus(String updateStatus)
-    {
+    public void setUpdateStatus(String updateStatus) {
         UpdateStatus = updateStatus;
     }
 
-    public String getLastUpdate()
-    {
+    public String getLastUpdate() {
         return LastUpdate;
     }
 
-    public void setLastUpdate(String lastUpdate)
-    {
+    public void setLastUpdate(String lastUpdate) {
         LastUpdate = lastUpdate;
+    }
+
+    public Integer getEndWhenStock() {
+        return EndWhenStock;
+    }
+
+    public void setEndWhenStock(Integer endWhenStock) {
+        EndWhenStock = endWhenStock;
+    }
+
+    public Double getStockPercentage() {
+        return StockPercentage;
+    }
+
+    public void setStockPercentage(Double stockPercentage) {
+        StockPercentage = stockPercentage;
+    }
+
+    public Boolean getIgnoreSync() {
+        return IgnoreSync;
+    }
+
+    public void setIgnoreSync(Boolean ignoreSync) {
+        IgnoreSync = ignoreSync;
+    }
+
+    public Boolean getIgnoreSyncMultiLocation() {
+        return IgnoreSyncMultiLocation;
+    }
+
+    public void setIgnoreSyncMultiLocation(Boolean ignoreSyncMultiLocation) {
+        IgnoreSyncMultiLocation = ignoreSyncMultiLocation;
+    }
+
+    public Boolean getMultiLocation() {
+        return IsMultiLocation;
+    }
+
+    public void setMultiLocation(Boolean multiLocation) {
+        IsMultiLocation = multiLocation;
     }
 }

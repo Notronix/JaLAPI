@@ -47,7 +47,7 @@ public class LinnworksAPIClientImpl implements LinnworksAPIClient
             StatusLine status = response.getStatusLine();
             String responsePayload = response.getEntity() == null ? null : EntityUtils.toString(response.getEntity());
 
-            if (status.getStatusCode() == HttpStatus.SC_OK)
+            if (status.getStatusCode() == HttpStatus.SC_OK || status.getStatusCode() == HttpStatus.SC_NO_CONTENT)
             {
                 method.setJsonResult(responsePayload);
             }

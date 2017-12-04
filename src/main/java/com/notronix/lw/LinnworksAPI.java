@@ -41,6 +41,9 @@ public interface LinnworksAPI {
     List<StockItemExtendedProperty> getExtendedProperties(LinnworksAPIClient client, SessionToken token, String itemId)
             throws LinnworksAPIException;
 
+    List<StockItemExtendedProperty> updateExtendedProperties(LinnworksAPIClient client, SessionToken token, List<StockItemExtendedProperty> extendedProperties)
+            throws LinnworksAPIException;
+
     List<Country> getCountries(LinnworksAPIClient client, SessionToken token)
             throws LinnworksAPIException;
 
@@ -93,6 +96,9 @@ public interface LinnworksAPI {
             throws LinnworksAPIException;
 
     List<StockItemChannelSKU> getChannelSKUs(LinnworksAPIClient client, SessionToken token, String itemId)
+            throws LinnworksAPIException;
+
+    Object createChannelSKU(LinnworksAPIClient client, SessionToken token, StockItemChannelSKU channelSKU)
             throws LinnworksAPIException;
 
     List<CurrencyConversionRate> getCurrencyConversionRates(LinnworksAPIClient client, SessionToken token, boolean getCurrenciesFromOrders, String currency)
