@@ -21,46 +21,47 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
-public class LinnworksAPIImpl implements LinnworksAPI {
+public class LinnworksAPIImpl implements LinnworksAPI
+{
     @Override
     public SessionToken authenticateApplication(LinnworksAPIClient client, String appId, String appSecret, String authToken)
-            throws LinnworksAPIException {
-        AuthorizeByApplicationMethod abam = new AuthorizeByApplicationMethod();
-        abam.setHost("https://api.linnworks.net");
-        abam.setAppId(appId);
-        abam.setAppSecret(appSecret);
-        abam.setAuthToken(authToken);
+            throws LinnworksAPIException, WrongTokenException {
+        AuthorizeByApplicationMethod method = new AuthorizeByApplicationMethod();
+        method.setHost("https://api.linnworks.net");
+        method.setAppId(appId);
+        method.setAppSecret(appSecret);
+        method.setAuthToken(authToken);
 
-        return client.executeMethod(abam);
+        return client.executeMethod(method);
     }
 
     @Override
     public List<StockLocation> getLocations(LinnworksAPIClient client, SessionToken token)
-            throws LinnworksAPIException {
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetStockLocationsMethod.class, token));
     }
 
     @Override
     public List<Channel> getChannels(LinnworksAPIClient client, SessionToken token)
-            throws LinnworksAPIException {
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetChannelsMethod.class, token));
     }
 
     @Override
     public List<Category> getCategories(LinnworksAPIClient client, SessionToken token)
-            throws LinnworksAPIException {
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetCategoriesMethod.class, token));
     }
 
     @Override
     public List<String> getExtendedPropertyNames(LinnworksAPIClient client, SessionToken token)
-            throws LinnworksAPIException {
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetExtendedPropertyNamesMethod.class, token));
     }
 
     @Override
     public GetInventoryItemsResponse getInventoryItems(LinnworksAPIClient client, SessionToken token, InventoryView view, List<StockLocation> locations, Integer pageSize, Integer startIndex, Boolean preloadChilds)
-            throws LinnworksAPIException {
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetInventoryItemsMethod.class, token)
                 .withView(view)
                 .withStockLocations(locations)
@@ -71,90 +72,105 @@ public class LinnworksAPIImpl implements LinnworksAPI {
 
     @Override
     public StockItemInv getInventoryItem(LinnworksAPIClient client, SessionToken token, String itemId)
-            throws LinnworksAPIException {
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetInventoryItemByIdMethod.class, token).withItemId(itemId));
     }
 
     @Override
     public List<StockItemComposition> getCompositions(LinnworksAPIClient client, SessionToken token, String itemId, boolean fullDetail)
-            throws LinnworksAPIException {
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetInventoryItemCompositionsMethod.class, token).withInventoryItemId(itemId).withFullDetail(fullDetail));
     }
 
     @Override
     public List<StockItemEbayCompatibility> getEbayCompatibility(LinnworksAPIClient client, SessionToken token, String itemId)
-            throws LinnworksAPIException {
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetEbayCompatibilityListMethod.class, token).withItemId(itemId));
     }
 
     @Override
     public List<StockItemPrice> getPrices(LinnworksAPIClient client, SessionToken token, String itemId)
-            throws LinnworksAPIException {
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetInventoryItemPricesMethod.class, token).withItemId(itemId));
     }
 
     @Override
     public List<StockItemExtendedProperty> getExtendedProperties(LinnworksAPIClient client, SessionToken token, String itemId)
-            throws LinnworksAPIException {
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetInventoryItemExtendedPropertiesMethod.class, token).withItemId(itemId));
     }
 
     @Override
-    public List<StockItemExtendedProperty> updateExtendedProperties(LinnworksAPIClient client, SessionToken token, List<StockItemExtendedProperty> extendedProperties) throws LinnworksAPIException {
+    public List<StockItemExtendedProperty> updateExtendedProperties(LinnworksAPIClient client,
+                                                                    SessionToken token,
+                                                                    List<StockItemExtendedProperty> extendedProperties)
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(UpdateInventoryItemExtendedPropertiesMethod.class, token).withExtendedProperties(extendedProperties));
     }
 
     @Override
     public List<Country> getCountries(LinnworksAPIClient client, SessionToken token)
-            throws LinnworksAPIException {
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetCountriesMethod.class, token));
     }
 
     @Override
     public GenericPagedResult<StockItem> getStockItems(LinnworksAPIClient client, SessionToken token, Integer pageSize)
-            throws LinnworksAPIException {
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetStockItemsMethod.class, token).withPageSize(pageSize));
     }
 
     @Override
     public List<StockItemLevel> getLevels(LinnworksAPIClient client, SessionToken token, String itemId)
-            throws LinnworksAPIException {
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetStockLevelMethod.class, token).withItemId(itemId));
     }
 
     @Override
-    public List<StockItemLevel> setLevels(LinnworksAPIClient client, SessionToken token, List<StockLevelUpdate> updates) throws LinnworksAPIException {
+    public List<StockItemLevel> setLevels(LinnworksAPIClient client, SessionToken token, List<StockLevelUpdate> updates)
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(SetStockLevelMethod.class, token).withUpdates(updates));
     }
 
     @Override
-    public Map<String, Object> updateInventoryField(LinnworksAPIClient client, SessionToken token, String itemId, InventoryField field, String value) throws LinnworksAPIException {
+    public Map<String, Object> updateInventoryField(LinnworksAPIClient client,
+                                                    SessionToken token,
+                                                    String itemId,
+                                                    InventoryField field,
+                                                    String value)
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(UpdateInventoryItemFieldMethod.class, token).withItemId(itemId)
                 .withField(field).withValue(value));
     }
 
     @Override
-    public Map<String, Object> updateStockField(LinnworksAPIClient client, SessionToken token, String itemId, InventoryStockField field, String value, String locationId) throws LinnworksAPIException {
+    public Map<String, Object> updateStockField(LinnworksAPIClient client,
+                                                SessionToken token,
+                                                String itemId,
+                                                InventoryStockField field,
+                                                String value,
+                                                String locationId)
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(UpdateInventoryItemStockFieldMethod.class, token).withItemId(itemId)
                 .withField(field).withValue(value).withLocationId(locationId));
     }
 
     @Override
     public List<StockItemChannelSKU> getChannelSKUs(LinnworksAPIClient client, SessionToken token, String itemId)
-            throws LinnworksAPIException {
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetInventoryItemChannelSKUsMethod.class, token).withItemId(itemId));
     }
 
     @Override
     public Object createChannelSKU(LinnworksAPIClient client, SessionToken token, StockItemChannelSKU channelSKU)
-            throws LinnworksAPIException {
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(CreateInventoryItemChannelSKUsMethod.class, token)
                 .withChannelSKU(channelSKU));
     }
 
     @Override
     public List<CurrencyConversionRate> getCurrencyConversionRates(LinnworksAPIClient client, SessionToken token, boolean getCurrenciesFromOrders, String currency)
-            throws LinnworksAPIException {
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetCurrencyConversionRatesMethod.class, token)
                 .withGetCurrenciesFromOrders(getCurrenciesFromOrders)
                 .forCurrency(currency)
@@ -163,36 +179,45 @@ public class LinnworksAPIImpl implements LinnworksAPI {
 
     @Override
     public List<StockItemImage> getImages(LinnworksAPIClient client, SessionToken token, String itemId)
-            throws LinnworksAPIException {
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetInventoryItemImagesMethod.class, token).withItemId(itemId));
     }
 
     @Override
     public List<UserOrderView> getOrderViews(LinnworksAPIClient client, SessionToken token)
-            throws LinnworksAPIException {
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetOrderViewsMethod.class, token));
     }
 
     @Override
     public List<SearchField> getSearchFields(LinnworksAPIClient client, SessionToken token)
-            throws LinnworksAPIException {
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetSearchTypesMethod.class, token));
     }
 
     @Override
-    public GenericPagedResult<ProcessedOrderWeb> searchProcessedOrdersPaged(LinnworksAPIClient client, SessionToken token, Instant from,
-                                                                            Instant to, SearchDateType dateType, SearchField searchField,
-                                                                            boolean exactMatch, String searchTerm, int pageNum, int pageSize)
-            throws LinnworksAPIException {
+    public GenericPagedResult<ProcessedOrderWeb> searchProcessedOrdersPaged(LinnworksAPIClient client,
+                                                                            SessionToken token,
+                                                                            Instant from,
+                                                                            Instant to,
+                                                                            SearchDateType dateType,
+                                                                            SearchField searchField,
+                                                                            boolean exactMatch,
+                                                                            String searchTerm,
+                                                                            int pageNum,
+                                                                            int pageSize)
+            throws LinnworksAPIException, WrongTokenException {
         SearchProcessedOrdersPagedMethod method = prepareMethod(SearchProcessedOrdersPagedMethod.class, token);
         method.from(from).to(to).withDateType(dateType).withSearchField(searchField);
 
         if (exactMatch) {
             method.withExactMatch();
-        } else {
+        }
+        else {
             try {
                 method.withPartialMatch();
-            } catch (IllegalArgumentException | IllegalAccessException e) {
+            }
+            catch (IllegalArgumentException | IllegalAccessException e) {
                 throw new LinnworksAPIException("Error setting partial match.", e);
             }
         }
@@ -201,8 +226,12 @@ public class LinnworksAPIImpl implements LinnworksAPI {
     }
 
     @Override
-    public GenericPagedResult<OpenOrder> getOpenOrders(LinnworksAPIClient client, SessionToken token, int pageNum, int pageSize, String locationId)
-            throws LinnworksAPIException {
+    public GenericPagedResult<OpenOrder> getOpenOrders(LinnworksAPIClient client,
+                                                       SessionToken token,
+                                                       int pageNum,
+                                                       int pageSize,
+                                                       String locationId)
+            throws LinnworksAPIException, WrongTokenException {
         GetOpenOrdersMethod method = prepareMethod(GetOpenOrdersMethod.class, token);
 
         return client.executeMethod(method.withPageNum(pageNum).withPageSize(pageSize).withFulfillmentCenterId(locationId));
@@ -210,28 +239,33 @@ public class LinnworksAPIImpl implements LinnworksAPI {
 
     @Override
     public List<OrderDetails> getOrdersById(LinnworksAPIClient client, SessionToken token, List<String> orderIds)
-            throws LinnworksAPIException {
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetOrdersByIdMethod.class, token).withOrderIds(orderIds));
     }
 
     @Override
-    public String createPurchaseOrder(LinnworksAPIClient client, SessionToken token, CreatePurchaseOrderParameters parameters) throws LinnworksAPIException {
+    public String createPurchaseOrder(LinnworksAPIClient client,
+                                      SessionToken token,
+                                      CreatePurchaseOrderParameters parameters)
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(CreatePurchaseOrderInitialMethod.class, token).withParameters(parameters));
     }
 
     @Override
-    public List<Supplier> getSuppliers(LinnworksAPIClient client, SessionToken token) throws LinnworksAPIException {
+    public List<Supplier> getSuppliers(LinnworksAPIClient client, SessionToken token)
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetSuppliersMethod.class, token));
     }
 
     @Override
-    public String deletePurchaseOrder(LinnworksAPIClient client, SessionToken token, String purchaseOrderId) throws LinnworksAPIException {
+    public String deletePurchaseOrder(LinnworksAPIClient client, SessionToken token, String purchaseOrderId)
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(DeletePurchaseOrderMethod.class, token).withPurchaseOrderId(purchaseOrderId));
     }
 
     @Override
     public List<StockItemSupplierStat> getStockSupplierStat(LinnworksAPIClient client, SessionToken token, String inventoryItemId)
-            throws LinnworksAPIException {
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetStockSupplierStatMethod.class, token).withInventoryItemId(inventoryItemId));
     }
 
@@ -243,7 +277,8 @@ public class LinnworksAPIImpl implements LinnworksAPI {
             method.setSessionToken(token.getSessionToken());
 
             return method;
-        } catch (InstantiationException | IllegalAccessException e) {
+        }
+        catch (InstantiationException | IllegalAccessException e) {
             throw new LinnworksAPIException("Unable to create method of type: " + clazz.getSimpleName(), e);
         }
     }

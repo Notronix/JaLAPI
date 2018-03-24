@@ -1,9 +1,9 @@
 package com.notronix.lw.client;
 
 import com.notronix.lw.LinnworksAPIException;
+import com.notronix.lw.WrongTokenException;
 import com.notronix.lw.methods.Method;
 import org.apache.http.HttpHost;
-import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
@@ -20,55 +20,57 @@ import java.net.ProxySelector;
 import java.net.URI;
 import java.util.List;
 
+import static org.apache.http.HttpStatus.SC_NO_CONTENT;
+import static org.apache.http.HttpStatus.SC_OK;
+
 public class LinnworksAPIClientImpl implements LinnworksAPIClient
 {
     @Override
-    public <T> T executeMethod(Method<T> method)
-            throws LinnworksAPIException
-    {
+    public <T> T executeMethod(Method<T> method) throws LinnworksAPIException, WrongTokenException {
         String url = method.getHost();
 
-        if (url == null)
-        {
+        if (url == null) {
             throw new LinnworksAPIException(method.getClass().getSimpleName() + ": host is null.");
         }
 
-        if (!url.endsWith("/"))
-        {
+        if (!url.endsWith("/")) {
             url += "/";
         }
         url += "api/" + method.getModule() + "/" + method.getName();
 
+        StatusLine status;
+        int statusCode;
+        String responsePayload;
+
         HttpRequestBase request = getRequest(url, method.getPayload(), method.getSessionToken());
 
         try (CloseableHttpClient client = HttpClientBuilder.create().setDefaultRequestConfig(request.getConfig()).build();
-             CloseableHttpResponse response = client.execute(request))
-        {
-            StatusLine status = response.getStatusLine();
-            String responsePayload = response.getEntity() == null ? null : EntityUtils.toString(response.getEntity());
-
-            if (status.getStatusCode() == HttpStatus.SC_OK || status.getStatusCode() == HttpStatus.SC_NO_CONTENT)
-            {
-                method.setJsonResult(responsePayload);
-            }
-            else
-            {
-                throw new Exception("API call failed" +
-                        ". Code: " + status.getStatusCode() +
-                        ", Reason: " + status.getReasonPhrase() +
-                        ", Details: " + responsePayload);
-            }
+             CloseableHttpResponse response = client.execute(request)) {
+            status = response.getStatusLine();
+            statusCode = status == null ? 0 : status.getStatusCode();
+            responsePayload = response.getEntity() == null ? null : EntityUtils.toString(response.getEntity());
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             throw new LinnworksAPIException("A failure occurred executing linnworks method (" + method.getModule() + "/" + method.getName() + ")", e);
         }
+
+        if (statusCode != SC_OK && statusCode != SC_NO_CONTENT) {
+            if (responsePayload != null && responsePayload.toLowerCase().contains("token is wrong")) {
+                throw new WrongTokenException(responsePayload);
+            }
+            else {
+                String reason = status == null ? "" : status.getReasonPhrase();
+                throw new LinnworksAPIException("API call failed" + ". Code: " + statusCode + ", Reason: " + reason
+                        + ", Details: " + responsePayload);
+            }
+        }
+
+        method.setJsonResult(responsePayload);
 
         return method.getResponse();
     }
 
-    private static HttpRequestBase getRequest(String url, String postPayload, String sessionToken)
-    {
+    private static HttpRequestBase getRequest(String url, String postPayload, String sessionToken) {
         int timeoutInMillis = 300000;
 
         RequestConfig.Builder defaultRequestConfigBuilder = RequestConfig.custom()
@@ -79,18 +81,15 @@ public class LinnworksAPIClientImpl implements LinnworksAPIClient
         ProxySelector proxySelector = ProxySelector.getDefault();
         List<Proxy> proxies = proxySelector.select(uri);
 
-        if (!proxies.isEmpty())
-        {
+        if (!proxies.isEmpty()) {
             Proxy proxy = proxies.get(0);
 
-            if (Proxy.Type.HTTP.equals(proxy.type()))
-            {
+            if (Proxy.Type.HTTP.equals(proxy.type())) {
                 String[] fields = proxy.address().toString().split(":");
                 String host = fields[0];
                 int port = -1;
 
-                if (fields.length > 1)
-                {
+                if (fields.length > 1) {
                     port = Integer.parseInt(fields[1]);
                 }
 
@@ -108,8 +107,7 @@ public class LinnworksAPIClientImpl implements LinnworksAPIClient
         HttpRequestBase request = new HttpPost(url);
         ((HttpPost) request).setEntity(new ByteArrayEntity(postPayload == null ? new byte[0] : postPayload.getBytes()));
 
-        if (sessionToken != null && sessionToken.trim().length() > 0)
-        {
+        if (sessionToken != null && sessionToken.trim().length() > 0) {
             request.addHeader("Authorization", sessionToken);
         }
 
