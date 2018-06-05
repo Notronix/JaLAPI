@@ -6,6 +6,7 @@ public class StockLocation
     private String LocationName;
     private Boolean IsFulfillmentCenter;
     private String LocationTag;
+    private String BinRack;
 
     public String getStockLocationId()
     {
@@ -45,5 +46,13 @@ public class StockLocation
     public void setLocationTag(String locationTag)
     {
         LocationTag = locationTag;
+    }
+
+    public String getBinRack() {
+        return BinRack;
+    }
+
+    public void setBinRack(String binRack) {
+        BinRack = binRack;
     }
 }
