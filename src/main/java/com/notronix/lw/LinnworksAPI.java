@@ -117,4 +117,10 @@ public interface LinnworksAPI {
 
     String addNewInventoryItem(LinnworksAPIClient client, SessionToken token, StockItemInv stockItem)
             throws LinnworksAPIException, WrongTokenException;
+
+    List<PostalService> getPostalServices(LinnworksAPIClient client, SessionToken token)
+            throws LinnworksAPIException, WrongTokenException;
+
+    List<KeyGuidValue> getPackageGroups(LinnworksAPIClient client, SessionToken token)
+            throws LinnworksAPIException, WrongTokenException;
 }

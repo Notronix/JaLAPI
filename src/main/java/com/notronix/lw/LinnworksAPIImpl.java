@@ -7,6 +7,7 @@ import com.notronix.lw.methods.inventory.*;
 import com.notronix.lw.methods.orders.GetOpenOrdersMethod;
 import com.notronix.lw.methods.orders.GetOrderViewsMethod;
 import com.notronix.lw.methods.orders.GetOrdersByIdMethod;
+import com.notronix.lw.methods.postalservices.GetPostalServicesMethod;
 import com.notronix.lw.methods.processedorders.SearchProcessedOrdersPagedMethod;
 import com.notronix.lw.methods.purchaseorder.CreatePurchaseOrderInitialMethod;
 import com.notronix.lw.methods.purchaseorder.DeletePurchaseOrderMethod;
@@ -187,6 +188,17 @@ public class LinnworksAPIImpl implements LinnworksAPI
     public String addNewInventoryItem(LinnworksAPIClient client, SessionToken token, StockItemInv stockItem)
             throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(AddInventoryItemMethod.class, token).withStockItem(stockItem));
+    }
+
+    @Override
+    public List<PostalService> getPostalServices(LinnworksAPIClient client, SessionToken token)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(GetPostalServicesMethod.class, token));
+    }
+
+    @Override
+    public List<KeyGuidValue> getPackageGroups(LinnworksAPIClient client, SessionToken token) throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(GetPackageGroupsMethod.class, token));
     }
 
     @Override
