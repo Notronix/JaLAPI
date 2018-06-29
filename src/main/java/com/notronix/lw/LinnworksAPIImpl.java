@@ -178,6 +178,18 @@ public class LinnworksAPIImpl implements LinnworksAPI
     }
 
     @Override
+    public String getNewItemNumber(LinnworksAPIClient client, SessionToken token)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(GetNewItemNumberMethod.class, token));
+    }
+
+    @Override
+    public String addNewInventoryItem(LinnworksAPIClient client, SessionToken token, StockItemInv stockItem)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(AddInventoryItemMethod.class, token).withStockItem(stockItem));
+    }
+
+    @Override
     public List<StockItemImage> getImages(LinnworksAPIClient client, SessionToken token, String itemId)
             throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetInventoryItemImagesMethod.class, token).withItemId(itemId));

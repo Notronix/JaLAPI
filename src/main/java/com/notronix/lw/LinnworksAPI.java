@@ -111,4 +111,10 @@ public interface LinnworksAPI {
 
     List<CurrencyConversionRate> getCurrencyConversionRates(LinnworksAPIClient client, SessionToken token, boolean getCurrenciesFromOrders, String currency)
             throws LinnworksAPIException, WrongTokenException;
+
+    String getNewItemNumber(LinnworksAPIClient client, SessionToken token)
+            throws LinnworksAPIException, WrongTokenException;
+
+    String addNewInventoryItem(LinnworksAPIClient client, SessionToken token, StockItemInv stockItem)
+            throws LinnworksAPIException, WrongTokenException;
 }
