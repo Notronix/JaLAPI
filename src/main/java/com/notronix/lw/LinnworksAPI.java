@@ -123,4 +123,8 @@ public interface LinnworksAPI {
 
     List<KeyGuidValue> getPackageGroups(LinnworksAPIClient client, SessionToken token)
             throws LinnworksAPIException, WrongTokenException;
+
+    AddImageToInventoryItemResponse addImageToInventoryItem(LinnworksAPIClient client, SessionToken token,
+                                                            String sku, String itemId, String imageURL, boolean isMain)
+            throws LinnworksAPIException, WrongTokenException;
 }

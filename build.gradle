@@ -4,7 +4,7 @@ apply plugin: 'signing'
 
 sourceCompatibility = 1.8
 group = 'com.notronix'
-version = '0.0.21' //System.getenv("BUILD_NUMBER") ?: 'SNAPSHOT-' + getDate()
+version = '0.0.22' //System.getenv("BUILD_NUMBER") ?: 'SNAPSHOT-' + getDate()
 
 repositories {
     mavenCentral()

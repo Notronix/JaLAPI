@@ -197,8 +197,18 @@ public class LinnworksAPIImpl implements LinnworksAPI
     }
 
     @Override
-    public List<KeyGuidValue> getPackageGroups(LinnworksAPIClient client, SessionToken token) throws LinnworksAPIException, WrongTokenException {
+    public List<KeyGuidValue> getPackageGroups(LinnworksAPIClient client, SessionToken token)
+            throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetPackageGroupsMethod.class, token));
+    }
+
+    @Override
+    public AddImageToInventoryItemResponse addImageToInventoryItem(LinnworksAPIClient client, SessionToken token,
+                                                                   String sku, String itemId, String imageURL,
+                                                                   boolean isMain)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(AddImageToInventoryItemMethod.class, token)
+                .withItemNumber(sku).withItemId(itemId).withImageURL(imageURL).withMain(isMain));
     }
 
     @Override
