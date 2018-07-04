@@ -23,7 +23,7 @@ public class AddImageToInventoryItemMethod extends InventoryMethod<AddImageToInv
     public String getPayload() {
         IsMain = TRUE.equals(IsMain);
 
-        return new GsonBuilder().setVersion(1.0).create().toJson(this);
+        return "request=" + new GsonBuilder().setVersion(1.0).create().toJson(this);
     }
 
     @Override

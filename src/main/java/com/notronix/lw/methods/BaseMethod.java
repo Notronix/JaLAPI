@@ -1,10 +1,12 @@
 package com.notronix.lw.methods;
 
+import com.google.gson.annotations.Since;
+
 public abstract class BaseMethod<T> implements Method<T>
 {
-    private String jsonResult;
-    private String host;
-    private String sessionToken;
+    @Since(2.0) private String jsonResult;
+    @Since(2.0) private String host;
+    @Since(2.0) private String sessionToken;
 
     @Override
     public String getJsonResult()
