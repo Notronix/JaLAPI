@@ -8,6 +8,7 @@ import com.notronix.lw.methods.orders.GetOpenOrdersMethod;
 import com.notronix.lw.methods.orders.GetOrderViewsMethod;
 import com.notronix.lw.methods.orders.GetOrdersByIdMethod;
 import com.notronix.lw.methods.postalservices.GetPostalServicesMethod;
+import com.notronix.lw.methods.processedorders.AddOrderNoteMethod;
 import com.notronix.lw.methods.processedorders.SearchProcessedOrdersPagedMethod;
 import com.notronix.lw.methods.purchaseorder.CreatePurchaseOrderInitialMethod;
 import com.notronix.lw.methods.purchaseorder.DeletePurchaseOrderMethod;
@@ -209,6 +210,13 @@ public class LinnworksAPIImpl implements LinnworksAPI
             throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(AddImageToInventoryItemMethod.class, token)
                 .withItemNumber(sku).withItemId(itemId).withImageURL(imageURL).withMain(isMain));
+    }
+
+    @Override
+    public String addOrderNote(LinnworksAPIClient client, SessionToken token, String orderId, String noteText, boolean isInternal)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(AddOrderNoteMethod.class, token).withOrderId(orderId)
+                .withNoteText(noteText).withIsInternal(isInternal));
     }
 
     @Override

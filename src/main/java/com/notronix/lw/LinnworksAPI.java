@@ -127,4 +127,7 @@ public interface LinnworksAPI {
     AddImageToInventoryItemResponse addImageToInventoryItem(LinnworksAPIClient client, SessionToken token,
                                                             String sku, String itemId, String imageURL, boolean isMain)
             throws LinnworksAPIException, WrongTokenException;
+
+    String addOrderNote(LinnworksAPIClient client, SessionToken token, String orderId, String noteText, boolean isInternal)
+            throws LinnworksAPIException, WrongTokenException;
 }
