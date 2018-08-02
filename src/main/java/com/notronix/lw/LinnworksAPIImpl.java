@@ -7,11 +7,14 @@ import com.notronix.lw.methods.inventory.*;
 import com.notronix.lw.methods.orders.GetOpenOrdersMethod;
 import com.notronix.lw.methods.orders.GetOrderViewsMethod;
 import com.notronix.lw.methods.orders.GetOrdersByIdMethod;
+import com.notronix.lw.methods.orders.MoveToLocationMethod;
 import com.notronix.lw.methods.postalservices.GetPostalServicesMethod;
 import com.notronix.lw.methods.processedorders.AddOrderNoteMethod;
 import com.notronix.lw.methods.processedorders.SearchProcessedOrdersPagedMethod;
 import com.notronix.lw.methods.purchaseorder.CreatePurchaseOrderInitialMethod;
 import com.notronix.lw.methods.purchaseorder.DeletePurchaseOrderMethod;
+import com.notronix.lw.methods.purchaseorder.GetPurchaseOrderMethod;
+import com.notronix.lw.methods.purchaseorder.SearchPurchaseOrdersMethod;
 import com.notronix.lw.methods.returnsrefunds.GetSearchTypesMethod;
 import com.notronix.lw.methods.settings.GetCurrencyConversionRatesMethod;
 import com.notronix.lw.methods.stock.GetStockItemsMethod;
@@ -22,6 +25,8 @@ import com.notronix.lw.model.*;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
+
+import static java.util.Objects.requireNonNull;
 
 public class LinnworksAPIImpl implements LinnworksAPI
 {
@@ -217,6 +222,25 @@ public class LinnworksAPIImpl implements LinnworksAPI
             throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(AddOrderNoteMethod.class, token).withOrderId(orderId)
                 .withNoteText(noteText).withIsInternal(isInternal));
+    }
+
+    @Override
+    public SearchPurchaseOrderResult searchPurchaseOrders(LinnworksAPIClient client, SessionToken token)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(SearchPurchaseOrdersMethod.class, token));
+    }
+
+    @Override
+    public GetPurchaseOrderResponse getPurchaseOrder(LinnworksAPIClient client, SessionToken token, String purchaseOrderId)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(GetPurchaseOrderMethod.class, token).withId(purchaseOrderId));
+    }
+
+    @Override
+    public MoveToLocationResult moveOrders(LinnworksAPIClient client, SessionToken token, List<String> orderIds, String locationId)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(MoveToLocationMethod.class, token)
+                .withLocationId(requireNonNull(locationId)).withOrderIds(requireNonNull(orderIds)));
     }
 
     @Override

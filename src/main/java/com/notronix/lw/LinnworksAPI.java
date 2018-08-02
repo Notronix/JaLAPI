@@ -130,4 +130,13 @@ public interface LinnworksAPI {
 
     String addOrderNote(LinnworksAPIClient client, SessionToken token, String orderId, String noteText, boolean isInternal)
             throws LinnworksAPIException, WrongTokenException;
+
+    SearchPurchaseOrderResult searchPurchaseOrders(LinnworksAPIClient client, SessionToken token)
+            throws LinnworksAPIException, WrongTokenException;
+
+    GetPurchaseOrderResponse getPurchaseOrder(LinnworksAPIClient client, SessionToken token, String purchaseOrderId)
+            throws LinnworksAPIException, WrongTokenException;
+
+    MoveToLocationResult moveOrders(LinnworksAPIClient client, SessionToken token, List<String> orderIds, String locationId)
+            throws LinnworksAPIException, WrongTokenException;
 }
