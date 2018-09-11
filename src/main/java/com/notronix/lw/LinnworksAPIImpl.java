@@ -67,7 +67,9 @@ public class LinnworksAPIImpl implements LinnworksAPI
     }
 
     @Override
-    public GetInventoryItemsResponse getInventoryItems(LinnworksAPIClient client, SessionToken token, InventoryView view, List<StockLocation> locations, Integer pageSize, Integer startIndex, Boolean preloadChilds)
+    public GetInventoryItemsResponse getInventoryItems(LinnworksAPIClient client, SessionToken token, InventoryView view,
+                                                       List<StockLocation> locations, Integer pageSize, Integer startIndex,
+                                                       Boolean preloadChilds)
             throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetInventoryItemsMethod.class, token)
                 .withView(view)
@@ -84,9 +86,11 @@ public class LinnworksAPIImpl implements LinnworksAPI
     }
 
     @Override
-    public List<StockItemComposition> getCompositions(LinnworksAPIClient client, SessionToken token, String itemId, boolean fullDetail)
+    public List<StockItemComposition> getCompositions(LinnworksAPIClient client, SessionToken token, String itemId,
+                                                      boolean fullDetail)
             throws LinnworksAPIException, WrongTokenException {
-        return client.executeMethod(prepareMethod(GetInventoryItemCompositionsMethod.class, token).withInventoryItemId(itemId).withFullDetail(fullDetail));
+        return client.executeMethod(prepareMethod(GetInventoryItemCompositionsMethod.class, token)
+                .withInventoryItemId(itemId).withFullDetail(fullDetail));
     }
 
     @Override
@@ -108,11 +112,21 @@ public class LinnworksAPIImpl implements LinnworksAPI
     }
 
     @Override
+    public List<StockItemExtendedProperty> createExtendedProperties(LinnworksAPIClient client,
+                                                                    SessionToken token,
+                                                                    List<StockItemExtendedProperty> extendedProperties)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(CreateInventoryItemExtendedPropertiesMethod.class, token)
+                .withExtendedProperties(extendedProperties));
+    }
+
+    @Override
     public List<StockItemExtendedProperty> updateExtendedProperties(LinnworksAPIClient client,
                                                                     SessionToken token,
                                                                     List<StockItemExtendedProperty> extendedProperties)
             throws LinnworksAPIException, WrongTokenException {
-        return client.executeMethod(prepareMethod(UpdateInventoryItemExtendedPropertiesMethod.class, token).withExtendedProperties(extendedProperties));
+        return client.executeMethod(prepareMethod(UpdateInventoryItemExtendedPropertiesMethod.class, token)
+                .withExtendedProperties(extendedProperties));
     }
 
     @Override
@@ -176,7 +190,8 @@ public class LinnworksAPIImpl implements LinnworksAPI
     }
 
     @Override
-    public List<CurrencyConversionRate> getCurrencyConversionRates(LinnworksAPIClient client, SessionToken token, boolean getCurrenciesFromOrders, String currency)
+    public List<CurrencyConversionRate> getCurrencyConversionRates(LinnworksAPIClient client, SessionToken token,
+                                                                   boolean getCurrenciesFromOrders, String currency)
             throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetCurrencyConversionRatesMethod.class, token)
                 .withGetCurrenciesFromOrders(getCurrenciesFromOrders)
@@ -191,9 +206,15 @@ public class LinnworksAPIImpl implements LinnworksAPI
     }
 
     @Override
-    public String addNewInventoryItem(LinnworksAPIClient client, SessionToken token, StockItemInv stockItem)
+    public StockItemInv addNewInventoryItem(LinnworksAPIClient client, SessionToken token, StockItemInv stockItem)
             throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(AddInventoryItemMethod.class, token).withStockItem(stockItem));
+    }
+
+    @Override
+    public StockItemInv updateInventoryItem(LinnworksAPIClient client, SessionToken token, StockItemInv stockItem)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(UpdateInventoryItemMethod.class, token).withStockItem(stockItem));
     }
 
     @Override
@@ -218,8 +239,8 @@ public class LinnworksAPIImpl implements LinnworksAPI
     }
 
     @Override
-    public String addOrderNote(LinnworksAPIClient client, SessionToken token, String orderId, String noteText, boolean isInternal)
-            throws LinnworksAPIException, WrongTokenException {
+    public String addOrderNote(LinnworksAPIClient client, SessionToken token, String orderId, String noteText,
+                               boolean isInternal) throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(AddOrderNoteMethod.class, token).withOrderId(orderId)
                 .withNoteText(noteText).withIsInternal(isInternal));
     }
@@ -241,6 +262,12 @@ public class LinnworksAPIImpl implements LinnworksAPI
             throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(MoveToLocationMethod.class, token)
                 .withLocationId(requireNonNull(locationId)).withOrderIds(requireNonNull(orderIds)));
+    }
+
+    @Override
+    public Map<String, List<String>> getAllExtendedPropertyNames(LinnworksAPIClient client, SessionToken token)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(GetAllExtendedPropertyNamesMethod.class, token));
     }
 
     @Override

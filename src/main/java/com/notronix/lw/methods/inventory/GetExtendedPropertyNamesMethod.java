@@ -6,8 +6,12 @@ import com.notronix.lw.LinnworksAPIException;
 import java.util.Arrays;
 import java.util.List;
 
+import static java.util.Objects.requireNonNull;
+
 public class GetExtendedPropertyNamesMethod extends InventoryMethod<List<String>>
 {
+    private String propertyType;
+
     @Override
     public String getName()
     {
@@ -17,7 +21,7 @@ public class GetExtendedPropertyNamesMethod extends InventoryMethod<List<String>
     @Override
     public String getPayload()
     {
-        return null;
+        return "propertyType=" + requireNonNull(propertyType);
     }
 
     @Override
@@ -25,5 +29,13 @@ public class GetExtendedPropertyNamesMethod extends InventoryMethod<List<String>
             throws LinnworksAPIException
     {
         return Arrays.asList(new Gson().fromJson(getJsonResult(), String[].class));
+    }
+
+    public String getPropertyType() {
+        return propertyType;
+    }
+
+    public void setPropertyType(String propertyType) {
+        this.propertyType = propertyType;
     }
 }

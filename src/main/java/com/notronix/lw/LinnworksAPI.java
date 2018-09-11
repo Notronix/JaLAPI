@@ -41,7 +41,12 @@ public interface LinnworksAPI {
     List<StockItemExtendedProperty> getExtendedProperties(LinnworksAPIClient client, SessionToken token, String itemId)
             throws LinnworksAPIException, WrongTokenException;
 
-    List<StockItemExtendedProperty> updateExtendedProperties(LinnworksAPIClient client, SessionToken token, List<StockItemExtendedProperty> extendedProperties)
+    List<StockItemExtendedProperty> createExtendedProperties(LinnworksAPIClient client, SessionToken token,
+                                                             List<StockItemExtendedProperty> extendedProperties)
+            throws LinnworksAPIException, WrongTokenException;
+
+    List<StockItemExtendedProperty> updateExtendedProperties(LinnworksAPIClient client, SessionToken token,
+                                                             List<StockItemExtendedProperty> extendedProperties)
             throws LinnworksAPIException, WrongTokenException;
 
     List<Country> getCountries(LinnworksAPIClient client, SessionToken token)
@@ -115,7 +120,10 @@ public interface LinnworksAPI {
     String getNewItemNumber(LinnworksAPIClient client, SessionToken token)
             throws LinnworksAPIException, WrongTokenException;
 
-    String addNewInventoryItem(LinnworksAPIClient client, SessionToken token, StockItemInv stockItem)
+    StockItemInv addNewInventoryItem(LinnworksAPIClient client, SessionToken token, StockItemInv stockItem)
+            throws LinnworksAPIException, WrongTokenException;
+
+    StockItemInv updateInventoryItem(LinnworksAPIClient client, SessionToken token, StockItemInv stockItem)
             throws LinnworksAPIException, WrongTokenException;
 
     List<PostalService> getPostalServices(LinnworksAPIClient client, SessionToken token)
@@ -138,5 +146,8 @@ public interface LinnworksAPI {
             throws LinnworksAPIException, WrongTokenException;
 
     MoveToLocationResult moveOrders(LinnworksAPIClient client, SessionToken token, List<String> orderIds, String locationId)
+            throws LinnworksAPIException, WrongTokenException;
+
+    Map<String, List<String>> getAllExtendedPropertyNames(LinnworksAPIClient client, SessionToken token)
             throws LinnworksAPIException, WrongTokenException;
 }
