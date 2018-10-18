@@ -1,5 +1,7 @@
 package com.notronix.lw.model;
 
+import java.util.List;
+
 public class OrderGeneralInfo
 {
     private Integer Status;
@@ -7,16 +9,24 @@ public class OrderGeneralInfo
     private String LabelError;
     private Boolean InvoicePrinted;
     private Boolean PickListPrinted;
+    private Boolean IsRuleRun;
     private Integer Notes;
     private Boolean PartShipped;
     private Byte Marker;
+    private Boolean IsParked;
+    private List<OrderIdentifier> Identifiers;
     private String ReferenceNum;
+    private String SecondaryReference;
     private String ExternalReferenceNum;
     private String ReceivedDate;
     private String Source;
     private String SubSource;
+    private String SiteCode;
     private Boolean HoldOrCancel;
     private String DespatchByDate;
+    private ScheduledDelivery ScheduledDelivery;
+    private Boolean HasScheduledDelivery;
+    private String Location;
     private Integer NumItems;
 
     public Integer getStatus()
@@ -177,5 +187,69 @@ public class OrderGeneralInfo
     public void setNumItems(Integer numItems)
     {
         NumItems = numItems;
+    }
+
+    public Boolean getRuleRun() {
+        return IsRuleRun;
+    }
+
+    public void setRuleRun(Boolean ruleRun) {
+        IsRuleRun = ruleRun;
+    }
+
+    public Boolean getParked() {
+        return IsParked;
+    }
+
+    public void setParked(Boolean parked) {
+        IsParked = parked;
+    }
+
+    public List<OrderIdentifier> getIdentifiers() {
+        return Identifiers;
+    }
+
+    public void setIdentifiers(List<OrderIdentifier> identifiers) {
+        Identifiers = identifiers;
+    }
+
+    public String getSecondaryReference() {
+        return SecondaryReference;
+    }
+
+    public void setSecondaryReference(String secondaryReference) {
+        SecondaryReference = secondaryReference;
+    }
+
+    public String getSiteCode() {
+        return SiteCode;
+    }
+
+    public void setSiteCode(String siteCode) {
+        SiteCode = siteCode;
+    }
+
+    public com.notronix.lw.model.ScheduledDelivery getScheduledDelivery() {
+        return ScheduledDelivery;
+    }
+
+    public void setScheduledDelivery(com.notronix.lw.model.ScheduledDelivery scheduledDelivery) {
+        ScheduledDelivery = scheduledDelivery;
+    }
+
+    public Boolean getHasScheduledDelivery() {
+        return HasScheduledDelivery;
+    }
+
+    public void setHasScheduledDelivery(Boolean hasScheduledDelivery) {
+        HasScheduledDelivery = hasScheduledDelivery;
+    }
+
+    public String getLocation() {
+        return Location;
+    }
+
+    public void setLocation(String location) {
+        Location = location;
     }
 }

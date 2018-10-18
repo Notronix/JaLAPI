@@ -1,7 +1,10 @@
 package com.notronix.lw.methods.orders;
 
+import com.google.gson.Gson;
 import com.notronix.lw.LinnworksAPIException;
 import com.notronix.lw.model.OrderDetails;
+
+import static java.util.Objects.requireNonNull;
 
 public class GetOrderByIdMethod extends OrdersMethod<OrderDetails>
 {
@@ -14,12 +17,12 @@ public class GetOrderByIdMethod extends OrdersMethod<OrderDetails>
 
     @Override
     public String getPayload() {
-        return "pkOrderId=" + orderId;
+        return "pkOrderId=" + requireNonNull(orderId);
     }
 
     @Override
     public OrderDetails getResponse() throws LinnworksAPIException {
-        return null;
+        return new Gson().fromJson(getJsonResult(), OrderDetails.class);
     }
 
     public String getOrderId() {

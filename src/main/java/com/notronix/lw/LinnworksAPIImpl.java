@@ -4,10 +4,7 @@ import com.notronix.lw.client.LinnworksAPIClient;
 import com.notronix.lw.methods.Method;
 import com.notronix.lw.methods.auth.AuthorizeByApplicationMethod;
 import com.notronix.lw.methods.inventory.*;
-import com.notronix.lw.methods.orders.GetOpenOrdersMethod;
-import com.notronix.lw.methods.orders.GetOrderViewsMethod;
-import com.notronix.lw.methods.orders.GetOrdersByIdMethod;
-import com.notronix.lw.methods.orders.MoveToLocationMethod;
+import com.notronix.lw.methods.orders.*;
 import com.notronix.lw.methods.postalservices.GetPostalServicesMethod;
 import com.notronix.lw.methods.processedorders.AddOrderNoteMethod;
 import com.notronix.lw.methods.processedorders.SearchProcessedOrdersPagedMethod;
@@ -331,9 +328,23 @@ public class LinnworksAPIImpl implements LinnworksAPI
     }
 
     @Override
+    public OrderDetails getOrderById(LinnworksAPIClient client, SessionToken token, String orderId)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(GetOrderByIdMethod.class, token).withOrderId(orderId));
+    }
+
+    @Override
     public List<OrderDetails> getOrdersById(LinnworksAPIClient client, SessionToken token, List<String> orderIds)
             throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetOrdersByIdMethod.class, token).withOrderIds(orderIds));
+    }
+
+    @Override
+    public OrderGeneralInfo updateOrderGeneralInfo(LinnworksAPIClient client, SessionToken token,
+                                                   OrderGeneralInfo info, String orderId, boolean wasDraft)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(SetOrderGeneralInfoMethod.class, token)
+        .withInfo(info).withOrderId(orderId).withWasDraft(wasDraft));
     }
 
     @Override

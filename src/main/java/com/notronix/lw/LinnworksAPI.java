@@ -93,7 +93,14 @@ public interface LinnworksAPI {
     GenericPagedResult<OpenOrder> getOpenOrders(LinnworksAPIClient client, SessionToken token, int pageNum, int pageSize, String locationId)
             throws LinnworksAPIException, WrongTokenException;
 
+    OrderDetails getOrderById(LinnworksAPIClient client, SessionToken token, String orderId)
+            throws LinnworksAPIException, WrongTokenException;
+
     List<OrderDetails> getOrdersById(LinnworksAPIClient client, SessionToken token, List<String> orderIds)
+            throws LinnworksAPIException, WrongTokenException;
+
+    OrderGeneralInfo updateOrderGeneralInfo(LinnworksAPIClient client, SessionToken token,
+                                            OrderGeneralInfo info, String orderId, boolean wasDraft)
             throws LinnworksAPIException, WrongTokenException;
 
     String createPurchaseOrder(LinnworksAPIClient client, SessionToken token, CreatePurchaseOrderParameters parameters)
