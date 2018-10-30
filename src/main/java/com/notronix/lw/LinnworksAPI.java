@@ -90,13 +90,24 @@ public interface LinnworksAPI {
                                                                      int pageSize)
             throws LinnworksAPIException, WrongTokenException;
 
-    GenericPagedResult<OpenOrder> getOpenOrders(LinnworksAPIClient client, SessionToken token, int pageNum, int pageSize, String locationId)
+    GenericPagedResult<OpenOrder> getOpenOrders(LinnworksAPIClient client, SessionToken token, int pageNum,
+                                                int pageSize, String locationId)
             throws LinnworksAPIException, WrongTokenException;
 
     OrderDetails getOrderById(LinnworksAPIClient client, SessionToken token, String orderId)
             throws LinnworksAPIException, WrongTokenException;
 
     List<OrderDetails> getOrdersById(LinnworksAPIClient client, SessionToken token, List<String> orderIds)
+            throws LinnworksAPIException, WrongTokenException;
+
+    OpenOrder createNewOrder(LinnworksAPIClient client, SessionToken token, String fulfilmentCenterId)
+            throws LinnworksAPIException, WrongTokenException;
+
+    String cancelOrder(LinnworksAPIClient client, SessionToken token, String orderId, String fulfilmentCenterId,
+                       Double refund, String note)
+            throws LinnworksAPIException, WrongTokenException;
+
+    String deleteOrder(LinnworksAPIClient client, SessionToken token, String orderId)
             throws LinnworksAPIException, WrongTokenException;
 
     OrderGeneralInfo updateOrderGeneralInfo(LinnworksAPIClient client, SessionToken token,
@@ -153,6 +164,19 @@ public interface LinnworksAPI {
             throws LinnworksAPIException, WrongTokenException;
 
     MoveToLocationResult moveOrders(LinnworksAPIClient client, SessionToken token, List<String> orderIds, String locationId)
+            throws LinnworksAPIException, WrongTokenException;
+
+    UpdateOrderItemResult removeOrderItem(LinnworksAPIClient client, SessionToken token,
+                                          String orderId, String rowId, String fulfilmentCenterId)
+            throws LinnworksAPIException, WrongTokenException;
+
+    UpdateOrderItemResult addOrderItem(LinnworksAPIClient client, SessionToken token, String orderId, String itemId,
+                                       String channelSKU, String fulfilmentCenterId, int quantity,
+                                       LinePricingRequest linePricingRequest)
+            throws LinnworksAPIException, WrongTokenException;
+
+    UpdateOrderItemResult updateOrderItem(LinnworksAPIClient client, SessionToken token, String orderId,
+                                          String fulfilmentCenterId, String source, String subSource, OrderItem orderItem)
             throws LinnworksAPIException, WrongTokenException;
 
     Map<String, List<String>> getAllExtendedPropertyNames(LinnworksAPIClient client, SessionToken token)

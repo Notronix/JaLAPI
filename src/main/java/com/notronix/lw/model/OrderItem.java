@@ -11,6 +11,7 @@ public class OrderItem {
     private String ItemSource;
     private String Title;
     private Integer Quantity;
+    private String CategoryId;
     private String CategoryName;
     private Integer CompositeAvailablity;
     private String RowId;
@@ -37,11 +38,22 @@ public class OrderItem {
     private Integer Market;
     private String ChannelSKU;
     private String ChannelTitle;
+    private Double DiscountValue;
     private Boolean HasImage;
     private String ImageId;
     private List<OrderItemOption> AdditionalInfo;
     private Integer StockLevelIndicator;
     private String BinRack;
+    private Boolean BatchNumberScanRequired;
+    private Boolean SerialNumberScanRequired;
+    private List<OrderItemBinRack> BinRacks;
+    private Integer InventoryTrackingType;
+    private Boolean isBatchedStockItem;
+    private Boolean HasPurchaseOrders;
+    private Boolean CanPurchaseOrderFulfil;
+    private Boolean IsUnlinked;
+    private String ParentItemId;
+    private String StockId;
 
     public String getOrderId() {
         return OrderId;
@@ -353,5 +365,101 @@ public class OrderItem {
 
     public void setBinRack(String binRack) {
         BinRack = binRack;
+    }
+
+    public String getCategoryId() {
+        return CategoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        CategoryId = categoryId;
+    }
+
+    public Double getDiscountValue() {
+        return DiscountValue;
+    }
+
+    public void setDiscountValue(Double discountValue) {
+        DiscountValue = discountValue;
+    }
+
+    public Boolean getBatchNumberScanRequired() {
+        return BatchNumberScanRequired;
+    }
+
+    public void setBatchNumberScanRequired(Boolean batchNumberScanRequired) {
+        BatchNumberScanRequired = batchNumberScanRequired;
+    }
+
+    public Boolean getSerialNumberScanRequired() {
+        return SerialNumberScanRequired;
+    }
+
+    public void setSerialNumberScanRequired(Boolean serialNumberScanRequired) {
+        SerialNumberScanRequired = serialNumberScanRequired;
+    }
+
+    public List<OrderItemBinRack> getBinRacks() {
+        return BinRacks;
+    }
+
+    public void setBinRacks(List<OrderItemBinRack> binRacks) {
+        BinRacks = binRacks;
+    }
+
+    public Integer getInventoryTrackingType() {
+        return InventoryTrackingType;
+    }
+
+    public void setInventoryTrackingType(Integer inventoryTrackingType) {
+        InventoryTrackingType = inventoryTrackingType;
+    }
+
+    public Boolean getBatchedStockItem() {
+        return isBatchedStockItem;
+    }
+
+    public void setBatchedStockItem(Boolean batchedStockItem) {
+        isBatchedStockItem = batchedStockItem;
+    }
+
+    public Boolean getHasPurchaseOrders() {
+        return HasPurchaseOrders;
+    }
+
+    public void setHasPurchaseOrders(Boolean hasPurchaseOrders) {
+        HasPurchaseOrders = hasPurchaseOrders;
+    }
+
+    public Boolean getCanPurchaseOrderFulfil() {
+        return CanPurchaseOrderFulfil;
+    }
+
+    public void setCanPurchaseOrderFulfil(Boolean canPurchaseOrderFulfil) {
+        CanPurchaseOrderFulfil = canPurchaseOrderFulfil;
+    }
+
+    public Boolean getUnlinked() {
+        return IsUnlinked;
+    }
+
+    public void setUnlinked(Boolean unlinked) {
+        IsUnlinked = unlinked;
+    }
+
+    public String getParentItemId() {
+        return ParentItemId;
+    }
+
+    public void setParentItemId(String parentItemId) {
+        ParentItemId = parentItemId;
+    }
+
+    public String getStockId() {
+        return StockId;
+    }
+
+    public void setStockId(String stockId) {
+        StockId = stockId;
     }
 }

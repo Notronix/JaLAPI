@@ -258,7 +258,45 @@ public class LinnworksAPIImpl implements LinnworksAPI
     public MoveToLocationResult moveOrders(LinnworksAPIClient client, SessionToken token, List<String> orderIds, String locationId)
             throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(MoveToLocationMethod.class, token)
-                .withLocationId(requireNonNull(locationId)).withOrderIds(requireNonNull(orderIds)));
+                .withLocationId(requireNonNull(locationId))
+                .withOrderIds(requireNonNull(orderIds)));
+    }
+
+    @Override
+    public UpdateOrderItemResult removeOrderItem(LinnworksAPIClient client, SessionToken token,
+                                                 String orderId, String rowId, String fulfilmentCenterId)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(RemoveOrderItemMethod.class, token)
+                .withOrderId(requireNonNull(orderId))
+                .withRowId(requireNonNull(rowId))
+                .withFulfilmentCenterId(requireNonNull(fulfilmentCenterId)));
+    }
+
+    @Override
+    public UpdateOrderItemResult addOrderItem(LinnworksAPIClient client, SessionToken token, String orderId,
+                                              String itemId, String channelSKU, String fulfilmentCenterId,
+                                              int quantity, LinePricingRequest linePricingRequest)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(AddOrderItemMethod.class, token)
+                .withOrderId(requireNonNull(orderId))
+                .withItemId(requireNonNull(itemId))
+                .withChannelSKU(requireNonNull(channelSKU))
+                .withFulfilmentCenterId(requireNonNull(fulfilmentCenterId))
+                .withQuantity(quantity)
+                .withLinePricing(linePricingRequest));
+    }
+
+    @Override
+    public UpdateOrderItemResult updateOrderItem(LinnworksAPIClient client, SessionToken token, String orderId,
+                                                 String fulfilmentCenterId, String source, String subSource,
+                                                 OrderItem orderItem)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(UpdateOrderItemMethod.class, token)
+                .withOrderId(requireNonNull(orderId))
+                .withFulfilmentCenterId(requireNonNull(fulfilmentCenterId))
+                .withSource(requireNonNull(source))
+                .withSubSource(requireNonNull(subSource))
+                .withOrderItem(requireNonNull(orderItem)));
     }
 
     @Override
@@ -340,11 +378,34 @@ public class LinnworksAPIImpl implements LinnworksAPI
     }
 
     @Override
+    public OpenOrder createNewOrder(LinnworksAPIClient client, SessionToken token, String fulfilmentCenterId)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(CreateNewOrderMethod.class, token)
+                .withFulfilmentCenterId(fulfilmentCenterId));
+    }
+
+    @Override
+    public String cancelOrder(LinnworksAPIClient client, SessionToken token, String orderId, String fulfilmentCenterId,
+                              Double refund, String note) throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(CancelOrderMethod.class, token)
+                .withOrderId(orderId)
+                .withFulfilmentCenterId(fulfilmentCenterId)
+                .withRefund(refund)
+                .withNote(note));
+    }
+
+    @Override
+    public String deleteOrder(LinnworksAPIClient client, SessionToken token, String orderId)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(DeleteOrderMethod.class, token).withOrderId(orderId));
+    }
+
+    @Override
     public OrderGeneralInfo updateOrderGeneralInfo(LinnworksAPIClient client, SessionToken token,
                                                    OrderGeneralInfo info, String orderId, boolean wasDraft)
             throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(SetOrderGeneralInfoMethod.class, token)
-        .withInfo(info).withOrderId(orderId).withWasDraft(wasDraft));
+                .withInfo(info).withOrderId(orderId).withWasDraft(wasDraft));
     }
 
     @Override

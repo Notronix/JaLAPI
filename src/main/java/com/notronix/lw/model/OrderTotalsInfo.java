@@ -12,6 +12,7 @@ public class OrderTotalsInfo
     private Double TotalDiscount;
     private String Currency;
     private Double CountryTaxRate;
+    private Double ConversionRate;
 
     public Double getSubtotal()
     {
@@ -111,5 +112,13 @@ public class OrderTotalsInfo
     public void setCountryTaxRate(Double countryTaxRate)
     {
         CountryTaxRate = countryTaxRate;
+    }
+
+    public Double getConversionRate() {
+        return ConversionRate;
+    }
+
+    public void setConversionRate(Double conversionRate) {
+        ConversionRate = conversionRate;
     }
 }
