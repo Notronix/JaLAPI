@@ -1,5 +1,7 @@
 package com.notronix.lw.model;
 
+import com.google.gson.annotations.Since;
+
 public class Address
 {
     private String Address1;
@@ -12,7 +14,7 @@ public class Address
     private String FullName;
     private String Company;
     private String PhoneNumber;
-    private String CountryId;
+    @Since(1.0) private String CountryId;
 
     public String getAddress1()
     {

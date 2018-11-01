@@ -19,11 +19,9 @@ public class SetOrderGeneralInfoMethod extends OrdersMethod<OrderGeneralInfo>
 
     @Override
     public String getPayload() {
-        String payload = "orderId=" + requireNonNull(orderId)
+        return "orderId=" + requireNonNull(orderId)
                 + "&info=" + new Gson().toJson(requireNonNull(info))
                 + "&wasDraft=" + requireNonNull(wasDraft).toString();
-
-        return payload;
     }
 
     @Override

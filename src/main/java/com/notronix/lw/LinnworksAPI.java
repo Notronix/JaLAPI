@@ -114,6 +114,10 @@ public interface LinnworksAPI {
                                             OrderGeneralInfo info, String orderId, boolean wasDraft)
             throws LinnworksAPIException, WrongTokenException;
 
+    OrderTotalsInfo updateOrderCustomerInfo(LinnworksAPIClient client, SessionToken token,
+                                            OrderCustomerInfo info, String orderId, boolean saveToCrm)
+            throws LinnworksAPIException, WrongTokenException;
+
     String createPurchaseOrder(LinnworksAPIClient client, SessionToken token, CreatePurchaseOrderParameters parameters)
             throws LinnworksAPIException, WrongTokenException;
 
