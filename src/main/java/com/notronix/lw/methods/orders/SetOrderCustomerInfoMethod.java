@@ -3,7 +3,6 @@ package com.notronix.lw.methods.orders;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.notronix.lw.LinnworksAPIException;
-import com.notronix.lw.model.CustomerAddress;
 import com.notronix.lw.model.OrderCustomerInfo;
 import com.notronix.lw.model.OrderTotalsInfo;
 
@@ -22,16 +21,20 @@ public class SetOrderCustomerInfoMethod extends OrdersMethod<OrderTotalsInfo>
 
     @Override
     public String getPayload() {
-        if (info.getAddress() == null) {
-            info.setAddress(new CustomerAddress());
-        }
+        requireNonNull(info);
+        requireNonNull(info.getAddress());
+        requireNonNull(info.getAddress().getCountryId());
+
         if (info.getBillingAddress() == null) {
-            info.setBillingAddress(new CustomerAddress());
+            info.setBillingAddress(info.getAddress());
+        }
+        else {
+            requireNonNull(info.getBillingAddress().getCountryId());
         }
 
         return "orderId=" + requireNonNull(orderId)
-                + "&info=" + new GsonBuilder().setVersion(0.0).serializeNulls().create()
-                .toJson(requireNonNull(info)).replaceAll("null", "\"\"")
+                + "&info=" + new GsonBuilder().serializeNulls().create()
+                .toJson(info).replaceAll("null", "\"\"")
                 + "&saveToCrm=" + requireNonNull(saveToCrm).toString();
     }
 

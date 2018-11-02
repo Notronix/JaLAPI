@@ -7,7 +7,8 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
-public interface LinnworksAPI {
+public interface LinnworksAPI
+{
     SessionToken authenticateApplication(LinnworksAPIClient client, String appId, String appSecret, String authToken)
             throws LinnworksAPIException, WrongTokenException;
 
@@ -112,6 +113,10 @@ public interface LinnworksAPI {
 
     OrderGeneralInfo updateOrderGeneralInfo(LinnworksAPIClient client, SessionToken token,
                                             OrderGeneralInfo info, String orderId, boolean wasDraft)
+            throws LinnworksAPIException, WrongTokenException;
+
+    List<String> changeOrderStatus(LinnworksAPIClient client, SessionToken token,
+                                   List<String> orderIds, OrderStatus status)
             throws LinnworksAPIException, WrongTokenException;
 
     OrderTotalsInfo updateOrderCustomerInfo(LinnworksAPIClient client, SessionToken token,

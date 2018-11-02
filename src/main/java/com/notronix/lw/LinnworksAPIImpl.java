@@ -409,6 +409,14 @@ public class LinnworksAPIImpl implements LinnworksAPI
     }
 
     @Override
+    public List<String> changeOrderStatus(LinnworksAPIClient client, SessionToken token,
+                                          List<String> orderIds, OrderStatus status)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(ChangeStatusMethod.class, token)
+                .withOrderIds(orderIds).withStatus(status));
+    }
+
+    @Override
     public OrderTotalsInfo updateOrderCustomerInfo(LinnworksAPIClient client, SessionToken token,
                                                    OrderCustomerInfo info, String orderId, boolean saveToCrm)
             throws LinnworksAPIException, WrongTokenException {
