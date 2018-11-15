@@ -21,7 +21,7 @@ public class CancelOrderMethod extends OrdersMethod<String>
         return "orderId=" + requireNonNull(orderId)
                 + "&fulfilmentCenter=" + requireNonNull(fulfilmentCenterId)
                 + "&refund=" + requireNonNull(refund)
-                + "&note=" + requireNonNull(note);
+                + "&note=" + (note == null ? "" : note);
     }
 
     @Override

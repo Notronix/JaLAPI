@@ -7,12 +7,13 @@ import com.notronix.lw.methods.inventory.*;
 import com.notronix.lw.methods.orders.*;
 import com.notronix.lw.methods.postalservices.GetPostalServicesMethod;
 import com.notronix.lw.methods.processedorders.AddOrderNoteMethod;
+import com.notronix.lw.methods.processedorders.GetRefundsMethod;
 import com.notronix.lw.methods.processedorders.SearchProcessedOrdersPagedMethod;
 import com.notronix.lw.methods.purchaseorder.CreatePurchaseOrderInitialMethod;
 import com.notronix.lw.methods.purchaseorder.DeletePurchaseOrderMethod;
 import com.notronix.lw.methods.purchaseorder.GetPurchaseOrderMethod;
 import com.notronix.lw.methods.purchaseorder.SearchPurchaseOrdersMethod;
-import com.notronix.lw.methods.returnsrefunds.GetSearchTypesMethod;
+import com.notronix.lw.methods.returnsrefunds.*;
 import com.notronix.lw.methods.settings.GetCurrencyConversionRatesMethod;
 import com.notronix.lw.methods.stock.GetStockItemsMethod;
 import com.notronix.lw.methods.stock.GetStockLevelMethod;
@@ -395,6 +396,41 @@ public class LinnworksAPIImpl implements LinnworksAPI
     }
 
     @Override
+    public List<RefundInfo> getRefunds(LinnworksAPIClient client, SessionToken token, String orderId)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(GetRefundsMethod.class, token).withOrderId(orderId));
+    }
+
+    @Override
+    public GetRefundOptionsResponse getRefundOptions(LinnworksAPIClient client, SessionToken token,
+                                                     GetRefundOptionsRequest request)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(GetRefundOptionsMethod.class, token).withRequest(request));
+    }
+
+    @Override
+    public GetRefundHeadersByOrderIdResponse getRefundHeadersByOrderId(LinnworksAPIClient client, SessionToken token,
+                                                                       GetRefundHeadersByOrderIdRequest request)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(GetRefundHeadersByOrderIdMethod.class, token).withRequest(request));
+    }
+
+    @Override
+    public GetActionableRefundHeadersResponse getActionableRefundHeaders(LinnworksAPIClient client, SessionToken token,
+                                                                         GetActionableRefundHeadersRequest request)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(GetActionableRefundHeadersMethod.class, token)
+                .withGetActionableRefundHeadersRequest(request));
+    }
+
+    @Override
+    public ActionRefundResponse actionRefund(LinnworksAPIClient client, SessionToken token, ActionRefundRequest request)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(ActionRefundMethod.class, token)
+                .withRequest(request));
+    }
+
+    @Override
     public String deleteOrder(LinnworksAPIClient client, SessionToken token, String orderId)
             throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(DeleteOrderMethod.class, token).withOrderId(orderId));
@@ -414,6 +450,20 @@ public class LinnworksAPIImpl implements LinnworksAPI
             throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(ChangeStatusMethod.class, token)
                 .withOrderIds(orderIds).withStatus(status));
+    }
+
+    @Override
+    public List<String> assignToFolder(LinnworksAPIClient client, SessionToken token, List<String> orderIds, String folder)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(AssignToFolderMethod.class, token)
+                .withOrderIds(orderIds).withFolder(folder));
+    }
+
+    @Override
+    public List<String> removeFromFolder(LinnworksAPIClient client, SessionToken token, List<String> orderIds, String folder)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(UnassignToFolderMethod.class, token)
+                .withOrderIds(orderIds).withFolder(folder));
     }
 
     @Override

@@ -28,7 +28,7 @@ public class UpdateInventoryItemStockFieldMethod extends InventoryMethod<Map<Str
 
     @Override
     public Map<String, Object> getResponse() throws LinnworksAPIException {
-        return new Gson().fromJson(getJsonResult(), new TypeToken<HashMap<String, Object>>(){}.getType());
+        return new Gson().fromJson(getJsonResult(), STRING_OBJECT_MAP);
     }
 
     public String getItemId() {

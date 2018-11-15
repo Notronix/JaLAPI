@@ -108,6 +108,24 @@ public interface LinnworksAPI
                        Double refund, String note)
             throws LinnworksAPIException, WrongTokenException;
 
+    List<RefundInfo> getRefunds(LinnworksAPIClient client, SessionToken token, String orderId)
+            throws LinnworksAPIException, WrongTokenException;
+
+    GetRefundOptionsResponse getRefundOptions(LinnworksAPIClient client, SessionToken token,
+                                              GetRefundOptionsRequest request)
+            throws LinnworksAPIException, WrongTokenException;
+
+    GetRefundHeadersByOrderIdResponse getRefundHeadersByOrderId(LinnworksAPIClient client, SessionToken token,
+                                                                GetRefundHeadersByOrderIdRequest request)
+            throws LinnworksAPIException, WrongTokenException;
+
+    GetActionableRefundHeadersResponse getActionableRefundHeaders(LinnworksAPIClient client, SessionToken token,
+                                                                  GetActionableRefundHeadersRequest request)
+            throws LinnworksAPIException, WrongTokenException;
+
+    ActionRefundResponse actionRefund(LinnworksAPIClient client, SessionToken token, ActionRefundRequest request)
+            throws LinnworksAPIException, WrongTokenException;
+
     String deleteOrder(LinnworksAPIClient client, SessionToken token, String orderId)
             throws LinnworksAPIException, WrongTokenException;
 
@@ -117,6 +135,12 @@ public interface LinnworksAPI
 
     List<String> changeOrderStatus(LinnworksAPIClient client, SessionToken token,
                                    List<String> orderIds, OrderStatus status)
+            throws LinnworksAPIException, WrongTokenException;
+
+    List<String> assignToFolder(LinnworksAPIClient client, SessionToken token, List<String> orderIds, String folder)
+            throws LinnworksAPIException, WrongTokenException;
+
+    List<String> removeFromFolder(LinnworksAPIClient client, SessionToken token, List<String> orderIds, String folder)
             throws LinnworksAPIException, WrongTokenException;
 
     OrderTotalsInfo updateOrderCustomerInfo(LinnworksAPIClient client, SessionToken token,
