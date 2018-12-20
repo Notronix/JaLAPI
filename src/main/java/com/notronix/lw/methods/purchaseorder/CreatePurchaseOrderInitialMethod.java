@@ -3,6 +3,8 @@ package com.notronix.lw.methods.purchaseorder;
 import com.notronix.lw.LinnworksAPIException;
 import com.notronix.lw.model.CreatePurchaseOrderParameters;
 
+import static java.util.Objects.requireNonNull;
+
 public class CreatePurchaseOrderInitialMethod extends PurchaseOrderMethod<String>
 {
     private CreatePurchaseOrderParameters parameters;
@@ -32,6 +34,8 @@ public class CreatePurchaseOrderInitialMethod extends PurchaseOrderMethod<String
         String shippingTaxRate = parameters.getShippingTaxRate() == null ? "0" : parameters.getShippingTaxRate().toString();
         String conversionRate = parameters.getConversionRate() == null ? "0" : parameters.getConversionRate().toString();
 
+        Integer taxType = requireNonNull(parameters.getUnitAmountTaxIncludedType());
+
         return "createParameters={\"fkSupplierId\": \"" + fkSupplierId + "\"," +
                 "\"fkLocationId\": \"" + fkLocationId + "\"," +
                 "\"ExternalInvoiceNumber\": \"" + externalInvoiceNumber + "\"," +
@@ -41,6 +45,7 @@ public class CreatePurchaseOrderInitialMethod extends PurchaseOrderMethod<String
                 "\"QuotedDeliveryDate\": \"" + quotedDeliveryDate + "\"," +
                 "\"PostagePaid\": " + postagePaid + "," +
                 "\"ShippingTaxRate\": " + shippingTaxRate + "," +
+                "\"UnitAmountTaxIncludedType\": " + taxType + "," +
                 "\"ConversionRate\": " + conversionRate + "}";
     }
 

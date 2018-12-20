@@ -14,7 +14,11 @@ public class PurchaseOrderItem
     private String SKU;
     private String ItemTitle;
     private Integer InventoryTrackingType;
-    private Boolean isDeleted;
+    private Boolean IsDeleted;
+    private Integer SortOrder;
+    private Double DimHeight;
+    private Double DimWidth;
+    private Double DimDepth;
 
     public String getPkPurchaseItemId() {
         return pkPurchaseItemId;
@@ -113,10 +117,42 @@ public class PurchaseOrderItem
     }
 
     public Boolean getDeleted() {
-        return isDeleted;
+        return IsDeleted;
     }
 
     public void setDeleted(Boolean deleted) {
-        isDeleted = deleted;
+        IsDeleted = deleted;
+    }
+
+    public Integer getSortOrder() {
+        return SortOrder;
+    }
+
+    public void setSortOrder(Integer sortOrder) {
+        SortOrder = sortOrder;
+    }
+
+    public Double getDimHeight() {
+        return DimHeight;
+    }
+
+    public void setDimHeight(Double dimHeight) {
+        DimHeight = dimHeight;
+    }
+
+    public Double getDimWidth() {
+        return DimWidth;
+    }
+
+    public void setDimWidth(Double dimWidth) {
+        DimWidth = dimWidth;
+    }
+
+    public Double getDimDepth() {
+        return DimDepth;
+    }
+
+    public void setDimDepth(Double dimDepth) {
+        DimDepth = dimDepth;
     }
 }

@@ -150,6 +150,16 @@ public interface LinnworksAPI
     String createPurchaseOrder(LinnworksAPIClient client, SessionToken token, CreatePurchaseOrderParameters parameters)
             throws LinnworksAPIException, WrongTokenException;
 
+    UpdatePurchaseOrderItemResponse deliverPurchaseItem(LinnworksAPIClient client, SessionToken token,
+                                                        DeliverPurchaseItemParameter parameters)
+            throws LinnworksAPIException, WrongTokenException;
+
+    PurchaseOrderNote addPurchaseOrderNote(LinnworksAPIClient client, SessionToken token, String purchaseOrderId,
+                                           String note) throws LinnworksAPIException, WrongTokenException;
+
+    List<PurchaseOrderNote> getPurchaseOrderNotes(LinnworksAPIClient client, SessionToken token, String purchaseId)
+            throws LinnworksAPIException, WrongTokenException;
+
     List<Supplier> getSuppliers(LinnworksAPIClient client, SessionToken token)
             throws LinnworksAPIException, WrongTokenException;
 

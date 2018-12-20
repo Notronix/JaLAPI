@@ -14,6 +14,7 @@ public class CreatePurchaseOrderParameters
     private Double PostagePaid;
     private Double ShippingTaxRate;
     private Double ConversionRate;
+    private Integer UnitAmountTaxIncludedType;
 
     public String getFkSupplierId()
     {
@@ -113,5 +114,13 @@ public class CreatePurchaseOrderParameters
     public void setConversionRate(Double conversionRate)
     {
         ConversionRate = conversionRate;
+    }
+
+    public Integer getUnitAmountTaxIncludedType() {
+        return UnitAmountTaxIncludedType;
+    }
+
+    public void setUnitAmountTaxIncludedType(Integer unitAmountTaxIncludedType) {
+        UnitAmountTaxIncludedType = unitAmountTaxIncludedType;
     }
 }

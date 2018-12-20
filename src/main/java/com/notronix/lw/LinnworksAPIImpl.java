@@ -9,10 +9,7 @@ import com.notronix.lw.methods.postalservices.GetPostalServicesMethod;
 import com.notronix.lw.methods.processedorders.AddOrderNoteMethod;
 import com.notronix.lw.methods.processedorders.GetRefundsMethod;
 import com.notronix.lw.methods.processedorders.SearchProcessedOrdersPagedMethod;
-import com.notronix.lw.methods.purchaseorder.CreatePurchaseOrderInitialMethod;
-import com.notronix.lw.methods.purchaseorder.DeletePurchaseOrderMethod;
-import com.notronix.lw.methods.purchaseorder.GetPurchaseOrderMethod;
-import com.notronix.lw.methods.purchaseorder.SearchPurchaseOrdersMethod;
+import com.notronix.lw.methods.purchaseorder.*;
 import com.notronix.lw.methods.returnsrefunds.*;
 import com.notronix.lw.methods.settings.GetCurrencyConversionRatesMethod;
 import com.notronix.lw.methods.stock.GetStockItemsMethod;
@@ -483,6 +480,26 @@ public class LinnworksAPIImpl implements LinnworksAPI
     }
 
     @Override
+    public UpdatePurchaseOrderItemResponse deliverPurchaseItem(LinnworksAPIClient client, SessionToken token,
+                                                               DeliverPurchaseItemParameter parameters)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(DeliverPurchaseItemMethod.class, token).withParameters(parameters));
+    }
+
+    @Override
+    public PurchaseOrderNote addPurchaseOrderNote(LinnworksAPIClient client, SessionToken token, String purchaseOrderId,
+                                                  String note) throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(AddPurchaseOrderNoteMethod.class, token)
+                .withPkPurchaseId(purchaseOrderId).withNote(note));
+    }
+
+    @Override
+    public List<PurchaseOrderNote> getPurchaseOrderNotes(LinnworksAPIClient client, SessionToken token, String purchaseId)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(GetPurchaseOrderNoteMethod.class, token).withPkPurchaseId(purchaseId));
+    }
+
+    @Override
     public List<Supplier> getSuppliers(LinnworksAPIClient client, SessionToken token)
             throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetSuppliersMethod.class, token));
@@ -491,7 +508,8 @@ public class LinnworksAPIImpl implements LinnworksAPI
     @Override
     public String deletePurchaseOrder(LinnworksAPIClient client, SessionToken token, String purchaseOrderId)
             throws LinnworksAPIException, WrongTokenException {
-        return client.executeMethod(prepareMethod(DeletePurchaseOrderMethod.class, token).withPurchaseOrderId(purchaseOrderId));
+        return client.executeMethod(prepareMethod(DeletePurchaseOrderMethod.class, token)
+                .withPurchaseOrderId(purchaseOrderId));
     }
 
     @Override

@@ -22,6 +22,12 @@ public class PurchaseOrderHeader
     private Double taxPaid;
     private Double ShippingTaxRate;
     private Double ConversionRate;
+    private Integer UnitAmountTaxIncludedType;
+    private Double ConvertedShippingCost;
+    private Double ConvertedShippingTax;
+    private Double ConvertedOtherCost;
+    private Double ConvertedOtherTax;
+    private Double ConvertedGrandTotal;
 
     public String getPkPurchaseID() {
         return pkPurchaseID;
@@ -165,5 +171,53 @@ public class PurchaseOrderHeader
 
     public void setConversionRate(Double conversionRate) {
         ConversionRate = conversionRate;
+    }
+
+    public Integer getUnitAmountTaxIncludedType() {
+        return UnitAmountTaxIncludedType;
+    }
+
+    public void setUnitAmountTaxIncludedType(Integer unitAmountTaxIncludedType) {
+        UnitAmountTaxIncludedType = unitAmountTaxIncludedType;
+    }
+
+    public Double getConvertedShippingCost() {
+        return ConvertedShippingCost;
+    }
+
+    public void setConvertedShippingCost(Double convertedShippingCost) {
+        ConvertedShippingCost = convertedShippingCost;
+    }
+
+    public Double getConvertedShippingTax() {
+        return ConvertedShippingTax;
+    }
+
+    public void setConvertedShippingTax(Double convertedShippingTax) {
+        ConvertedShippingTax = convertedShippingTax;
+    }
+
+    public Double getConvertedOtherCost() {
+        return ConvertedOtherCost;
+    }
+
+    public void setConvertedOtherCost(Double convertedOtherCost) {
+        ConvertedOtherCost = convertedOtherCost;
+    }
+
+    public Double getConvertedOtherTax() {
+        return ConvertedOtherTax;
+    }
+
+    public void setConvertedOtherTax(Double convertedOtherTax) {
+        ConvertedOtherTax = convertedOtherTax;
+    }
+
+    public Double getConvertedGrandTotal() {
+        return ConvertedGrandTotal;
+    }
+
+    public void setConvertedGrandTotal(Double convertedGrandTotal) {
+        ConvertedGrandTotal = convertedGrandTotal;
     }
 }

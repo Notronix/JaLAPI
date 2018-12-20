@@ -3,10 +3,12 @@ package com.notronix.lw.model;
 public class OrderNote
 {
     private String OrderNoteId;
+    private String OrderId;
     private String NoteDate;
     private Boolean Internal;
     private String Note;
     private String CreatedBy;
+    private Byte NoteTypeId;
 
     public String getOrderNoteId()
     {
@@ -56,5 +58,21 @@ public class OrderNote
     public void setCreatedBy(String createdBy)
     {
         CreatedBy = createdBy;
+    }
+
+    public String getOrderId() {
+        return OrderId;
+    }
+
+    public void setOrderId(String orderId) {
+        OrderId = orderId;
+    }
+
+    public Byte getNoteTypeId() {
+        return NoteTypeId;
+    }
+
+    public void setNoteTypeId(Byte noteTypeId) {
+        NoteTypeId = noteTypeId;
     }
 }
