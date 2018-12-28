@@ -480,6 +480,14 @@ public class LinnworksAPIImpl implements LinnworksAPI
     }
 
     @Override
+    public PurchaseOrderHeader changePurchaseOrderStatus(LinnworksAPIClient client, SessionToken token,
+                                                         ChangePurchaseOrderStatusParameter parameters)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(ChangePurchaseOrderStatusMethod.class, token)
+                .withChangeStatusParameter(parameters));
+    }
+
+    @Override
     public UpdatePurchaseOrderItemResponse deliverPurchaseItem(LinnworksAPIClient client, SessionToken token,
                                                                DeliverPurchaseItemParameter parameters)
             throws LinnworksAPIException, WrongTokenException {
