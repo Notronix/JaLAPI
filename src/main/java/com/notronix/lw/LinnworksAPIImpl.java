@@ -476,7 +476,16 @@ public class LinnworksAPIImpl implements LinnworksAPI
                                       SessionToken token,
                                       CreatePurchaseOrderParameters parameters)
             throws LinnworksAPIException, WrongTokenException {
-        return client.executeMethod(prepareMethod(CreatePurchaseOrderInitialMethod.class, token).withParameters(parameters));
+        return client.executeMethod(prepareMethod(CreatePurchaseOrderInitialMethod.class, token)
+                .withParameters(parameters));
+    }
+
+    @Override
+    public UpdatePurchaseOrderItemResponse addPurchaseOrderItem(LinnworksAPIClient client, SessionToken token,
+                                                                AddPurchaseOrderItemParameter params)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(AddPurchaseOrderItemMethod.class, token)
+                .withAddItemParameter(params));
     }
 
     @Override

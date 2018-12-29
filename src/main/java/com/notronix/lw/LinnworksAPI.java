@@ -150,6 +150,10 @@ public interface LinnworksAPI
     String createPurchaseOrder(LinnworksAPIClient client, SessionToken token, CreatePurchaseOrderParameters parameters)
             throws LinnworksAPIException, WrongTokenException;
 
+    UpdatePurchaseOrderItemResponse addPurchaseOrderItem(LinnworksAPIClient client, SessionToken token,
+                                                         AddPurchaseOrderItemParameter params)
+            throws LinnworksAPIException, WrongTokenException;
+
     PurchaseOrderHeader changePurchaseOrderStatus(LinnworksAPIClient client, SessionToken token,
                                                   ChangePurchaseOrderStatusParameter parameters)
             throws LinnworksAPIException, WrongTokenException;
