@@ -133,6 +133,9 @@ public interface LinnworksAPI
                                             OrderGeneralInfo info, String orderId, boolean wasDraft)
             throws LinnworksAPIException, WrongTokenException;
 
+    List<String> changeOrderTag(LinnworksAPIClient client, SessionToken token, List<String> orderIds, Integer tag)
+            throws LinnworksAPIException, WrongTokenException;
+
     List<String> changeOrderStatus(LinnworksAPIClient client, SessionToken token,
                                    List<String> orderIds, OrderStatus status)
             throws LinnworksAPIException, WrongTokenException;

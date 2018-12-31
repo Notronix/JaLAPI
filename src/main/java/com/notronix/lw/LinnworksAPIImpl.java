@@ -442,6 +442,13 @@ public class LinnworksAPIImpl implements LinnworksAPI
     }
 
     @Override
+    public List<String> changeOrderTag(LinnworksAPIClient client, SessionToken token, List<String> orderIds, Integer tag)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(ChangeOrderTagMethod.class, token)
+                .withOrderIds(orderIds).withTag(tag));
+    }
+
+    @Override
     public List<String> changeOrderStatus(LinnworksAPIClient client, SessionToken token,
                                           List<String> orderIds, OrderStatus status)
             throws LinnworksAPIException, WrongTokenException {
