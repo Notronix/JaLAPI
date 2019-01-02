@@ -19,8 +19,7 @@ public class ChangeOrderTagMethod extends OrdersMethod<List<String>>
 
     @Override
     public String getPayload() {
-        Gson gson = new Gson();
-        return "orderIds=" + gson.toJson(orderIds) + "&tag=" + tag.toString();
+        return "orderIds=" + new Gson().toJson(orderIds) + "&tag=" + (tag == null ? "null": tag.toString());
     }
 
     @Override
