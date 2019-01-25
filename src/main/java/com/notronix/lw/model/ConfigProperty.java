@@ -1,58 +1,50 @@
 package com.notronix.lw.model;
 
-public class ConfigItem<T>
+public class ConfigProperty<T>
 {
     private Boolean Loaded;
     private Integer pkPropertyId;
     private Boolean IsChanged;
-    private String PropertyValue;
+    private T PropertyValue;
     private String PropertyType;
 
-    public Boolean getLoaded()
-    {
+    public Boolean getLoaded() {
         return Loaded;
     }
 
-    public void setLoaded(Boolean loaded)
-    {
+    public void setLoaded(Boolean loaded) {
         Loaded = loaded;
     }
 
-    public Integer getPkPropertyId()
-    {
+    public Integer getPkPropertyId() {
         return pkPropertyId;
     }
 
-    public void setPkPropertyId(Integer pkPropertyId)
-    {
+    public void setPkPropertyId(Integer pkPropertyId) {
         this.pkPropertyId = pkPropertyId;
     }
 
-    public Boolean getChanged()
-    {
+    public Boolean getChanged() {
         return IsChanged;
     }
 
-    public void setChanged(Boolean changed)
-    {
+    public void setChanged(Boolean changed) {
         IsChanged = changed;
     }
 
-    public String getPropertyValue() {
+    public T getPropertyValue() {
         return PropertyValue;
     }
 
-    public void setPropertyValue(String propertyValue) {
+    public void setPropertyValue(T propertyValue) {
         PropertyValue = propertyValue;
     }
 
-    public String getPropertyType()
-    {
+    public String getPropertyType() {
         return PropertyType;
     }
 
-    public void setPropertyType(String propertyType)
-    {
+    public void setPropertyType(String propertyType) {
         PropertyType = propertyType;
     }
 }

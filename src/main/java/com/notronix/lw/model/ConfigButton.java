@@ -1,6 +1,6 @@
 package com.notronix.lw.model;
 
-public class Button
+public class ConfigButton
 {
     private String FieldName;
     private String GroupName;

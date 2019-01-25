@@ -50,6 +50,12 @@ public class LinnworksAPIImpl implements LinnworksAPI
     }
 
     @Override
+    public List<Channel> getChannelsBySource(LinnworksAPIClient client, SessionToken token, String source)
+            throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(GetChannelsBySourceMethod.class, token).withSource(source));
+    }
+
+    @Override
     public List<Category> getCategories(LinnworksAPIClient client, SessionToken token)
             throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetCategoriesMethod.class, token));

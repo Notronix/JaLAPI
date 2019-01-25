@@ -2,10 +2,10 @@ package com.notronix.lw.model;
 
 import java.util.List;
 
-public class Rule
+public class Rule<T>
 {
     private String FieldName;
-    private List<FieldRule> Rules;
+    private List<T> Rules;
 
     public String getFieldName()
     {
@@ -17,13 +17,11 @@ public class Rule
         FieldName = fieldName;
     }
 
-    public List<FieldRule> getRules()
-    {
+    public List<T> getRules() {
         return Rules;
     }
 
-    public void setRules(List<FieldRule> rules)
-    {
+    public void setRules(List<T> rules) {
         Rules = rules;
     }
 }

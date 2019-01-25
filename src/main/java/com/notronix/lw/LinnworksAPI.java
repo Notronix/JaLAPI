@@ -18,6 +18,9 @@ public interface LinnworksAPI
     List<Channel> getChannels(LinnworksAPIClient client, SessionToken token)
             throws LinnworksAPIException, WrongTokenException;
 
+    List<Channel> getChannelsBySource(LinnworksAPIClient client, SessionToken token, String source)
+            throws LinnworksAPIException, WrongTokenException;
+
     List<Category> getCategories(LinnworksAPIClient client, SessionToken token)
             throws LinnworksAPIException, WrongTokenException;
 
