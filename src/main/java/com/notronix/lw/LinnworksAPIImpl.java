@@ -13,6 +13,7 @@ import com.notronix.lw.methods.purchaseorder.*;
 import com.notronix.lw.methods.returnsrefunds.*;
 import com.notronix.lw.methods.settings.GetCurrencyConversionRatesMethod;
 import com.notronix.lw.methods.stock.GetStockItemsMethod;
+import com.notronix.lw.methods.stock.GetStockLevelBatchMethod;
 import com.notronix.lw.methods.stock.GetStockLevelMethod;
 import com.notronix.lw.methods.stock.SetStockLevelMethod;
 import com.notronix.lw.model.*;
@@ -146,6 +147,13 @@ public class LinnworksAPIImpl implements LinnworksAPI
     public List<StockItemLevel> getLevels(LinnworksAPIClient client, SessionToken token, String itemId)
             throws LinnworksAPIException, WrongTokenException {
         return client.executeMethod(prepareMethod(GetStockLevelMethod.class, token).withItemId(itemId));
+    }
+
+    @Override
+    public List<GetStockLevelBatchResponse> getLevels(LinnworksAPIClient client, SessionToken token, List<String> itemIds)
+            throws LinnworksAPIException, WrongTokenException {
+        GetStockLevelBatchRequest request = new GetStockLevelBatchRequest().withStockItemIds(itemIds);
+        return client.executeMethod(prepareMethod(GetStockLevelBatchMethod.class, token).withRequest(request));
     }
 
     @Override

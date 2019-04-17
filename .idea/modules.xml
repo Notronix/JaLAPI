@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/JaLAPI.iml" filepath="$PROJECT_DIR$/.idea/modules/JaLAPI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/JaLAPI.iml" filepath="$PROJECT_DIR$/.idea/modules/JaLAPI.iml" group="JaLAPI" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/JaLAPI_main.iml" filepath="$PROJECT_DIR$/.idea/modules/JaLAPI_main.iml" group="JaLAPI" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/JaLAPI_test.iml" filepath="$PROJECT_DIR$/.idea/modules/JaLAPI_test.iml" group="JaLAPI" />
     </modules>

@@ -65,6 +65,9 @@ public interface LinnworksAPI
     List<StockItemLevel> getLevels(LinnworksAPIClient client, SessionToken token, String itemId)
             throws LinnworksAPIException, WrongTokenException;
 
+    List<GetStockLevelBatchResponse> getLevels(LinnworksAPIClient client, SessionToken token, List<String> itemIds)
+            throws LinnworksAPIException, WrongTokenException;
+
     List<StockItemLevel> setLevels(LinnworksAPIClient client, SessionToken token, List<StockLevelUpdate> updates)
             throws LinnworksAPIException, WrongTokenException;
 
