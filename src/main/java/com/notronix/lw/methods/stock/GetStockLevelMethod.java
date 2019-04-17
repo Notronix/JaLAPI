@@ -1,9 +1,12 @@
 package com.notronix.lw.methods.stock;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.notronix.lw.LinnworksAPIException;
+import com.notronix.lw.gson.InstantDeserializer;
 import com.notronix.lw.model.StockItemLevel;
 
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,7 +30,9 @@ public class GetStockLevelMethod extends StockMethod<List<StockItemLevel>>
     public List<StockItemLevel> getResponse()
             throws LinnworksAPIException
     {
-        return Arrays.asList(new Gson().fromJson(getJsonResult(), StockItemLevel[].class));
+        Gson gson = new GsonBuilder().registerTypeAdapter(Instant.class, new InstantDeserializer()).create();
+
+        return Arrays.asList(gson.fromJson(getJsonResult(), StockItemLevel[].class));
     }
 
     public String getItemId()
