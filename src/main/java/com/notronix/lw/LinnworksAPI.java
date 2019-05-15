@@ -195,6 +195,12 @@ public interface LinnworksAPI
     List<CurrencyConversionRate> getCurrencyConversionRates(LinnworksAPIClient client, SessionToken token, boolean getCurrenciesFromOrders, String currency)
             throws LinnworksAPIException, WrongTokenException;
 
+    VariationGroup createVariationGroup(LinnworksAPIClient client, SessionToken token, VariationGroupTemplate template)
+            throws LinnworksAPIException, WrongTokenException;
+
+    List<VariationItem> addVariationItems(LinnworksAPIClient client, SessionToken token, String groupId, List<String> itemIds)
+            throws LinnworksAPIException, WrongTokenException;
+
     String getNewItemNumber(LinnworksAPIClient client, SessionToken token)
             throws LinnworksAPIException, WrongTokenException;
 

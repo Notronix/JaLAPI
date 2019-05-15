@@ -12,10 +12,7 @@ import com.notronix.lw.methods.processedorders.SearchProcessedOrdersPagedMethod;
 import com.notronix.lw.methods.purchaseorder.*;
 import com.notronix.lw.methods.returnsrefunds.*;
 import com.notronix.lw.methods.settings.GetCurrencyConversionRatesMethod;
-import com.notronix.lw.methods.stock.GetStockItemsMethod;
-import com.notronix.lw.methods.stock.GetStockLevelBatchMethod;
-import com.notronix.lw.methods.stock.GetStockLevelMethod;
-import com.notronix.lw.methods.stock.SetStockLevelMethod;
+import com.notronix.lw.methods.stock.*;
 import com.notronix.lw.model.*;
 
 import java.time.Instant;
@@ -206,6 +203,17 @@ public class LinnworksAPIImpl implements LinnworksAPI
                 .withGetCurrenciesFromOrders(getCurrenciesFromOrders)
                 .forCurrency(currency)
         );
+    }
+
+    @Override
+    public VariationGroup createVariationGroup(LinnworksAPIClient client, SessionToken token, VariationGroupTemplate template) throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(CreateVariationGroupMethod.class, token).withTemplate(template));
+    }
+
+    @Override
+    public List<VariationItem> addVariationItems(LinnworksAPIClient client, SessionToken token, String groupId, List<String> itemIds) throws LinnworksAPIException, WrongTokenException {
+        return client.executeMethod(prepareMethod(AddVariationItemsMethod.class, token)
+                .withPkVariationItemId(groupId).withPkStockItemIds(itemIds));
     }
 
     @Override
