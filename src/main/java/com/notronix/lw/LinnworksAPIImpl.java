@@ -25,7 +25,7 @@ public class LinnworksAPIImpl implements LinnworksAPI
 {
     @Override
     public SessionToken authenticateApplication(LinnworksAPIClient client, String appId, String appSecret, String authToken)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         AuthorizeByApplicationMethod method = new AuthorizeByApplicationMethod();
         method.setHost("https://api.linnworks.net");
         method.setAppId(appId);
@@ -37,31 +37,31 @@ public class LinnworksAPIImpl implements LinnworksAPI
 
     @Override
     public List<StockLocation> getLocations(LinnworksAPIClient client, SessionToken token)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetStockLocationsMethod.class, token));
     }
 
     @Override
     public List<Channel> getChannels(LinnworksAPIClient client, SessionToken token)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetChannelsMethod.class, token));
     }
 
     @Override
     public List<Channel> getChannelsBySource(LinnworksAPIClient client, SessionToken token, String source)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetChannelsBySourceMethod.class, token).withSource(source));
     }
 
     @Override
     public List<Category> getCategories(LinnworksAPIClient client, SessionToken token)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetCategoriesMethod.class, token));
     }
 
     @Override
     public List<String> getExtendedPropertyNames(LinnworksAPIClient client, SessionToken token)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetExtendedPropertyNamesMethod.class, token));
     }
 
@@ -69,7 +69,7 @@ public class LinnworksAPIImpl implements LinnworksAPI
     public GetInventoryItemsResponse getInventoryItems(LinnworksAPIClient client, SessionToken token, InventoryView view,
                                                        List<StockLocation> locations, Integer pageSize, Integer startIndex,
                                                        Boolean preloadChilds)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetInventoryItemsMethod.class, token)
                 .withView(view)
                 .withStockLocations(locations)
@@ -80,33 +80,33 @@ public class LinnworksAPIImpl implements LinnworksAPI
 
     @Override
     public StockItemInv getInventoryItem(LinnworksAPIClient client, SessionToken token, String itemId)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetInventoryItemByIdMethod.class, token).withItemId(itemId));
     }
 
     @Override
     public List<StockItemComposition> getCompositions(LinnworksAPIClient client, SessionToken token, String itemId,
                                                       boolean fullDetail)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetInventoryItemCompositionsMethod.class, token)
                 .withInventoryItemId(itemId).withFullDetail(fullDetail));
     }
 
     @Override
     public List<StockItemEbayCompatibility> getEbayCompatibility(LinnworksAPIClient client, SessionToken token, String itemId)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetEbayCompatibilityListMethod.class, token).withItemId(itemId));
     }
 
     @Override
     public List<StockItemPrice> getPrices(LinnworksAPIClient client, SessionToken token, String itemId)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetInventoryItemPricesMethod.class, token).withItemId(itemId));
     }
 
     @Override
     public List<StockItemExtendedProperty> getExtendedProperties(LinnworksAPIClient client, SessionToken token, String itemId)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetInventoryItemExtendedPropertiesMethod.class, token).withItemId(itemId));
     }
 
@@ -114,7 +114,7 @@ public class LinnworksAPIImpl implements LinnworksAPI
     public List<StockItemExtendedProperty> createExtendedProperties(LinnworksAPIClient client,
                                                                     SessionToken token,
                                                                     List<StockItemExtendedProperty> extendedProperties)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(CreateInventoryItemExtendedPropertiesMethod.class, token)
                 .withExtendedProperties(extendedProperties));
     }
@@ -123,7 +123,7 @@ public class LinnworksAPIImpl implements LinnworksAPI
     public List<StockItemComposition> createCompositions(LinnworksAPIClient client,
                                                          SessionToken token,
                                                          List<StockItemComposition> inventoryItemCompositions)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(CreateInventoryItemCompositionsMethod.class, token)
                 .withInventoryItemCompositions(inventoryItemCompositions));
     }
@@ -131,7 +131,7 @@ public class LinnworksAPIImpl implements LinnworksAPI
     @Override
     public StockItem duplicateInventoryItem(LinnworksAPIClient client, SessionToken token, StockItem newItem,
                                             String sourceItemId, boolean copyImages)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(DuplicateInventoryItemMethod.class, token)
                 .withInventoryItem(newItem).withSourceItemId(sourceItemId).withCopyImages(copyImages));
     }
@@ -140,39 +140,39 @@ public class LinnworksAPIImpl implements LinnworksAPI
     public List<StockItemExtendedProperty> updateExtendedProperties(LinnworksAPIClient client,
                                                                     SessionToken token,
                                                                     List<StockItemExtendedProperty> extendedProperties)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(UpdateInventoryItemExtendedPropertiesMethod.class, token)
                 .withExtendedProperties(extendedProperties));
     }
 
     @Override
     public List<Country> getCountries(LinnworksAPIClient client, SessionToken token)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetCountriesMethod.class, token));
     }
 
     @Override
     public GenericPagedResult<StockItem> getStockItems(LinnworksAPIClient client, SessionToken token, Integer pageSize)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetStockItemsMethod.class, token).withPageSize(pageSize));
     }
 
     @Override
     public List<StockItemLevel> getLevels(LinnworksAPIClient client, SessionToken token, String itemId)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetStockLevelMethod.class, token).withItemId(itemId));
     }
 
     @Override
     public List<GetStockLevelBatchResponse> getLevels(LinnworksAPIClient client, SessionToken token, List<String> itemIds)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         GetStockLevelBatchRequest request = new GetStockLevelBatchRequest().withStockItemIds(itemIds);
         return client.executeMethod(prepareMethod(GetStockLevelBatchMethod.class, token).withRequest(request));
     }
 
     @Override
     public List<StockItemLevel> setLevels(LinnworksAPIClient client, SessionToken token, List<StockLevelUpdate> updates)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(SetStockLevelMethod.class, token).withUpdates(updates));
     }
 
@@ -182,7 +182,7 @@ public class LinnworksAPIImpl implements LinnworksAPI
                                                     String itemId,
                                                     InventoryField field,
                                                     String value)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(UpdateInventoryItemFieldMethod.class, token).withItemId(itemId)
                 .withField(field).withValue(value));
     }
@@ -194,20 +194,20 @@ public class LinnworksAPIImpl implements LinnworksAPI
                                                 InventoryStockField field,
                                                 String value,
                                                 String locationId)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(UpdateInventoryItemStockFieldMethod.class, token).withItemId(itemId)
                 .withField(field).withValue(value).withLocationId(locationId));
     }
 
     @Override
     public List<StockItemChannelSKU> getChannelSKUs(LinnworksAPIClient client, SessionToken token, String itemId)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetInventoryItemChannelSKUsMethod.class, token).withItemId(itemId));
     }
 
     @Override
     public Object createChannelSKU(LinnworksAPIClient client, SessionToken token, StockItemChannelSKU channelSKU)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(CreateInventoryItemChannelSKUsMethod.class, token)
                 .withChannelSKU(channelSKU));
     }
@@ -215,7 +215,7 @@ public class LinnworksAPIImpl implements LinnworksAPI
     @Override
     public List<CurrencyConversionRate> getCurrencyConversionRates(LinnworksAPIClient client, SessionToken token,
                                                                    boolean getCurrenciesFromOrders, String currency)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetCurrencyConversionRatesMethod.class, token)
                 .withGetCurrenciesFromOrders(getCurrenciesFromOrders)
                 .forCurrency(currency)
@@ -223,43 +223,43 @@ public class LinnworksAPIImpl implements LinnworksAPI
     }
 
     @Override
-    public VariationGroup createVariationGroup(LinnworksAPIClient client, SessionToken token, VariationGroupTemplate template) throws LinnworksAPIException, WrongTokenException {
+    public VariationGroup createVariationGroup(LinnworksAPIClient client, SessionToken token, VariationGroupTemplate template) throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(CreateVariationGroupMethod.class, token).withTemplate(template));
     }
 
     @Override
-    public List<VariationItem> addVariationItems(LinnworksAPIClient client, SessionToken token, String groupId, List<String> itemIds) throws LinnworksAPIException, WrongTokenException {
+    public List<VariationItem> addVariationItems(LinnworksAPIClient client, SessionToken token, String groupId, List<String> itemIds) throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(AddVariationItemsMethod.class, token)
                 .withPkVariationItemId(groupId).withPkStockItemIds(itemIds));
     }
 
     @Override
     public String getNewItemNumber(LinnworksAPIClient client, SessionToken token)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetNewItemNumberMethod.class, token));
     }
 
     @Override
     public StockItemInv addNewInventoryItem(LinnworksAPIClient client, SessionToken token, StockItemInv stockItem)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(AddInventoryItemMethod.class, token).withStockItem(stockItem));
     }
 
     @Override
     public StockItemInv updateInventoryItem(LinnworksAPIClient client, SessionToken token, StockItemInv stockItem)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(UpdateInventoryItemMethod.class, token).withStockItem(stockItem));
     }
 
     @Override
     public List<PostalService> getPostalServices(LinnworksAPIClient client, SessionToken token)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetPostalServicesMethod.class, token));
     }
 
     @Override
     public List<KeyGuidValue> getPackageGroups(LinnworksAPIClient client, SessionToken token)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetPackageGroupsMethod.class, token));
     }
 
@@ -267,33 +267,33 @@ public class LinnworksAPIImpl implements LinnworksAPI
     public AddImageToInventoryItemResponse addImageToInventoryItem(LinnworksAPIClient client, SessionToken token,
                                                                    String sku, String itemId, String imageURL,
                                                                    boolean isMain)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(AddImageToInventoryItemMethod.class, token)
                 .withItemNumber(sku).withItemId(itemId).withImageURL(imageURL).withMain(isMain));
     }
 
     @Override
     public String addOrderNote(LinnworksAPIClient client, SessionToken token, String orderId, String noteText,
-                               boolean isInternal) throws LinnworksAPIException, WrongTokenException {
+                               boolean isInternal) throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(AddOrderNoteMethod.class, token).withOrderId(orderId)
                 .withNoteText(noteText).withIsInternal(isInternal));
     }
 
     @Override
     public SearchPurchaseOrderResult searchPurchaseOrders(LinnworksAPIClient client, SessionToken token)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(SearchPurchaseOrdersMethod.class, token));
     }
 
     @Override
     public GetPurchaseOrderResponse getPurchaseOrder(LinnworksAPIClient client, SessionToken token, String purchaseOrderId)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetPurchaseOrderMethod.class, token).withId(purchaseOrderId));
     }
 
     @Override
     public MoveToLocationResult moveOrders(LinnworksAPIClient client, SessionToken token, List<String> orderIds, String locationId)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(MoveToLocationMethod.class, token)
                 .withLocationId(requireNonNull(locationId))
                 .withOrderIds(requireNonNull(orderIds)));
@@ -302,7 +302,7 @@ public class LinnworksAPIImpl implements LinnworksAPI
     @Override
     public UpdateOrderItemResult removeOrderItem(LinnworksAPIClient client, SessionToken token,
                                                  String orderId, String rowId, String fulfilmentCenterId)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(RemoveOrderItemMethod.class, token)
                 .withOrderId(requireNonNull(orderId))
                 .withRowId(requireNonNull(rowId))
@@ -313,7 +313,7 @@ public class LinnworksAPIImpl implements LinnworksAPI
     public UpdateOrderItemResult addOrderItem(LinnworksAPIClient client, SessionToken token, String orderId,
                                               String itemId, String channelSKU, String fulfilmentCenterId,
                                               int quantity, LinePricingRequest linePricingRequest)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(AddOrderItemMethod.class, token)
                 .withOrderId(requireNonNull(orderId))
                 .withItemId(requireNonNull(itemId))
@@ -327,7 +327,7 @@ public class LinnworksAPIImpl implements LinnworksAPI
     public UpdateOrderItemResult updateOrderItem(LinnworksAPIClient client, SessionToken token, String orderId,
                                                  String fulfilmentCenterId, String source, String subSource,
                                                  OrderItem orderItem)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(UpdateOrderItemMethod.class, token)
                 .withOrderId(requireNonNull(orderId))
                 .withFulfilmentCenterId(requireNonNull(fulfilmentCenterId))
@@ -338,25 +338,25 @@ public class LinnworksAPIImpl implements LinnworksAPI
 
     @Override
     public Map<String, List<String>> getAllExtendedPropertyNames(LinnworksAPIClient client, SessionToken token)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetAllExtendedPropertyNamesMethod.class, token));
     }
 
     @Override
     public List<StockItemImage> getImages(LinnworksAPIClient client, SessionToken token, String itemId)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetInventoryItemImagesMethod.class, token).withItemId(itemId));
     }
 
     @Override
     public List<UserOrderView> getOrderViews(LinnworksAPIClient client, SessionToken token)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetOrderViewsMethod.class, token));
     }
 
     @Override
     public List<SearchField> getSearchFields(LinnworksAPIClient client, SessionToken token)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetSearchTypesMethod.class, token));
     }
 
@@ -371,7 +371,7 @@ public class LinnworksAPIImpl implements LinnworksAPI
                                                                             String searchTerm,
                                                                             int pageNum,
                                                                             int pageSize)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         SearchProcessedOrdersPagedMethod method = prepareMethod(SearchProcessedOrdersPagedMethod.class, token);
         method.from(from).to(to).withDateType(dateType).withSearchField(searchField);
 
@@ -396,7 +396,7 @@ public class LinnworksAPIImpl implements LinnworksAPI
                                                        int pageNum,
                                                        int pageSize,
                                                        String locationId)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         GetOpenOrdersMethod method = prepareMethod(GetOpenOrdersMethod.class, token);
 
         return client.executeMethod(method.withPageNum(pageNum).withPageSize(pageSize).withFulfillmentCenterId(locationId));
@@ -404,26 +404,26 @@ public class LinnworksAPIImpl implements LinnworksAPI
 
     @Override
     public OrderDetails getOrderById(LinnworksAPIClient client, SessionToken token, String orderId)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetOrderByIdMethod.class, token).withOrderId(orderId));
     }
 
     @Override
     public List<OrderDetails> getOrdersById(LinnworksAPIClient client, SessionToken token, List<String> orderIds)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetOrdersByIdMethod.class, token).withOrderIds(orderIds));
     }
 
     @Override
     public OpenOrder createNewOrder(LinnworksAPIClient client, SessionToken token, String fulfilmentCenterId)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(CreateNewOrderMethod.class, token)
                 .withFulfilmentCenterId(fulfilmentCenterId));
     }
 
     @Override
     public String cancelOrder(LinnworksAPIClient client, SessionToken token, String orderId, String fulfilmentCenterId,
-                              Double refund, String note) throws LinnworksAPIException, WrongTokenException {
+                              Double refund, String note) throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(CancelOrderMethod.class, token)
                 .withOrderId(orderId)
                 .withFulfilmentCenterId(fulfilmentCenterId)
@@ -433,56 +433,56 @@ public class LinnworksAPIImpl implements LinnworksAPI
 
     @Override
     public List<RefundInfo> getRefunds(LinnworksAPIClient client, SessionToken token, String orderId)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetRefundsMethod.class, token).withOrderId(orderId));
     }
 
     @Override
     public GetRefundOptionsResponse getRefundOptions(LinnworksAPIClient client, SessionToken token,
                                                      GetRefundOptionsRequest request)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetRefundOptionsMethod.class, token).withRequest(request));
     }
 
     @Override
     public GetRefundHeadersByOrderIdResponse getRefundHeadersByOrderId(LinnworksAPIClient client, SessionToken token,
                                                                        GetRefundHeadersByOrderIdRequest request)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetRefundHeadersByOrderIdMethod.class, token).withRequest(request));
     }
 
     @Override
     public GetActionableRefundHeadersResponse getActionableRefundHeaders(LinnworksAPIClient client, SessionToken token,
                                                                          GetActionableRefundHeadersRequest request)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetActionableRefundHeadersMethod.class, token)
                 .withGetActionableRefundHeadersRequest(request));
     }
 
     @Override
     public ActionRefundResponse actionRefund(LinnworksAPIClient client, SessionToken token, ActionRefundRequest request)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(ActionRefundMethod.class, token)
                 .withRequest(request));
     }
 
     @Override
     public String deleteOrder(LinnworksAPIClient client, SessionToken token, String orderId)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(DeleteOrderMethod.class, token).withOrderId(orderId));
     }
 
     @Override
     public OrderGeneralInfo updateOrderGeneralInfo(LinnworksAPIClient client, SessionToken token,
                                                    OrderGeneralInfo info, String orderId, boolean wasDraft)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(SetOrderGeneralInfoMethod.class, token)
                 .withInfo(info).withOrderId(orderId).withWasDraft(wasDraft));
     }
 
     @Override
     public List<String> changeOrderTag(LinnworksAPIClient client, SessionToken token, List<String> orderIds, Integer tag)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(ChangeOrderTagMethod.class, token)
                 .withOrderIds(orderIds).withTag(tag));
     }
@@ -490,21 +490,21 @@ public class LinnworksAPIImpl implements LinnworksAPI
     @Override
     public List<String> changeOrderStatus(LinnworksAPIClient client, SessionToken token,
                                           List<String> orderIds, OrderStatus status)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(ChangeStatusMethod.class, token)
                 .withOrderIds(orderIds).withStatus(status));
     }
 
     @Override
     public List<String> assignToFolder(LinnworksAPIClient client, SessionToken token, List<String> orderIds, String folder)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(AssignToFolderMethod.class, token)
                 .withOrderIds(orderIds).withFolder(folder));
     }
 
     @Override
     public List<String> removeFromFolder(LinnworksAPIClient client, SessionToken token, List<String> orderIds, String folder)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(UnassignToFolderMethod.class, token)
                 .withOrderIds(orderIds).withFolder(folder));
     }
@@ -512,7 +512,7 @@ public class LinnworksAPIImpl implements LinnworksAPI
     @Override
     public OrderTotalsInfo updateOrderCustomerInfo(LinnworksAPIClient client, SessionToken token,
                                                    OrderCustomerInfo info, String orderId, boolean saveToCrm)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(SetOrderCustomerInfoMethod.class, token)
                 .withInfo(info).withOrderId(orderId).withSaveToCrm(saveToCrm));
     }
@@ -521,7 +521,7 @@ public class LinnworksAPIImpl implements LinnworksAPI
     public String createPurchaseOrder(LinnworksAPIClient client,
                                       SessionToken token,
                                       CreatePurchaseOrderParameters parameters)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(CreatePurchaseOrderInitialMethod.class, token)
                 .withParameters(parameters));
     }
@@ -529,7 +529,7 @@ public class LinnworksAPIImpl implements LinnworksAPI
     @Override
     public UpdatePurchaseOrderItemResponse addPurchaseOrderItem(LinnworksAPIClient client, SessionToken token,
                                                                 AddPurchaseOrderItemParameter params)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(AddPurchaseOrderItemMethod.class, token)
                 .withAddItemParameter(params));
     }
@@ -537,7 +537,7 @@ public class LinnworksAPIImpl implements LinnworksAPI
     @Override
     public PurchaseOrderHeader changePurchaseOrderStatus(LinnworksAPIClient client, SessionToken token,
                                                          ChangePurchaseOrderStatusParameter parameters)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(ChangePurchaseOrderStatusMethod.class, token)
                 .withChangeStatusParameter(parameters));
     }
@@ -545,39 +545,39 @@ public class LinnworksAPIImpl implements LinnworksAPI
     @Override
     public UpdatePurchaseOrderItemResponse deliverPurchaseItem(LinnworksAPIClient client, SessionToken token,
                                                                DeliverPurchaseItemParameter parameters)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(DeliverPurchaseItemMethod.class, token).withParameters(parameters));
     }
 
     @Override
     public PurchaseOrderNote addPurchaseOrderNote(LinnworksAPIClient client, SessionToken token, String purchaseOrderId,
-                                                  String note) throws LinnworksAPIException, WrongTokenException {
+                                                  String note) throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(AddPurchaseOrderNoteMethod.class, token)
                 .withPkPurchaseId(purchaseOrderId).withNote(note));
     }
 
     @Override
     public List<PurchaseOrderNote> getPurchaseOrderNotes(LinnworksAPIClient client, SessionToken token, String purchaseId)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetPurchaseOrderNoteMethod.class, token).withPkPurchaseId(purchaseId));
     }
 
     @Override
     public List<Supplier> getSuppliers(LinnworksAPIClient client, SessionToken token)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetSuppliersMethod.class, token));
     }
 
     @Override
     public String deletePurchaseOrder(LinnworksAPIClient client, SessionToken token, String purchaseOrderId)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(DeletePurchaseOrderMethod.class, token)
                 .withPurchaseOrderId(purchaseOrderId));
     }
 
     @Override
     public List<StockItemSupplierStat> getStockSupplierStat(LinnworksAPIClient client, SessionToken token, String inventoryItemId)
-            throws LinnworksAPIException, WrongTokenException {
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetStockSupplierStatMethod.class, token).withInventoryItemId(inventoryItemId));
     }
 

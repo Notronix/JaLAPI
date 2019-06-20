@@ -1,6 +1,7 @@
 package com.notronix.lw.client;
 
 import com.notronix.lw.LinnworksAPIException;
+import com.notronix.lw.ThrottlingException;
 import com.notronix.lw.WrongTokenException;
 import com.notronix.lw.methods.Method;
 import org.apache.http.HttpHost;
@@ -26,7 +27,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 public class LinnworksAPIClientImpl implements LinnworksAPIClient
 {
     @Override
-    public <T> T executeMethod(Method<T> method) throws LinnworksAPIException, WrongTokenException {
+    public <T> T executeMethod(Method<T> method) throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         String url = method.getHost();
 
         if (url == null) {
@@ -57,6 +58,9 @@ public class LinnworksAPIClientImpl implements LinnworksAPIClient
         if (statusCode != SC_OK && statusCode != SC_NO_CONTENT) {
             if (responsePayload != null && responsePayload.toLowerCase().contains("token is wrong")) {
                 throw new WrongTokenException(responsePayload);
+            }
+            else if (responsePayload != null && responsePayload.toLowerCase().contains("api calls quota exceeded")) {
+                throw new ThrottlingException(responsePayload);
             }
             else {
                 String reason = status == null ? "" : status.getReasonPhrase();
