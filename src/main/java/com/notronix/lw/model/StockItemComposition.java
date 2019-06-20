@@ -8,6 +8,9 @@ public class StockItemComposition
     private Integer Quantity;
     private Double PurchasePrice;
     private Byte InventoryTrackingType;
+    private Double DimHeight;
+    private Double DimWidth;
+    private Double DimDepth;
     private String StockItemId;
 
     public String getLinkedStockItemId() {
@@ -56,6 +59,30 @@ public class StockItemComposition
 
     public void setInventoryTrackingType(Byte inventoryTrackingType) {
         InventoryTrackingType = inventoryTrackingType;
+    }
+
+    public Double getDimHeight() {
+        return DimHeight;
+    }
+
+    public void setDimHeight(Double dimHeight) {
+        DimHeight = dimHeight;
+    }
+
+    public Double getDimWidth() {
+        return DimWidth;
+    }
+
+    public void setDimWidth(Double dimWidth) {
+        DimWidth = dimWidth;
+    }
+
+    public Double getDimDepth() {
+        return DimDepth;
+    }
+
+    public void setDimDepth(Double dimDepth) {
+        DimDepth = dimDepth;
     }
 
     public String getStockItemId() {

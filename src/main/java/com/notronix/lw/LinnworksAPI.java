@@ -49,6 +49,14 @@ public interface LinnworksAPI
                                                              List<StockItemExtendedProperty> extendedProperties)
             throws LinnworksAPIException, WrongTokenException;
 
+    List<StockItemComposition> createCompositions(LinnworksAPIClient client, SessionToken token,
+                                                  List<StockItemComposition> inventoryItemCompositions)
+            throws LinnworksAPIException, WrongTokenException;
+
+    StockItem duplicateInventoryItem(LinnworksAPIClient client, SessionToken token,
+                                     StockItem newItem, String sourceItemId, boolean copyImages)
+            throws LinnworksAPIException, WrongTokenException;
+
     List<StockItemExtendedProperty> updateExtendedProperties(LinnworksAPIClient client, SessionToken token,
                                                              List<StockItemExtendedProperty> extendedProperties)
             throws LinnworksAPIException, WrongTokenException;
