@@ -36,6 +36,9 @@ public interface LinnworksAPI
     List<StockItemComposition> getCompositions(LinnworksAPIClient client, SessionToken token, String itemId, boolean fullDetails)
             throws LinnworksAPIException, WrongTokenException, ThrottlingException;
 
+    Boolean deleteCompositions(LinnworksAPIClient client, SessionToken token, String itemId, List<String> compositionIds)
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException;
+
     List<StockItemEbayCompatibility> getEbayCompatibility(LinnworksAPIClient client, SessionToken token, String itemId)
             throws LinnworksAPIException, WrongTokenException, ThrottlingException;
 

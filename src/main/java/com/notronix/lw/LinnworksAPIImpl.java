@@ -93,6 +93,13 @@ public class LinnworksAPIImpl implements LinnworksAPI
     }
 
     @Override
+    public Boolean deleteCompositions(LinnworksAPIClient client, SessionToken token, String itemId, List<String> compositionIds)
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
+        return client.executeMethod(prepareMethod(DeleteInventoryItemCompositionsMethod.class, token)
+                .withStockItemId(itemId).withInventoryItemCompositionIds(compositionIds));
+    }
+
+    @Override
     public List<StockItemEbayCompatibility> getEbayCompatibility(LinnworksAPIClient client, SessionToken token, String itemId)
             throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetEbayCompatibilityListMethod.class, token).withItemId(itemId));
