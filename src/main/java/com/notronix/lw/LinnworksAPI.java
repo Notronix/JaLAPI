@@ -42,7 +42,13 @@ public interface LinnworksAPI
     List<StockItemEbayCompatibility> getEbayCompatibility(LinnworksAPIClient client, SessionToken token, String itemId)
             throws LinnworksAPIException, WrongTokenException, ThrottlingException;
 
+    List<StockItemPrice> setPrices(LinnworksAPIClient client, SessionToken token, List<StockItemPrice> prices)
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException;
+
     List<StockItemPrice> getPrices(LinnworksAPIClient client, SessionToken token, String itemId)
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException;
+
+    List<String> deletePrices(LinnworksAPIClient client, SessionToken token, List<String> priceIds)
             throws LinnworksAPIException, WrongTokenException, ThrottlingException;
 
     List<StockItemExtendedProperty> getExtendedProperties(LinnworksAPIClient client, SessionToken token, String itemId)
@@ -210,7 +216,14 @@ public interface LinnworksAPI
     VariationGroup createVariationGroup(LinnworksAPIClient client, SessionToken token, VariationGroupTemplate template)
             throws LinnworksAPIException, WrongTokenException, ThrottlingException;
 
+    GenericPagedResult<VariationGroup> searchVariationGroups(LinnworksAPIClient client, SessionToken token, String text,
+                                                             VariationSearchType type, Integer pageNum, Integer pageSize)
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException;
+
     List<VariationItem> addVariationItems(LinnworksAPIClient client, SessionToken token, String groupId, List<String> itemIds)
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException;
+
+    List<VariationItem> getVariationItems(LinnworksAPIClient client, SessionToken token, String groupId)
             throws LinnworksAPIException, WrongTokenException, ThrottlingException;
 
     String getNewItemNumber(LinnworksAPIClient client, SessionToken token)

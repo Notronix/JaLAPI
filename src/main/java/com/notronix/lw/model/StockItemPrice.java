@@ -4,13 +4,13 @@ import java.util.List;
 
 public class StockItemPrice {
     private String pkRowId;
+    private String StockItemId;
     private String Source;
     private String SubSource;
     private Double Price;
     private UpdateStatusType UpdateStatus;
     private String Tag;
     private List<StockItemPricingRule> Rules;
-    private String StockItemId;
 
     public String getPkRowId() {
         return pkRowId;
