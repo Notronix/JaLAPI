@@ -2,20 +2,20 @@ package com.notronix.lw.methods.inventory;
 
 import com.google.gson.Gson;
 import com.notronix.lw.LinnworksAPIException;
-import com.notronix.lw.model.StockItemPrice;
+import com.notronix.lw.model.StockItemTitle;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
-public class GetInventoryItemPricesMethod extends InventoryMethod<List<StockItemPrice>>
+public class GetInventoryItemTitlesMethod extends InventoryMethod<List<StockItemTitle>>
 {
     private String itemId;
 
     @Override
     public String getName() {
-        return "GetInventoryItemPrices";
+        return "GetInventoryItemTitles";
     }
 
     @Override
@@ -24,8 +24,8 @@ public class GetInventoryItemPricesMethod extends InventoryMethod<List<StockItem
     }
 
     @Override
-    public List<StockItemPrice> getResponse() throws LinnworksAPIException {
-        return Arrays.asList(new Gson().fromJson(getJsonResult(), StockItemPrice[].class));
+    public List<StockItemTitle> getResponse() throws LinnworksAPIException {
+        return Arrays.asList(new Gson().fromJson(getJsonResult(), StockItemTitle[].class));
     }
 
     public String getItemId() {
@@ -36,8 +36,7 @@ public class GetInventoryItemPricesMethod extends InventoryMethod<List<StockItem
         this.itemId = itemId;
     }
 
-    public GetInventoryItemPricesMethod withItemId(String itemId)
-    {
+    public GetInventoryItemTitlesMethod withItemId(String itemId) {
         this.itemId = itemId;
         return this;
     }

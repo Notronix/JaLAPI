@@ -51,6 +51,15 @@ public interface LinnworksAPI
     List<String> deletePrices(LinnworksAPIClient client, SessionToken token, List<String> priceIds)
             throws LinnworksAPIException, WrongTokenException, ThrottlingException;
 
+    List<StockItemTitle> setTitles(LinnworksAPIClient client, SessionToken token, List<StockItemTitle> titles)
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException;
+
+    List<StockItemTitle> getTitles(LinnworksAPIClient client, SessionToken token, String itemId)
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException;
+
+    List<String> deleteTitles(LinnworksAPIClient client, SessionToken token, List<String> titleIds)
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException;
+
     List<StockItemExtendedProperty> getExtendedProperties(LinnworksAPIClient client, SessionToken token, String itemId)
             throws LinnworksAPIException, WrongTokenException, ThrottlingException;
 

@@ -126,6 +126,26 @@ public class LinnworksAPIImpl implements LinnworksAPI
     }
 
     @Override
+    public List<StockItemTitle> setTitles(LinnworksAPIClient client, SessionToken token, List<StockItemTitle> titles)
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
+        return client.executeMethod(prepareMethod(CreateInventoryItemTitlesMethod.class, token)
+                .withInventoryItemTitles(titles));
+    }
+
+    @Override
+    public List<StockItemTitle> getTitles(LinnworksAPIClient client, SessionToken token, String itemId)
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
+        return client.executeMethod(prepareMethod(GetInventoryItemTitlesMethod.class, token).withItemId(itemId));
+    }
+
+    @Override
+    public List<String> deleteTitles(LinnworksAPIClient client, SessionToken token, List<String> titleIds)
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException {
+        return client.executeMethod(prepareMethod(DeleteInventoryItemTitlesMethod.class, token)
+                .withInventoryItemTitleIds(titleIds));
+    }
+
+    @Override
     public List<StockItemExtendedProperty> getExtendedProperties(LinnworksAPIClient client, SessionToken token, String itemId)
             throws LinnworksAPIException, WrongTokenException, ThrottlingException {
         return client.executeMethod(prepareMethod(GetInventoryItemExtendedPropertiesMethod.class, token).withItemId(itemId));
