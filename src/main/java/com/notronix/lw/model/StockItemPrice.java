@@ -2,39 +2,12 @@ package com.notronix.lw.model;
 
 import java.util.List;
 
-public class StockItemPrice {
-    private String pkRowId;
-    private String StockItemId;
-    private String Source;
-    private String SubSource;
+public class StockItemPrice extends ChannelItem
+{
     private Double Price;
     private UpdateStatusType UpdateStatus;
     private String Tag;
     private List<StockItemPricingRule> Rules;
-
-    public String getPkRowId() {
-        return pkRowId;
-    }
-
-    public void setPkRowId(String pkRowId) {
-        this.pkRowId = pkRowId;
-    }
-
-    public String getSource() {
-        return Source;
-    }
-
-    public void setSource(String source) {
-        Source = source;
-    }
-
-    public String getSubSource() {
-        return SubSource;
-    }
-
-    public void setSubSource(String subSource) {
-        SubSource = subSource;
-    }
 
     public Double getPrice() {
         return Price;
@@ -66,13 +39,5 @@ public class StockItemPrice {
 
     public void setRules(List<StockItemPricingRule> rules) {
         Rules = rules;
-    }
-
-    public String getStockItemId() {
-        return StockItemId;
-    }
-
-    public void setStockItemId(String stockItemId) {
-        StockItemId = stockItemId;
     }
 }

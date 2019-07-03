@@ -60,6 +60,16 @@ public interface LinnworksAPI
     List<String> deleteTitles(LinnworksAPIClient client, SessionToken token, List<String> titleIds)
             throws LinnworksAPIException, WrongTokenException, ThrottlingException;
 
+    List<StockItemDescription> setDescriptions(LinnworksAPIClient client, SessionToken token,
+                                               List<StockItemDescription> descriptions)
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException;
+
+    List<StockItemDescription> getDescriptions(LinnworksAPIClient client, SessionToken token, String itemId)
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException;
+
+    List<String> deleteDescriptions(LinnworksAPIClient client, SessionToken token, List<String> descriptionIds)
+            throws LinnworksAPIException, WrongTokenException, ThrottlingException;
+
     List<StockItemExtendedProperty> getExtendedProperties(LinnworksAPIClient client, SessionToken token, String itemId)
             throws LinnworksAPIException, WrongTokenException, ThrottlingException;
 
