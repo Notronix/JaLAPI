@@ -4,6 +4,9 @@
 # User-specific stuff:
 .idea
 
+# Gradle specific stuff
+.gradle
+
 # CMake
 cmake-build-debug/
 cmake-build-release/

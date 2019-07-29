@@ -1,49 +1,31 @@
 package com.notronix.lw.demo;
 
-import com.notronix.lw.LinnworksAPI;
-import com.notronix.lw.LinnworksAPIException;
-import com.notronix.lw.LinnworksAPIImpl;
-import com.notronix.lw.client.LinnworksAPIClient;
-import com.notronix.lw.client.LinnworksAPIClientImpl;
-import com.notronix.lw.model.SessionToken;
+import com.notronix.lw.api.LinnworksAPIException;
+import com.notronix.lw.api.model.BaseSession;
+import com.notronix.lw.api.model.Credentials;
+import com.notronix.lw.impl.LinnworksDataService;
 
+@SuppressWarnings("unused")
 public class APITester
 {
-    private static void makeAPICalls(LinnworksAPI api, LinnworksAPIClient client, SessionToken token) throws LinnworksAPIException
-    {
-        //MAKE API METHOD CALLS HERE
+    private static Object makeAPICalls(LinnworksDataService lds, BaseSession session) throws LinnworksAPIException {
+        return lds.getServerUTCTime(session);
     }
 
-    public static void main(String[] args)
-    {
-        try
-        {
-            if (args == null || args.length < 3)
-            {
-                System.out.println("Invalid inputs: appId, appSecret, authToken required.");
-                System.exit(1);
-            }
+    public static void main(String[] args) {
+        LinnworksDataService lds = new LinnworksDataService();
+        Credentials credentials = Credentials.withKeys(args[0], args[1], args[2]);
+        BaseSession session;
+        Object result;
 
-            LinnworksAPI api = new LinnworksAPIImpl();
-            LinnworksAPIClient client = new LinnworksAPIClientImpl();
-            SessionToken token = APITester.authenticateApplication(api, client, args[0], args[1], args[2]);
-            APITester.makeAPICalls(api, client, token);
+        try {
+            session = lds.authorizeByApplication(credentials);
+            result = makeAPICalls(lds, session);
+
+            System.exit(0);
         }
-        catch (LinnworksAPIException ex)
-        {
+        catch (LinnworksAPIException ex) {
             ex.printStackTrace();
         }
-    }
-
-    private static SessionToken authenticateApplication(LinnworksAPI api, LinnworksAPIClient client, String appId, String appSecret, String authToken)
-            throws LinnworksAPIException
-    {
-        SessionToken sessionToken = api.authenticateApplication(client, appId, appSecret, authToken);
-        if (sessionToken == null)
-        {
-            throw new LinnworksAPIException("Unable to authenticate.");
-        }
-
-        return sessionToken;
     }
 }
