@@ -43,6 +43,12 @@ public class AnyConfig
     private String SubSource;
     private List<SystemChannelSettingProperty> HeaderAuditValues;
 
+    private ConfigItem<String> MarketplaceId;
+    private ConfigItem<String> MerchantId;
+    private ConfigItem<String> Token;
+    private ConfigItem<String> TokenSecret;
+    private ConfigItem<String> ShopIdOrName;
+
     public ConfigItem<String> getSourceVersion() {
         return SourceVersion;
     }
@@ -337,5 +343,45 @@ public class AnyConfig
 
     public void setHeaderAuditValues(List<SystemChannelSettingProperty> headerAuditValues) {
         HeaderAuditValues = headerAuditValues;
+    }
+
+    public ConfigItem<String> getMarketplaceId() {
+        return MarketplaceId;
+    }
+
+    public void setMarketplaceId(ConfigItem<String> marketplaceId) {
+        MarketplaceId = marketplaceId;
+    }
+
+    public ConfigItem<String> getMerchantId() {
+        return MerchantId;
+    }
+
+    public void setMerchantId(ConfigItem<String> merchantId) {
+        MerchantId = merchantId;
+    }
+
+    public ConfigItem<String> getToken() {
+        return Token;
+    }
+
+    public void setToken(ConfigItem<String> token) {
+        Token = token;
+    }
+
+    public ConfigItem<String> getTokenSecret() {
+        return TokenSecret;
+    }
+
+    public void setTokenSecret(ConfigItem<String> tokenSecret) {
+        TokenSecret = tokenSecret;
+    }
+
+    public ConfigItem<String> getShopIdOrName() {
+        return ShopIdOrName;
+    }
+
+    public void setShopIdOrName(ConfigItem<String> shopIdOrName) {
+        ShopIdOrName = shopIdOrName;
     }
 }
