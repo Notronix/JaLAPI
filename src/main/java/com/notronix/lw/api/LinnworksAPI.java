@@ -212,6 +212,11 @@ public interface LinnworksAPI
     OpenOrder createNewOrder(BaseSession session, UUID fulfilmentCenter, Boolean createAsDraft)
             throws LinnworksAPIException;
 
+    List<UUID> createOrders(BaseSession session, String location, List<ChannelOrder> orders)
+            throws LinnworksAPIException;
+
+    String completeOrder(BaseSession session, UUID orderId) throws LinnworksAPIException;
+
     Void setOrderGeneralInfo(BaseSession session, UUID orderId, OrderGeneralInfo info, Boolean wasDraft)
             throws LinnworksAPIException;
 

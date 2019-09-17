@@ -19,17 +19,9 @@ import com.notronix.lw.impl.method.processedorders.AddOrderNoteMethod;
 import com.notronix.lw.impl.method.processedorders.GetRefundsMethod;
 import com.notronix.lw.impl.method.processedorders.SearchProcessedOrdersPagedMethod;
 import com.notronix.lw.impl.method.purchaseorder.*;
-import com.notronix.lw.impl.method.returnsrefunds.GetActionableRefundHeadersMethod;
-import com.notronix.lw.impl.method.returnsrefunds.GetRefundHeadersByOrderIdMethod;
-import com.notronix.lw.impl.method.returnsrefunds.GetRefundOptionsMethod;
-import com.notronix.lw.impl.method.returnsrefunds.GetSearchTypesMethod;
+import com.notronix.lw.impl.method.returnsrefunds.*;
 import com.notronix.lw.impl.method.settings.GetCurrencyConversionRatesMethod;
 import com.notronix.lw.impl.method.stock.*;
-import com.notronix.lw.impl.method.stock.CreateVariationGroupMethod;
-import com.notronix.lw.impl.method.stock.AddVariationItemsMethod;
-import com.notronix.lw.impl.method.inventory.UpdateInventoryItemMethod;
-import com.notronix.lw.impl.method.inventory.AddImageToInventoryItemMethod;
-import com.notronix.lw.impl.method.returnsrefunds.ActionRefundMethod;
 
 import java.time.Instant;
 import java.util.List;
@@ -556,6 +548,18 @@ public class LinnworksDataService implements LinnworksAPI
     }
 
     @Override
+    public List<UUID> createOrders(BaseSession session, String location, List<ChannelOrder> orders)
+            throws LinnworksAPIException {
+        return execute(new CreateOrdersMethod()
+                .withLocation(location).withOrders(orders).withSession(session));
+    }
+
+    @Override
+    public String completeOrder(BaseSession session, UUID orderId) throws LinnworksAPIException {
+        return execute(new CompleteOrderMethod().withOrderId(orderId).withSession(session));
+    }
+
+    @Override
     public Void setOrderGeneralInfo(BaseSession session, UUID orderId, OrderGeneralInfo info, Boolean wasDraft)
             throws LinnworksAPIException {
         return execute(new SetOrderGeneralInfoMethod()
@@ -826,8 +830,8 @@ public class LinnworksDataService implements LinnworksAPI
             }
 
             updatingGSON = new GsonBuilder().setVersion(0)
-                    .registerTypeAdapter(ListSortDirection.class, new ListSortDirectionAdaptor())
-                    .registerTypeAdapter(Instant.class, new InstantAdaptor())
+                    .registerTypeAdapter(ListSortDirection.class, new ListSortDirectionAdaptor().nullSafe())
+                    .registerTypeAdapter(Instant.class, new InstantAdaptor().nullSafe())
                     .create();
         }
 
