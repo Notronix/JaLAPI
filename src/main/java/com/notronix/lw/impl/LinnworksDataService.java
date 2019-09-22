@@ -560,6 +560,25 @@ public class LinnworksDataService implements LinnworksAPI
     }
 
     @Override
+    public ProcessOrderResult processOrder(BaseSession session, UUID orderId, boolean scanPerformed, UUID locationId)
+            throws LinnworksAPIException {
+        return execute(new ProcessOrderMethod()
+                .withOrderId(orderId)
+                .withScanPerformed(scanPerformed)
+                .withLocationId(locationId)
+                .withSession(session));
+    }
+
+    @Override
+    public List<ProcessOrderResult> processOrdersInBatch(BaseSession session, List<UUID> ordersIds, UUID locationId)
+            throws LinnworksAPIException {
+        return execute(new ProcessOrdersInBatchMethod()
+                .withOrdersIds(ordersIds)
+                .withLocationId(locationId)
+                .withSession(session));
+    }
+
+    @Override
     public Void setOrderGeneralInfo(BaseSession session, UUID orderId, OrderGeneralInfo info, Boolean wasDraft)
             throws LinnworksAPIException {
         return execute(new SetOrderGeneralInfoMethod()

@@ -217,6 +217,12 @@ public interface LinnworksAPI
 
     String completeOrder(BaseSession session, UUID orderId) throws LinnworksAPIException;
 
+    ProcessOrderResult processOrder(BaseSession session, UUID orderId, boolean scanPerformed, UUID locationId)
+            throws LinnworksAPIException;
+
+    List<ProcessOrderResult> processOrdersInBatch(BaseSession session, List<UUID> ordersIds, UUID locationId)
+            throws LinnworksAPIException;
+
     Void setOrderGeneralInfo(BaseSession session, UUID orderId, OrderGeneralInfo info, Boolean wasDraft)
             throws LinnworksAPIException;
 
