@@ -41,8 +41,8 @@ public class SearchProcessedOrdersPagedMethod extends AbstractLinnworksAPIMethod
         params.put("dateType", requireNonNull(dateType).ordinal());
         params.put("exactMatch", requireNonNull(exactMatch));
 
-        putIfProvided(params, "from", from, gson::toJson);
-        putIfProvided(params, "to", to, gson::toJson);
+        putIfProvided(params, "from", from);
+        putIfProvided(params, "to", to);
         putIfProvided(params, "searchField", searchField, SearchField::getField);
         putIfProvided(params, "searchTerm", searchTerm);
 
