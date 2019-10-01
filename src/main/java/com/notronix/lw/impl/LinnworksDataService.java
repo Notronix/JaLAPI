@@ -794,7 +794,21 @@ public class LinnworksDataService implements LinnworksAPI
             return method.getResponse(getReceivingGSON(), payload);
         }
         catch (Exception ex) {
-            throw new LinnworksAPIException("Linnworks request failed.", ex);
+            if (ex instanceof LinnworksAPIException) {
+                throw (LinnworksAPIException) ex;
+            }
+            else {
+                String payload = ex.getMessage();
+                if (payload != null && payload.toLowerCase().contains("token is wrong")) {
+                    throw new LinnworksAPIException(payload, ex).dueToWrongToken();
+                }
+                else if (payload != null && payload.toLowerCase().contains("api calls quota exceeded")) {
+                    throw new LinnworksAPIException(payload, ex).dueToThrottling();
+                }
+                else {
+                    throw new LinnworksAPIException(payload, ex);
+                }
+            }
         }
     }
 
