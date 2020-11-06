@@ -4,14 +4,14 @@ apply plugin: 'signing'
 
 sourceCompatibility = 1.8
 group = 'com.notronix'
-version = '1.0.5' //System.getenv("BUILD_NUMBER") ?: 'SNAPSHOT-' + getDate()
+version = '1.0.6' //System.getenv("BUILD_NUMBER") ?: 'SNAPSHOT-' + getDate()
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compile 'com.notronix:AlbacoreDeed:2.0.1'
+    compile 'com.notronix:AlbacoreDeed:2.0.5'
     compile 'com.google.http-client:google-http-client-gson:1.30.2'
     compile 'org.apache.commons:commons-lang3:3.9'
 
@@ -19,7 +19,7 @@ dependencies {
 }
 
 wrapper {
-    gradleVersion = '4.8'
+    gradleVersion = '6.5'
 }
 
 jar {

@@ -48,6 +48,8 @@ public class AnyConfig
     private ConfigItem<String> Token;
     private ConfigItem<String> TokenSecret;
     private ConfigItem<String> ShopIdOrName;
+    private ConfigItem<String> StoreHash;
+    private ConfigItem<String> Url;
 
     public ConfigItem<String> getSourceVersion() {
         return SourceVersion;
@@ -383,5 +385,21 @@ public class AnyConfig
 
     public void setShopIdOrName(ConfigItem<String> shopIdOrName) {
         ShopIdOrName = shopIdOrName;
+    }
+
+    public ConfigItem<String> getStoreHash() {
+        return StoreHash;
+    }
+
+    public void setStoreHash(ConfigItem<String> storeHash) {
+        StoreHash = storeHash;
+    }
+
+    public ConfigItem<String> getUrl() {
+        return Url;
+    }
+
+    public void setUrl(ConfigItem<String> url) {
+        Url = url;
     }
 }
