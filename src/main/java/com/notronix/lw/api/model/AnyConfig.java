@@ -50,6 +50,7 @@ public class AnyConfig
     private ConfigItem<String> ShopIdOrName;
     private ConfigItem<String> StoreHash;
     private ConfigItem<String> Url;
+    private ConfigItem<String> username;
 
     public ConfigItem<String> getSourceVersion() {
         return SourceVersion;
@@ -401,5 +402,13 @@ public class AnyConfig
 
     public void setUrl(ConfigItem<String> url) {
         Url = url;
+    }
+
+    public ConfigItem<String> getUsername() {
+        return username;
+    }
+
+    public void setUsername(ConfigItem<String> username) {
+        this.username = username;
     }
 }
